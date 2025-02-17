@@ -39,16 +39,10 @@ Keep people informed of the latest developments and information. ( TBA - blogs, 
 Reduce carbon footprint and improve public environmental quality.
 
 ## Technical
-
-System is using a custom docker implementation in a container.
-
-## Team
-
-### Stefan CTO
-### Alex  
+TBA 
 
 ## Legal
-
+TBA
 
 ## Contact
 TBA
