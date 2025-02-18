@@ -1,20 +1,24 @@
 {
-    "name": "nasirkhan/laravel-starter",
-    "description": "A CMS like modular Laravel starter project.",
+    "name": "publicsos/application",
+    "description": "An international organization that provides free, open, and high quality sustainable alerts and information to the public.",
+    "homepage": "https://publicsos.org",
+    "type": "project",
+
+    "authors": [
+        {
+            "name": "<Stefan Bogdanel>",
+            "email": "stefan@izdrail.com"
+        }
+    ],
+
     "keywords": [
         "framework",
-        "laravel",
-        "cms",
-        "starter",
-        "admin",
-        "admin dashboard",
-        "laravel blog",
-        "website"
+        "laravel"
     ],
-    "license": "GPL-3.0-or-later",
-    "type": "project",
+    "license": "CC0-4.0",
+
     "require": {
-        "php": "^8.2",
+        "php": "^8.2|^8.3",
         "arcanedev/log-viewer": "^11.0",
         "intervention/image-laravel": "^1.2",
         "laracasts/flash": "^3.2",
