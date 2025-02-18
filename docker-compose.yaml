@@ -1,19 +1,19 @@
 services:
-  publicsos.ro:
+  publicsos.org:
     build:
       context: .
       dockerfile: Dockerfile
       args:
         WWWUSER: '${WWWUSER:-1000}'
         WWWGROUP: '${WWWGROUP:-1000}'
-    image: izdrail/publicsos.ro:main
-    container_name: publicsos.ro
+    image: izdrail/publicsos.org:main
+    container_name: publicsos.org
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
-      - '1700:1600'
-      - '1701:1601'
-      - '1702:1602'
+      - '1120:1120'
+      - '1121:1121'
+      - '1122:1122'
     environment:
       WWWUSER: '${WWWUSER}'
       WWWGROUP: '${WWWGROUP}'
@@ -21,13 +21,13 @@ services:
       IGNITION_LOCAL_SITES_PATH: '${PWD}'
     volumes:
       - './application-domain/php/:/var/www/php'
-      - './application-domain/php/:/var/www/python'
+      - './application-domain/python/:/var/www/python'
     networks:
       - sail
 
   mysql:
     image: mysql:8.0
-    container_name: mysql.publicsos.ro
+    container_name: developer.publicsos.org
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: examplepassword  # Change this to a secure password

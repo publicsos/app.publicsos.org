@@ -1,4 +1,5 @@
 # Public Sos
+
 An international organization that provides free, open, and high quality sustainable alerts and information to the public.
 
 ## Company size
@@ -8,7 +9,7 @@ An international organization that provides free, open, and high quality sustain
 
 
 - Romania
-- United Kingdoms
+- United Kingdom
 
 
 
