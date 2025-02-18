@@ -21,15 +21,18 @@ jobs:
 
       - name: Install Dependencies
         run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+        working-directory: application-domain/php
 
       - name: Set up Environment
         run: |
           cp .env.production .env
           touch testing.sqlite
           php artisan key:generate
+        working-directory: application-domain/php
 
       - name: Run Tests
         run: php artisan test
+        working-directory: application-domain/php
 
   docker:
     name: Build and Push Docker Image
@@ -54,7 +57,7 @@ jobs:
       - name: Build and Push Image
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: application-domain/php
           platforms: linux/amd64
           push: true
           tags: |
