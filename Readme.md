@@ -11,6 +11,7 @@ An international organization that provides free, open, and high quality sustain
 [] United Kingdoms
 
 
+
 ## Executive roles and responsibilities
 
 
@@ -27,6 +28,9 @@ They are the geek face of the company and hold ultimate responsibility for techn
 
 ### Members: Andrei, Bogdan
 
+### Design Inspiration 
+
+https://iconscout.com/illustration-pack/earthquake-4
 
 Cross-functional collaboration among the leadership team is essential for ensuring that different departments work cohesively toward shared goals. 
 By working together, executives can make well-rounded decisions that benefit the entire organization.

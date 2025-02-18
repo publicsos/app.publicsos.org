@@ -6,14 +6,14 @@ services:
       args:
         WWWUSER: '${WWWUSER:-1000}'
         WWWGROUP: '${WWWGROUP:-1000}'
-    image: izdrail/furaciuni.ro:main
-    container_name: app.furaciuni.ro
+    image: izdrail/publicsos.ro:main
+    container_name: publicsos.ro
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
-      - '1600:1600'
-      - '1601:1601'
-      - '1603:1603'
+      - '1700:1600'
+      - '1701:1601'
+      - '1702:1602'
     environment:
       WWWUSER: '${WWWUSER}'
       WWWGROUP: '${WWWGROUP}'
