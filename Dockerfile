@@ -60,35 +60,6 @@ RUN mkdir -p /usr/src/php/ext/redis && \
     curl -fsSL https://pecl.php.net/get/redis --ipv4 | tar xvz -C "/usr/src/php/ext/redis" --strip 1 && \
     docker-php-ext-install redis
 
-
-
-# Install Composer
-RUN curl -sSL https://getcomposer.org/download/latest-stable/composer.phar -o /usr/local/bin/composer && \
-    chmod +x /usr/local/bin/composer
-
-# Set up application
-WORKDIR /var/www/php/
-
-# Copy application
-COPY application-domain/php/ .
-COPY application-domain/php/.env.production .env
-
-# Install PHP dependencies
-RUN composer install --no-interaction --no-suggest --ignore-platform-req=ext-gd --ignore-platform-req=ext-exif
-
-# Install Laravel Octane
-RUN composer require laravel/octane
-
-# Install and build Laravel Octane
-RUN php artisan octane:install
-
-# Install and build Node.js assets
-RUN npm install --legacy-peer-deps && npm run build
-
-
-# Configure Supervisor
-COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 # Install Python dependencies
 WORKDIR /var/www/python/
 RUN pip install --no-cache-dir \
@@ -102,6 +73,7 @@ RUN pip install --no-cache-dir \
     uvicorn \
     spacy \
     spacy-transformers \
+    spacy-streamlit \
     spacy-llm \
     socialshares \
     socid_extractor \
@@ -113,6 +85,35 @@ COPY ./application-domain/python .
 
 # Install spaCy model
 RUN python3 -m spacy download en_core_web_trf --break-system-packages
+
+
+# Install Composer
+RUN curl -sSL https://getcomposer.org/download/latest-stable/composer.phar -o /usr/local/bin/composer && \
+    chmod +x /usr/local/bin/composer
+
+# Set up application
+WORKDIR /var/www/php/
+
+# Copy application
+COPY application-domain/php/ .
+COPY application-domain/php/.env.production .env
+# Install Laravel Octane
+RUN composer require laravel/octane
+
+# Install PHP dependencies
+RUN composer install --no-interaction --no-suggest --ignore-platform-req=ext-gd --ignore-platform-req=ext-exif
+
+
+# Install and build Laravel Octane
+RUN php artisan octane:install
+
+# Install and build Node.js assets
+RUN npm install --legacy-peer-deps && npm run build
+
+
+# Configure Supervisor
+COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 
 # Expose ports
 EXPOSE 1120 1121 1122
