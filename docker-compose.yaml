@@ -20,7 +20,8 @@ services:
       LARAVEL_SAIL: 1
       IGNITION_LOCAL_SITES_PATH: '${PWD}'
     volumes:
-      - '.:/var/www'
+      - './application-domain/php/:/var/www/php'
+      - './application-domain/php/:/var/www/python'
     networks:
       - sail
 
