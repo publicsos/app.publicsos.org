@@ -6,21 +6,21 @@
 
 @section("content")
     <section class="bg-white dark:bg-gray-800">
-        <div class="mx-auto max-w-screen-xl px-4 py-24 text-center sm:px-12">
-            <div class="m-6 flex justify-center">
-                <img class="h-24 rounded" src="{{ asset("img/logo-square.jpg") }}" alt="{{ app_name() }}" />
+        <div class="px-4 py-24 mx-auto max-w-screen-xl text-center sm:px-12">
+            <div class="flex justify-center m-6">
+                <img class="h-24 rounded" src="{{ asset("logo.jpg") }}" alt="{{ app_name() }}" />
             </div>
             <h1
-                class="mb-6 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white sm:text-6xl"
+                class="mb-6 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white sm:text-6xl"
             >
                 {{ app_name() }}
             </h1>
             <p class="mb-10 text-lg font-normal text-gray-500 dark:text-gray-400 sm:px-16 sm:text-2xl xl:px-48">
                 {!! setting("app_description") !!}
             </p>
-            <div class="mb-8 flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0 lg:mb-16">
+            <div class="flex flex-col mb-8 space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0 lg:mb-16">
                 <a
-                    class="inline-flex items-center justify-center rounded-lg bg-gray-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-gray-800 focus:ring-4 focus:ring-gray-300"
+                    class="inline-flex justify-center items-center px-5 py-3 text-base font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:ring-gray-300"
                     href="https://github.com/nasirkhan/laravel-starter"
                     target="_blank"
                 >
@@ -44,7 +44,7 @@
                     <span class="ms-2">Github</span>
                 </a>
                 <a
-                    class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-3 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:border-gray-700 dark:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-800"
+                    class="inline-flex justify-center items-center px-5 py-3 text-base font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:border-gray-700 dark:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-800"
                     href="https://nasirkhn.com"
                     target="_blank"
                 >
@@ -79,8 +79,8 @@
         </div>
     </section>
 
-    <section class="bg-gray-100 py-20 text-gray-600 dark:bg-gray-700 dark:text-gray-400">
-        <div class="container mx-auto flex flex-col items-center justify-center px-5">
+    <section class="py-20 text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+        <div class="container flex flex-col justify-center items-center px-5 mx-auto">
             <div class="w-full text-center lg:w-2/3">
                 <h1 class="mb-4 text-3xl font-medium text-gray-800 dark:text-gray-200 sm:text-4xl">
                     {{ __("Screenshots of the project") }}
@@ -94,27 +94,27 @@
         </div>
     </section>
 
-    <section class="bg-gray-50 pb-20 dark:bg-gray-700">
+    <section class="pb-20 bg-gray-50 dark:bg-gray-700">
         <div class="grid grid-cols-1 gap-4 p-5 sm:grid-cols-2">
-            <div class="rounded-lg p-3 shadow-lg dark:bg-gray-800 sm:p-10">
+            <div class="p-3 rounded-lg shadow-lg dark:bg-gray-800 sm:p-10">
                 <img
                     src="https://github.com/nasirkhan/laravel-starter/assets/396987/1cf5ce5a-f374-4bae-b5a3-69e8d7ff684d"
                     alt="Page preview"
                 />
             </div>
-            <div class="rounded-lg p-3 shadow-lg dark:bg-gray-800 sm:p-10">
+            <div class="p-3 rounded-lg shadow-lg dark:bg-gray-800 sm:p-10">
                 <img
                     src="https://github.com/nasirkhan/laravel-starter/assets/396987/93341711-60dd-4624-8cd7-82f1c611287d"
                     alt="Page preview"
                 />
             </div>
-            <div class="rounded-lg p-3 shadow-lg dark:bg-gray-800 sm:p-10">
+            <div class="p-3 rounded-lg shadow-lg dark:bg-gray-800 sm:p-10">
                 <img
                     src="https://github.com/nasirkhan/laravel-starter/assets/396987/0f6b8201-6f6a-429f-894b-4e491cc5eba4"
                     alt="Page preview"
                 />
             </div>
-            <div class="rounded-lg p-3 shadow-lg dark:bg-gray-800 sm:p-10">
+            <div class="p-3 rounded-lg shadow-lg dark:bg-gray-800 sm:p-10">
                 <img
                     src="https://github.com/nasirkhan/laravel-starter/assets/396987/f8131011-2ecc-4a11-961f-85e02cb8f7a1"
                     alt="Page preview"
