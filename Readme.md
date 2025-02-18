@@ -55,6 +55,9 @@ See [Cto Decision](developer-domain/18022025.md)
 
 
 ## Legal
+Legal department is responsible for the legal aspects of the organization.
+
+[Legal Department](business-domain/administration/readme.md)
 18022025.md
 
 ## Contact
