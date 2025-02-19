@@ -25,32 +25,45 @@ jobs:
 
       - name: Set up Environment
         run: |
-          # Create a new .env file with secrets from GitHub
-          echo "APP_NAME=${{ secrets.APP_NAME }}" >> .env
-          echo "APP_ENV=${{ secrets.APP_ENV }}" >> .env
+          # Create .env file with secrets or default values
+          echo "APP_NAME=${{ secrets.APP_NAME || 'LaravelApp' }}" >> .env
+          echo "APP_ENV=${{ secrets.APP_ENV || 'local' }}" >> .env
           echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
-          echo "APP_DEBUG=${{ secrets.APP_DEBUG }}" >> .env
-          echo "APP_URL=${{ secrets.APP_URL }}" >> .env
-          echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "CACHE_DRIVER=${{ secrets.CACHE_DRIVER }}" >> .env
-          echo "SESSION_DRIVER=${{ secrets.SESSION_DRIVER }}" >> .env
-          echo "QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }}" >> .env
-          
-          # Generate application key if not provided (for safety)
+          echo "APP_DEBUG=${{ secrets.APP_DEBUG || 'true' }}" >> .env
+          echo "APP_URL=${{ secrets.APP_URL || 'http://localhost' }}" >> .env
+          echo "DB_CONNECTION=${{ secrets.DB_CONNECTION || 'sqlite' }}" >> .env
+          echo "DB_HOST=${{ secrets.DB_HOST || '127.0.0.1' }}" >> .env
+          echo "DB_PORT=${{ secrets.DB_PORT || '3306' }}" >> .env
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE || 'testing' }}" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME || 'root' }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD || '' }}" >> .env
+          echo "CACHE_DRIVER=${{ secrets.CACHE_DRIVER || 'file' }}" >> .env
+          echo "SESSION_DRIVER=${{ secrets.SESSION_DRIVER || 'file' }}" >> .env
+          echo "QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION || 'sync' }}" >> .env
+
+          # Generate application key if missing
           if [ -z "${{ secrets.APP_KEY }}" ]; then
-            php artisan key:generate
+            php artisan key:generate --force
           fi
           
-          # Set up database for testing
-          touch testing.sqlite
-          
+          # Display .env file for debugging
+          echo "Generated .env file:"
+          cat .env
+
+          # Clear Laravel cache and config
+          php artisan config:clear
+          php artisan cache:clear
+          php artisan config:cache
+
+          # Ensure database service is ready
+          echo "Waiting for database to be ready..."
+          sleep 10  # Adjust this based on DB start time
+
+          # Set up SQLite DB for testing (if applicable)
+          touch database/testing.sqlite
+
           # Run migrations
-          php artisan migrate:fresh --seed
+          php artisan migrate:fresh --seed --force
         working-directory: application-domain/php
 
       - name: Run Tests
@@ -83,5 +96,4 @@ jobs:
           context: application-domain/php
           platforms: linux/amd64
           push: true
-          tags: |
-            izdrail/publicsos.org:dev
+          tags: izdrail/publicsos.org:dev
