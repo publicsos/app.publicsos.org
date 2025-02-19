@@ -1,8 +1,8 @@
 #!/bin/sh -l
 
 # Define variables
-IMAGE_DEV=izdrail/publicsos.ro:dev
-IMAGE_PROD=izdrail/publicsos.ro:latest
+IMAGE_DEV=izdrail/publicsos.org:dev
+IMAGE_PROD=izdrail/publicsos.org:latest
 DOCKERFILE=Dockerfile
 DOCKER_COMPOSE_FILE=docker-compose.yaml
 DOCKER_COMPOSE_FILE_PROD=docker-compose.yaml
@@ -13,7 +13,9 @@ build-dev:
 	docker buildx build \
 		--platform linux/amd64 \
 		-t $(IMAGE_DEV) \
+		--no-cache \
 		--progress=plain \
+		--build-arg CACHEBUST=$$(date +%s) \
 		-f $(DOCKERFILE) \
 		.  # <-- Build Context Docker file is located at root
 
@@ -38,7 +40,7 @@ down:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) down
 
 ssh:
-	docker exec -it publicsos.ro /bin/bash
+	docker exec -it publicsos.org /bin/bash
 
 publish-dev:
 	docker push $(IMAGE_DEV)
@@ -50,28 +52,28 @@ publish-prod:
 
 # Additional functionality
 test:
-	docker exec publicsos.ro php artisan test
+	docker exec publicsos.org php artisan test
 
 migrate:
-	docker exec publicsos.ro php artisan migrate --force
+	docker exec publicsos.org php artisan migrate --force
 
 seed:
-	docker exec publicsos.ro php artisan db:seed --force
+	docker exec publicsos.org php artisan db:seed --force
 
 clean-queue:
-	docker exec publicsos.ro php artisan horizon:clear
+	docker exec publicsos.org php artisan horizon:clear
 
 lint:
-	docker exec publicsos.ro ./vendor/bin/phpcs --standard=PSR12 app/
+	docker exec publicsos.org ./vendor/bin/phpcs --standard=PSR12 app/
 
 fix-lint:
-	docker exec publicsos.ro ./vendor/bin/phpcbf --standard=PSR12 app/
+	docker exec publicsos.org ./vendor/bin/phpcbf --standard=PSR12 app/
 
 prune:
 	docker system prune -f --volumes
 
 logs:
-	docker logs -f furaciuni.ro
+	docker logs -f publicsos.org
 
 restart:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) down

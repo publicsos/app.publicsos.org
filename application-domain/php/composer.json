@@ -1,24 +1,29 @@
 {
-    "name": "nasirkhan/laravel-starter",
-    "description": "A CMS like modular Laravel starter project.",
+    "name": "publicsos/application",
+    "description": "An international organization that provides free, open, and high quality sustainable alerts and information to the public.",
+    "homepage": "https://publicsos.org",
+    "type": "project",
+
+    "authors": [
+        {
+            "name": "<Stefan Bogdanel>",
+            "email": "stefan@izdrail.com"
+        }
+    ],
+
     "keywords": [
         "framework",
-        "laravel",
-        "cms",
-        "starter",
-        "admin",
-        "admin dashboard",
-        "laravel blog",
-        "website"
+        "laravel"
     ],
-    "license": "GPL-3.0-or-later",
-    "type": "project",
+    "license": "CC0-4.0",
+
     "require": {
-        "php": "^8.2",
+        "php": "^8.2|^8.3",
         "arcanedev/log-viewer": "^11.0",
         "intervention/image-laravel": "^1.2",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^11.0",
+        "laravel/octane": "^2.8",
         "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
@@ -28,6 +33,8 @@
         "spatie/laravel-html": "^3.6",
         "spatie/laravel-medialibrary": "^11.4",
         "spatie/laravel-permission": "^6.4",
+        "spiral/roadrunner-cli": "^2.6.0",
+        "spiral/roadrunner-http": "^3.3.0",
         "sqids/sqids": "^0.4.1",
         "unisharp/laravel-filemanager": "^2.9",
         "yajra/laravel-datatables-oracle": "^11.0"
