@@ -25,7 +25,7 @@ jobs:
 
       - name: Set up Environment
         run: |
-          cp .env.production .env
+          cp application-domain/php/.env.production .env
           touch testing.sqlite
           php artisan key:generate
         working-directory: application-domain/php

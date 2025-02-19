@@ -54,8 +54,8 @@ RUN pip install pipx --break-system-packages
 RUN pip install spacy-streamlit --break-system-packages
 
 # Install PHP extensions
-RUN docker-php-ext-install gd exif zip pdo_mysql pcntl sockets && \
-    docker-php-ext-enable gd exif zip pcntl sockets
+RUN docker-php-ext-install bcmath gd exif zip pdo_mysql pcntl sockets && \
+    docker-php-ext-enable bcmath gd exif zip pcntl sockets
 RUN mkdir -p /usr/src/php/ext/redis && \
     curl -fsSL https://pecl.php.net/get/redis --ipv4 | tar xvz -C "/usr/src/php/ext/redis" --strip 1 && \
     docker-php-ext-install redis
