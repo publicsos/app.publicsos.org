@@ -85,9 +85,8 @@ return [
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_GB'),
 
     'available_locales' => [
-        'ro' => 'Română (RO)',
         'en' => 'English (EN)',
-        'ru' => 'Russian (RUS)',
+        'ro' => 'Romanian (RO)',
     ],
 
     /*

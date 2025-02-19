@@ -10,14 +10,14 @@ $notifications_latest = optional($notifications)->take(5);
             <a href="/">
                 <img
                     class="sidebar-brand-full"
-                    src="{{ asset("img/logo-with-text.jpg") }}"
+                    src="{{ asset("logo2.svg") }}"
                     alt="{{ app_name() }}"
                     height="46"
                 />
                 <img
                     class="sidebar-brand-narrow"
                     src="{{ asset("img/logo-square.jpg") }}"
-                    alt="{{ app_name() }}"
+                    src="{{ asset("logo2.svg") }}"
                     height="46"
                 />
             </a>
