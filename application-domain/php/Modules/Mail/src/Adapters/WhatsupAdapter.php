@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace LaravelCompany\Mail\Adapters;
 
 use Illuminate\Support\Arr;
-use Mailjet\Client;
-use Mailjet\Resources;
-use Mailjet\Response;
 use LaravelCompany\Mail\Services\Messages\MessageTrackingOptions;
 
 class WhatsupAdapter extends BaseMailAdapter

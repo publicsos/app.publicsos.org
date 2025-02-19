@@ -66,12 +66,15 @@ RUN pip install --no-cache-dir \
     PyMuPDF \
     pymupdf4llm \
     fastapi \
+    fastapi_versioning \
     yake \
     vaderSentiment \
     markdownify \
     newspaper3k \
     uvicorn \
+    duckdb \
     sqlalchemy \
+    spacy \
     spacy \
     spacy-transformers \
     spacy-streamlit \
