@@ -71,6 +71,7 @@ RUN pip install --no-cache-dir \
     markdownify \
     newspaper3k \
     uvicorn \
+    sqlalchemy \
     spacy \
     spacy-transformers \
     spacy-streamlit \
@@ -95,15 +96,14 @@ RUN curl -sSL https://getcomposer.org/download/latest-stable/composer.phar -o /u
 WORKDIR /var/www/php/
 
 # Copy application
-COPY application-domain/php/ .
-COPY application-domain/php/.env.production .env
+COPY ./application-domain/php/ .
+COPY ./application-domain/php/.env.production .env
 # Install Laravel Octane
 RUN composer require laravel/octane
 
 # Install PHP dependencies
-RUN composer install --no-interaction --no-suggest --ignore-platform-req=ext-gd --ignore-platform-req=ext-exif
 
-
+WORKDIR /var/www/php/
 # Install and build Laravel Octane
 RUN php artisan octane:install
 
