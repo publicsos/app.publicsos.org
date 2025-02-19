@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\LanguageController;
 use App\Livewire\Privacy;
 use App\Livewire\Terms;
+use App\Livewire\Business;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,7 @@ Route::get('language/{language}', [LanguageController::class, 'switch'])->name('
 Route::get('dashboard', 'App\Http\Controllers\Frontend\FrontendController@index')->name('dashboard');
 
 // pages
+Route::get('business', Business::class)->name('business');
 Route::get('terms', Terms::class)->name('terms');
 Route::get('privacy', Privacy::class)->name('privacy');
 

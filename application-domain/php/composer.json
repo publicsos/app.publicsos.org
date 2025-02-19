@@ -55,7 +55,9 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Modules\\": "Modules/"
+            "Modules\\": "Modules/",
+            "LaravelCompany\\Mail\\": "Modules/Mail/src/"
+
         },
         "files": [
             "app/helpers.php"

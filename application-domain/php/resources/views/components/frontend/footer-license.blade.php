@@ -3,7 +3,7 @@
 <div class="pt-6">
     @switch($license)
         @case("cc-by-sa")
-            <div class="flex flex-col items-center justify-center text-center">
+            <div class="flex flex-col justify-center items-center text-center">
                 <div>
                     <div class="flex justify-center space-x-6 text-gray-500 hover:text-gray-800">
                         <div>
@@ -85,11 +85,11 @@
 
             @break
         @default
-            <div class="flex items-center justify-center text-center">
+            <div class="flex justify-center items-center text-center">
                 <div class="w-1/2 text-sm text-gray-500">
                     &copy; {{ date("Y") }}
                     <a href="{{ $author_url }}" rel="cc:attributionURL dct:creator">{{ $author }}</a>
-                    All Right Reserved.
+                     All Right Reserved.
                 </div>
             </div>
     @endswitch

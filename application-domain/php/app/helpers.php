@@ -124,7 +124,7 @@ if (! function_exists('show_column_value')) {
 
             $return_text = '<figure class="figure">
                                 <a href="'.$img_path.'" data-lightbox="image-set" data-title="Path: '.$value.'">
-                                    <img src="'.$img_path.'" style="max-width:200px;" class="figure-img img-fluid rounded img-thumbnail" alt="">
+                                    <img src="'.$img_path.'" style="max-width:200px;" class="rounded figure-img img-fluid img-thumbnail" alt="">
                                 </a>
                                 <figcaption class="figure-caption">Path: '.$value.'</figcaption>
                             </figure>';
@@ -523,6 +523,8 @@ if (! function_exists('language_direction')) {
  * Application Demo Mode check
  */
 if (! function_exists('demo_mode')) {
+
+
     /**
      * Helper to grab the application name.
      *
@@ -530,6 +532,8 @@ if (! function_exists('demo_mode')) {
      */
     function demo_mode()
     {
+        return false;
+
         $return_string = false;
 
         if (env('DEMO_MODE') === true) {

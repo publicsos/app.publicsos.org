@@ -13,10 +13,10 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark">
             <a href="/admin">
-                <img class="logo" src="{{ asset("img/logo-with-text.svg") }}" alt="Tabler" height="32" />
+                <img class="logo" src="{{ asset("logo.svg") }}" alt="Logo" height="32" />
             </a>
         </h1>
-        <div class="navbar-nav d-sm-none flex-row">
+        <div class="flex-row navbar-nav d-sm-none">
             {{-- language menu --}}
             <x-backend.includes.menu-language />
 
