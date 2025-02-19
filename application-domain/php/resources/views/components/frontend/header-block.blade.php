@@ -1,7 +1,7 @@
-@props(["title" => app_name(), "sub_title" => ""])
+@props(["title" => app_name(), "sub_title" => "Emergency Response Service Management System"])
 
-<section class="bg-gray-100 py-20 text-gray-600 dark:bg-gray-800 dark:text-gray-400">
-    <div class="container mx-auto flex flex-col items-center justify-center px-5">
+<section class="py-20 text-gray-600 bg-gray-100 dark:bg-gray-800 dark:text-gray-400">
+    <div class="container flex flex-col justify-center items-center px-5 mx-auto">
         <div class="w-full text-center lg:w-2/3">
             {!! $sub_title !!}
 

@@ -6,7 +6,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Title('Business')]
-class Terms extends Component
+class Business extends Component
 {
     public function render()
     {

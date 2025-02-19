@@ -1,16 +1,16 @@
-<nav class="border-b-2 border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-900">
-    <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
+<nav class="bg-white border-b-2 border-gray-200 shadow-md dark:border-gray-700 dark:bg-gray-900">
+    <div class="flex flex-wrap justify-between items-center p-4 mx-auto max-w-screen-xl">
         <a class="flex items-center space-x-3 rtl:space-x-reverse" href="/">
-            <img class="h-9" src="{{ asset("img/logo-with-text.jpg") }}" alt="{{ app_name() }} Logo" />
+            <img class="h-9" src="{{ asset("logo2.svg") }}" style="height:50px;" alt="{{ app_name() }} Logo" />
         </a>
-        <div class="flex items-center justify-end space-x-1 md:order-2 md:space-x-0 rtl:space-x-reverse">
+        <div class="flex justify-end items-center space-x-1 md:order-2 md:space-x-0 rtl:space-x-reverse">
             <button
-                class="rounded-lg p-2.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                class="p-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                 id="theme-toggle"
                 type="button"
             >
                 <svg
-                    class="hidden h-5 w-5"
+                    class="hidden w-5 h-5"
                     id="theme-toggle-dark-icon"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -19,7 +19,7 @@
                     <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                 </svg>
                 <svg
-                    class="hidden h-5 w-5"
+                    class="hidden w-5 h-5"
                     id="theme-toggle-light-icon"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -34,7 +34,7 @@
             </button>
 
             <button
-                class="inline-flex cursor-pointer items-center justify-center rounded px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
+                class="inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 rounded cursor-pointer hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
                 data-dropdown-toggle="language-dropdown-menu"
                 type="button"
             >
@@ -57,13 +57,13 @@
                     <path d="M12 20l4 -9l4 9" />
                     <path d="M19.1 18h-6.2" />
                 </svg>
-                <span class="ms-2 hidden sm:block">
+                <span class="hidden ms-2 sm:block">
                     {{ strtoupper(app()->currentLocale()) }}
                 </span>
             </button>
             <!-- Dropdown:language-dropdown-menu -->
             <div
-                class="z-50 my-4 hidden list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow dark:bg-gray-700"
+                class="hidden z-50 my-4 text-base list-none bg-white rounded-lg divide-y divide-gray-100 shadow dark:bg-gray-700"
                 id="language-dropdown-menu"
             >
                 <ul class="py-2 font-medium" role="none">
@@ -86,7 +86,7 @@
             @guest
                 @if (user_registration())
                     <a
-                        class="inline-flex cursor-pointer items-center justify-center rounded px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
+                        class="inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 rounded cursor-pointer hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
                         href="{{ route("register") }}"
                     >
                         <svg
@@ -106,14 +106,14 @@
                             <path d="M6 21v-2a4 4 0 0 1 4 -4h4c.267 0 .529 .026 .781 .076" />
                             <path d="M19 16l-2 3h4l-2 3" />
                         </svg>
-                        <span class="ms-2 hidden sm:block">
+                        <span class="hidden ms-2 sm:block">
                             {{ __("Register") }}
                         </span>
                     </a>
                 @endif
 
                 <a
-                    class="inline-flex cursor-pointer items-center justify-center rounded px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
+                    class="inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 rounded cursor-pointer hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
                     href="{{ route("login") }}"
                 >
                     <svg
@@ -133,7 +133,7 @@
                         <path d="M21 12h-13l3 -3" />
                         <path d="M11 15l-3 -3" />
                     </svg>
-                    <span class="ms-2 hidden sm:block">
+                    <span class="hidden ms-2 sm:block">
                         {{ __("Login") }}
                     </span>
                 </a>
@@ -141,18 +141,18 @@
 
             @auth
                 <button
-                    class="inline-flex cursor-pointer items-center justify-center rounded-lg px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
+                    class="inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 rounded-lg cursor-pointer hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
                     data-dropdown-toggle="user-dropdown-menu"
                     type="button"
                 >
                     <img class="h-9 rounded-md" src="{{ asset(Auth::user()->avatar) }}" alt="" />
-                    <span class="ms-2 hidden sm:block">
+                    <span class="hidden ms-2 sm:block">
                         {{ Auth::user()->last_name }}
                     </span>
                 </button>
                 <!-- Dropdown:user-dropdown-menu -->
                 <div
-                    class="z-50 my-4 hidden list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow dark:bg-gray-700"
+                    class="hidden z-50 my-4 text-base list-none bg-white rounded-lg divide-y divide-gray-100 shadow dark:bg-gray-700"
                     id="user-dropdown-menu"
                 >
                     <ul class="py-2 font-medium" role="none">
@@ -299,7 +299,7 @@
             @endauth
 
             <button
-                class="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
+                class="inline-flex justify-center items-center p-2 w-10 h-10 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
                 data-collapse-toggle="navbar-language"
                 type="button"
                 aria-controls="navbar-language"
@@ -307,7 +307,7 @@
             >
                 <span class="sr-only">Open main menu</span>
                 <svg
-                    class="h-5 w-5"
+                    class="w-5 h-5"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -324,9 +324,9 @@
             </button>
         </div>
 
-        <div class="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto" id="navbar-language">
+        <div class="hidden justify-between items-center w-full md:order-1 md:flex md:w-auto" id="navbar-language">
             <ul
-                class="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse"
+                class="flex flex-col p-4 mt-4 font-medium bg-gray-50 rounded-lg border border-gray-100 dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse"
             >
                 <x-frontend.nav-item :active="request()->routeIs('home')">
                     {{ __("Home") }}
