@@ -74,24 +74,6 @@ Route::group(['namespace' => '\Modules\Domain\Http\Controllers\Backend', 'as' =>
     Route::resource("$module_name", "$controller_name");
 
 
-        #Postcodes
-    $module_name = 'phones';
-    $controller_name = 'PhonesController';
-    Route::get("$module_name/index_list", ['as' => "$module_name.index_list", 'uses' => "$controller_name@index_list"]);
-    Route::get("$module_name/index_data", ['as' => "$module_name.index_data", 'uses' => "$controller_name@index_data"]);
-    Route::get("$module_name/trashed", ['as' => "$module_name.trashed", 'uses' => "$controller_name@trashed"]);
-    Route::patch("$module_name/trashed/{id}", ['as' => "$module_name.restore", 'uses' => "$controller_name@restore"]);
-    Route::resource("$module_name", "$controller_name");
 
-
-
-            #Postcodes
-            $module_name = 'imei';
-            $controller_name = 'ImeiController';
-            Route::get("$module_name/index_list", ['as' => "$module_name.index_list", 'uses' => "$controller_name@index_list"]);
-            Route::get("$module_name/index_data", ['as' => "$module_name.index_data", 'uses' => "$controller_name@index_data"]);
-            Route::get("$module_name/trashed", ['as' => "$module_name.trashed", 'uses' => "$controller_name@trashed"]);
-            Route::patch("$module_name/trashed/{id}", ['as' => "$module_name.restore", 'uses' => "$controller_name@restore"]);
-            Route::resource("$module_name", "$controller_name");
 
 });

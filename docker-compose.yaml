@@ -6,7 +6,7 @@ services:
       args:
         WWWUSER: '${WWWUSER:-1000}'
         WWWGROUP: '${WWWGROUP:-1000}'
-    image: izdrail/publicsos.org:main
+    image: izdrail/publicsos.org:dev
     container_name: publicsos.org
     extra_hosts:
       - 'host.docker.internal:host-gateway'

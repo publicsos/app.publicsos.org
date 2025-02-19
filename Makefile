@@ -13,7 +13,9 @@ build-dev:
 	docker buildx build \
 		--platform linux/amd64 \
 		-t $(IMAGE_DEV) \
+		--no-cache \
 		--progress=plain \
+		--build-arg CACHEBUST=$$(date +%s) \
 		-f $(DOCKERFILE) \
 		.  # <-- Build Context Docker file is located at root
 
