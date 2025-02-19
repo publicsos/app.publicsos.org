@@ -1,0 +1,44 @@
+<?php
+declare(strict_types=1);
+namespace LaravelCompany\Mail\Events;
+
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+use LaravelCompany\Mail\Models\Message;
+use Log;
+
+class MessageDispatchEvent
+{
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
+
+    /**
+     * @var Message
+     */
+    public $message;
+
+    /**
+     * MessageDispatchEvent constructor
+     *
+     * @param Message $message
+     */
+    public function __construct(Message $message)
+    {
+        $this->message = $message;
+    }
+
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return \Illuminate\Broadcasting\Channel|array
+     */
+    public function broadcastOn()
+    {
+        
+        Log::info('MessageDispatchEvent broadcasting on '. $this->message->id);
+        return new PrivateChannel('channel-name');
+    }
+}
