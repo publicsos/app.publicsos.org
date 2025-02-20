@@ -82,6 +82,7 @@ class UserController extends Controller
         );
     }
 
+    //todo refactor this
     public function index_data()
     {
         $module_title = $this->module_title;
@@ -159,6 +160,7 @@ class UserController extends Controller
             return response()->json([]);
         }
 
+        //todo refactor this
         $query_data = $module_model::where('name', 'LIKE', "%{$term}%")->orWhere('email', 'LIKE', "%{$term}%")->limit(10)->get();
 
         $$module_name = [];
@@ -748,15 +750,6 @@ class UserController extends Controller
             $id = auth()->user()->id;
         }
 
-        // if ($id !== auth()->user()->id) {
-        //     if (auth()->user()->hasAnyRole(['administrator', 'super admin'])) {
-        //         Log::info(auth()->user()->name.' ('.auth()->user()->id.') - User Requested for Email Verification.');
-        //     } else {
-        //         Log::warning(auth()->user()->name.' ('.auth()->user()->id.') - User trying to confirm another users email.');
-
-        //         abort('403');
-        //     }
-        // }
 
         $user = User::where('id', '=', $id)->first();
 

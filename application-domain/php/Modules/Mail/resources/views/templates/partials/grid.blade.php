@@ -1,13 +1,13 @@
 <div class="row masonry-grid">
     @if($templates->isEmpty())
         <div class="col-12">
-            <div class="alert alert-warning text-center">
+            <div class="text-center alert alert-warning">
                 No templates found for "<span class="highlight">{{ $searchTerm }}</span>"
             </div>
         </div>
     @else
         @foreach($templates as $template)
-            <div class="col-lg-3 col-md-6 col-sm-12 mb-2 masonry-item">
+            <div class="mb-2 col-lg-3 col-md-6 col-sm-12 masonry-item">
                 <div class="card">
                     <div class="card-header">
                         <div class="text-white">
@@ -15,7 +15,7 @@
                         </div>
 
                         <!-- Buttons Wrapper (Aligned Left to Right) -->
-                        <div class="d-flex justify-content-start gap-2 mt-2">
+                        <div class="gap-2 mt-2 d-flex justify-content-start">
 
                             <a href="{{ route('laravel-mail.templates.edit', $template->id) }}" class="btn btn-block btn-primary">
                                <i class="fa fa-pencil"></i> {{ __('Edit') }}
@@ -36,7 +36,7 @@
                         <a href="{{ route('laravel-mail.templates.edit', $template->id) }}">
                             <div class="text-white">
                                 <img
-                                    src="{{ asset($template->thumbnail ?? 'logo.svg')  }}"
+                                    src="{{ asset($template->thumbnail ?? 'logo2.svg')  }}"
                                     class="img-fluid"
                                     loading="lazy"
                                     alt="{{ $template->name }}">

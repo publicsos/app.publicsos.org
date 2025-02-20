@@ -18,11 +18,12 @@ trait UserPresenter
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => ($value == '') ? '/img/default-avatar.jpg' : $value,
+            get: fn ($value) => ($value == '') ? '/logo2.svg' : $value,
         );
     }
 
-    /**
+
+ /**
      * Get Status Label.
      */
     public function getStatusLabelAttribute()
@@ -30,15 +31,15 @@ trait UserPresenter
         $return_string = '';
         switch ($this->status) {
             case '1':
-                $return_string = '<span class="badge text-bg-success">Active</span>';
+                $return_string = '<span class="badge text-bg-success">'.__('Active').'</span>';
                 break;
 
             case '2':
-                $return_string = '<span class="badge text-bg-danger">Blocked</span>';
+                $return_string = '<span class="badge text-bg-danger">'.__('Blocked').'</span>';
                 break;
 
             default:
-                $return_string = '<span class="badge text-bg-primary">Status:'.$this->status.'</span>';
+                $return_string = '<span class="badge text-bg-primary">'.__('Status:').$this->status.'</span>'; // "Status:" is now translatable
                 break;
         }
 

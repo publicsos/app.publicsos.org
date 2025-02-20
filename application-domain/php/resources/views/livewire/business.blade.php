@@ -4,7 +4,7 @@
         <section class="bg-white dark:bg-gray-800">
         <div class="px-4 py-24 mx-auto max-w-screen-xl text-center sm:px-12">
             <div class="flex justify-center m-6">
-                <img class="h-24 rounded" src="{{ asset('logo.svg') }}" alt="{{ app_name() }}" />
+                <img class="h-24 rounded" src="{{ asset('logo2.svg') }}" alt="{{ app_name() }}" />
             </div>
             <h1 class="mb-6 text-4xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white sm:text-6xl">
                 Plan de Afaceri pentru SOS Public
