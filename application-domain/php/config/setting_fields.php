@@ -58,7 +58,7 @@ return [
                 'label' => 'Email', // you know what label it is
                 'rules' => 'required|email', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => 'info@example.com', // default value if you want
+                'value' => 'info@publicsos.org', // default value if you want
             ],
         ],
 
@@ -76,7 +76,7 @@ return [
                 'label' => 'Website URL', // you know what label it is
                 'rules' => 'nullable|max:191', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => 'https://nasirkhn.com', // default value if you want
+                'value' => 'https://publicsos.org', // default value if you want
             ],
             [
                 'type' => 'text', // input fields type
@@ -85,7 +85,7 @@ return [
                 'label' => 'Facebook Page URL', // you know what label it is
                 'rules' => 'nullable|max:191', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => '#', // default value if you want
+                'value' => 'https://facebook.com/publicsos', // default value if you want
             ],
             [
                 'type' => 'text', // input fields type
@@ -94,7 +94,7 @@ return [
                 'label' => 'Twitter Profile URL', // you know what label it is
                 'rules' => 'nullable|max:191', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => 'https://twitter.com/nasirkhansaikat', // default value if you want
+                'value' => 'https://twitter.com/publicsosorg', // default value if you want
             ],
             [
                 'type' => 'text', // input fields type
@@ -103,7 +103,7 @@ return [
                 'label' => 'Instagram Account URL', // you know what label it is
                 'rules' => 'nullable|max:191', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => 'https://www.instagram.com/nasirkhansaikat', // default value if you want
+                'value' => 'https://www.instagram.com/publicsos', // default value if you want
             ],
             [
                 'type' => 'text', // input fields type
@@ -112,7 +112,7 @@ return [
                 'label' => 'Youtube Channel URL', // you know what label it is
                 'rules' => 'nullable|max:191', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => 'https://www.youtube.com/@nasirkhan', // default value if you want
+                'value' => 'https://www.youtube.com/@publicsos', // default value if you want
             ],
             [
                 'type' => 'text', // input fields type

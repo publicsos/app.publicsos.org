@@ -29,8 +29,12 @@
         </ul>
 
 
+        <x-frontend.social.all-social-url />
 
+        <x-frontend.footer-license license="cc-by-40" />
 
         <x-frontend.footer-credit />
+
+
     </div>
 </footer>
