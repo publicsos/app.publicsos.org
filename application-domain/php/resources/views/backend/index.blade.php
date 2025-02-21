@@ -19,25 +19,20 @@
 
     <!-- Cesium JS -->
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
-
     <script>
-        // Your access token from https://cesium.com/ion/tokens
         Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmMWYwZjFiMS01OGQ3LTRiNDctOTk1Mi03NDgwOWVhZTBjYjciLCJpZCI6MTM0NTU5LCJpYXQiOjE2ODE5NDEwMzN9.0kUdp5KVqgFEL8kZmqMIvcUyKGzzNDiIrliUNHJ2w5s';
 
-        // Initialize the Cesium Viewer
         const viewer = new Cesium.Viewer('cesiumContainer', {
             terrainProvider: new Cesium.EllipsoidTerrainProvider(),
             infoBox: true,
             selectionIndicator: false,
             shadows: true,
-            shouldAnimate: true,
-            baseLayerPicker: false // Disable base layer picker to avoid token errors
+            shouldAnimate: true
         });
 
-        // Remove default base layer (to avoid token errors if no valid token)
-        viewer.scene.globe.enableLighting = false;
+        // Enable lighting effects
+        viewer.scene.globe.enableLighting = true;
 
-        // Your marker data
         const locationData = [
             {
                 id: "21590547",
@@ -45,7 +40,7 @@
                 longitude: 27.6895,
                 latitude: 46.2298,
                 face: "East",
-                iconUrl: "{{ asset("logo2.svg") }}",
+                height: 30, // Approximate height in meters
                 distance: 0.599854
             },
             {
@@ -54,7 +49,7 @@
                 longitude: 27.6736,
                 latitude: 46.2201,
                 face: "East",
-                iconUrl: "{{ asset("logo2.svg") }}",
+                height: 25,
                 distance: 0.705530
             },
             {
@@ -63,7 +58,7 @@
                 longitude: 27.6733,
                 latitude: 46.2206,
                 face: "East",
-                iconUrl: "{{ asset("logo2.svg") }}",
+                height: 25,
                 distance: 0.717102
             },
             {
@@ -72,7 +67,7 @@
                 longitude: 27.6743,
                 latitude: 46.2253,
                 face: "East",
-                iconUrl: "{{ asset("logo2.svg") }}",
+                height: 28,
                 distance: 0.726878
             },
             {
@@ -81,62 +76,64 @@
                 longitude: 27.6732,
                 latitude: 46.2198,
                 face: "East",
-                iconUrl: "{{ asset("logo2.svg") }}",
+                height: 25,
                 distance: 0.726942
             }
         ];
 
-        // Function to add markers
-        function addMarkersToMap(viewer, locations) {
+        function addBuildingsToMap(viewer, locations) {
             locations.forEach(location => {
+                // Add the building as a box
                 viewer.entities.add({
+                    name: location.title,
                     position: Cesium.Cartesian3.fromDegrees(location.longitude, location.latitude),
-                    billboard: {
-                        image: location.iconUrl,
-                        scale: 1.0,
-                        pixelOffset: new Cesium.Cartesian2(0, 0),
-                        verticalOrigin: Cesium.VerticalOrigin.CENTER,
-                        horizontalOrigin: Cesium.HorizontalOrigin.CENTER
+                    box: {
+                        dimensions: new Cesium.Cartesian3(20.0, 20.0, location.height), // width, depth, height
+                        material: Cesium.Color.LIGHTSTEELBLUE.withAlpha(0.7),
+                        outline: true,
+                        outlineColor: Cesium.Color.DARKBLUE
                     },
                     label: {
-                        text: `${location.title} (${location.face})`,
-                        font: '12pt monospace',
+                        text: location.title,
+                        font: '14pt monospace',
                         style: Cesium.LabelStyle.FILL_AND_OUTLINE,
                         outlineWidth: 2,
                         verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-                        pixelOffset: new Cesium.Cartesian2(0, -15),
+                        pixelOffset: new Cesium.Cartesian2(0, -30),
                         fillColor: Cesium.Color.WHITE,
                         outlineColor: Cesium.Color.BLACK,
                         showBackground: true,
-                        backgroundColor: new Cesium.Color(0.165, 0.165, 0.165, 0.7)
+                        backgroundColor: new Cesium.Color(0.165, 0.165, 0.165, 0.7),
+                        heightReference: Cesium.HeightReference.RELATIVE_TO_GROUND
                     }
                 });
             });
         }
 
-        // Function to fly to markers
         function flyToMarkers() {
-            // Calculate the center point of all markers
             const centerLon = locationData.reduce((sum, loc) => sum + loc.longitude, 0) / locationData.length;
             const centerLat = locationData.reduce((sum, loc) => sum + loc.latitude, 0) / locationData.length;
 
-            // Fly to the center point
             viewer.camera.flyTo({
-                destination: Cesium.Cartesian3.fromDegrees(centerLon, centerLat, 2000.0),
+                destination: Cesium.Cartesian3.fromDegrees(centerLon, centerLat, 500.0),
                 orientation: {
-                    heading: Cesium.Math.toRadians(0.0),
-                    pitch: Cesium.Math.toRadians(-45.0),
+                    heading: Cesium.Math.toRadians(45.0),
+                    pitch: Cesium.Math.toRadians(-35.0),
                     roll: 0.0
                 },
                 duration: 3
             });
         }
 
-        // Add markers to the map
-        addMarkersToMap(viewer, locationData);
+        // Add 3D buildings to the map
+        addBuildingsToMap(viewer, locationData);
 
         // Initial view setup
         flyToMarkers();
+
+        // Enable depth testing for proper 3D rendering
+        viewer.scene.globe.depthTestAgainstTerrain = true;
     </script>
+
 </div>
 @endsection

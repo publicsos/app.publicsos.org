@@ -48,11 +48,13 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from fastapi_versioning import VersionedFastAPI, version
 
 from api.endpoints import security
+from api.endpoints import nlp
 
 
 
 # Router inclusion
 app.include_router(security.router)
+app.include_router(nlp.router)
 
 app = VersionedFastAPI(app,version_format='{major}')
 
