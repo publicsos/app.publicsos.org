@@ -352,7 +352,6 @@ class DatabaseSeeder extends Seeder
     {
         foreach ($this->roles as $role) {
 
-
             Category::create([
                 'name' => ucfirst($role['name']),
                 'slug' => \Str::slug($role['name']),

@@ -1,32 +1,87 @@
-name: Build Docker Image
+name: Build and Test Docker Image
+
 on:
   push:
     branches:
       - "main"
+
 jobs:
-  docker:
+  test:
+    name: Run Tests
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v3
-      -
-        name: Set up QEMU
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          tools: composer
+
+      - name: Install Dependencies
+        run: |
+          composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+          composer dump-autoload
+        working-directory: application-domain/php
+
+      - name: Set up Environment
+        run: |
+          # Create .env file with secrets or default values
+          cat <<EOF > .env
+          APP_NAME=${{ secrets.APP_NAME || 'LaravelApp' }}
+          APP_ENV=${{ secrets.APP_ENV || 'local' }}
+          APP_KEY=${{ secrets.APP_KEY || '' }}
+          APP_DEBUG=${{ secrets.APP_DEBUG || 'true' }}
+          APP_URL=${{ secrets.APP_URL || 'http://localhost' }}
+          DB_CONNECTION=sqlite
+          DB_DATABASE=database/database.sqlite
+          CACHE_DRIVER=${{ secrets.CACHE_DRIVER || 'file' }}
+          SESSION_DRIVER=${{ secrets.SESSION_DRIVER || 'file' }}
+          QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION || 'sync' }}
+          EOF
+
+          # Ensure application key exists
+          if [ -z "${{ secrets.APP_KEY }}" ]; then
+            php artisan key:generate
+          fi
+
+          # Set up SQLite database
+          mkdir -p database
+          touch database/database.sqlite
+
+          # Run migrations
+          php artisan migrate:fresh --seed
+        working-directory: application-domain/php
+
+      - name: Run Tests
+        run: php artisan test
+        working-directory: application-domain/php
+
+  docker:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Build
+
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      -
-        name: Login to Docker Hub
+
+      - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
+
+      - name: Build and Push Image
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: application-domain/php
           platforms: linux/amd64
           push: true
           tags: |

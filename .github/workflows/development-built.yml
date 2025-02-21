@@ -3,7 +3,7 @@ name: Build and Test Docker Image
 on:
   push:
     branches:
-      - "release/001"
+      - "development"
 
 jobs:
   test:

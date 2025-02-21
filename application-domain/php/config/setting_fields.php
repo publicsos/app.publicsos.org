@@ -23,7 +23,7 @@ return [
                 'label' => 'App Description', // you know what label it is
                 'rules' => 'required', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => '', // default value if you want
+                'value' => 'A strategy and operational framework for a incident management team, adhering to the Public Safety and rescue service guidelines.', // default value if you want
             ],
             [
                 'type' => 'text', // input fields type
@@ -45,6 +45,66 @@ return [
             ],
         ],
     ],
+
+
+    'location' => [
+        'title' => 'Central Location',
+        'desc' => 'This is the latitude and londitude of the central location of the public society.',
+        'icon' => 'fas fa-marker',
+
+        'elements' => [
+            [
+                'type' => 'text', // input fields type
+                'data' => 'string', // data type, string, int, boolean
+                'name' => 'postcode', // unique name for field
+                'label' => 'Postcode', // you know what label it is
+                'rules' => 'required', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => '731182', // default value if you want
+            ],
+            [
+                'type' => 'text', // input fields type
+                'data' => 'string', // data type, string, int, boolean
+                'name' => 'latitude', // unique name for field
+                'label' => 'Latitude', // you know what label it is
+                'rules' => 'required', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => '46.2271164', // default value if you want
+            ],
+            [
+                'type' => 'text', // input fields type
+                'data' => 'string', // data type, string, int, boolean
+                'name' => 'longitude', // unique name for field
+                'label' => 'Longitude', // you know what label it is
+                'rules' => 'required', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => '27.6689432', // default value if you want
+            ],
+
+            [
+                'type' => 'text', // input fields type
+                'data' => 'string', // data type, string, int, boolean
+                'name' => 'w3w', // unique name for field
+                'label' => 'What 3 Words', // you know what label it is
+                'rules' => 'required', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => 'sleep.enormous.dynamic', // default value if you want
+            ],
+
+            [
+                'type' => 'text', // input fields type
+                'data' => 'string', // data type, string, int, boolean
+                'name' => 'w3w-ro', // unique name for field
+                'label' => 'What 3 Words - Ro', // you know what label it is
+                'rules' => 'required', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => 'somn.enorm.mobil', // default value if you want
+            ],
+        ],
+
+    ],
+
+
     'email' => [
         'title' => 'Email',
         'desc' => 'Email settings for app',
@@ -69,6 +129,15 @@ return [
         'icon' => 'fas fa-users',
 
         'elements' => [
+            [
+                'type' => 'text', // input fields type
+                'data' => 'string', // data type, string, int, boolean
+                'name' => 'website_url', // unique name for field
+                'label' => 'Website URL', // you know what label it is
+                'rules' => 'nullable|max:191', // validation rule of laravel
+                'class' => '', // any class for input
+                'value' => 'https://publicsos.org', // default value if you want
+            ],
             [
                 'type' => 'text', // input fields type
                 'data' => 'string', // data type, string, int, boolean
@@ -157,7 +226,7 @@ return [
                 'label' => 'Meta Site Name', // you know what label it is
                 'rules' => 'required', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => 'Laravel Starter | An Awesome Laravel Starter Project', // default value if you want
+                'value' => 'Public Sos', // default value if you want
             ],
             [
                 'type' => 'text', // input fields type
@@ -166,7 +235,7 @@ return [
                 'label' => 'Meta Description', // you know what label it is
                 'rules' => 'required', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => 'Laravel Starter is a CMS like modular starter application project built with latest Laravel. This starter project can be used as a foundation to build your own projects.', // default value if you want
+                'value' => 'A strategy and operational framework for a incident management team, adhering to the Public Safety and rescue service guidelines.', // default value if you want
             ],
             [
                 'type' => 'text', // input fields type
@@ -175,7 +244,7 @@ return [
                 'label' => 'Meta Keyword', // you know what label it is
                 'rules' => 'nullable', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => 'Web Application, web app, Laravel, Laravel starter, Bootstrap, Admin, Template, Open Source, nasir khan saikat, nasirkhansaikat', // default value if you want
+                'value' => 'operation framework, incident management team software', // default value if you want
             ],
             [
                 'type' => 'text', // input fields type
@@ -184,7 +253,7 @@ return [
                 'label' => 'Meta Image', // you know what label it is
                 'rules' => 'required', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => 'img/default_banner.jpg', // default value if you want
+                'value' => 'logo2.png', // default value if you want
             ],
             [
                 'type' => 'text', // input fields type
@@ -202,7 +271,7 @@ return [
                 'label' => 'Meta Twitter Site Account', // you know what label it is
                 'rules' => 'nullable', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => '@nasirkhansaikat', // default value if you want
+                'value' => '@publicsosorg', // default value if you want
             ],
             [
                 'type' => 'text', // input fields type
@@ -211,8 +280,9 @@ return [
                 'label' => 'Meta Twitter Creator Account', // you know what label it is
                 'rules' => 'nullable', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => '@nasirkhansaikat', // default value if you want
+                'value' => '@publicsosorg', // default value if you want
             ],
+
         ],
     ],
     'analytics' => [
@@ -228,7 +298,7 @@ return [
                 'label' => 'Google Analytics (gtag)', // you know what label it is
                 'rules' => 'nullable', // validation rule of laravel
                 'class' => '', // any class for input
-                'value' => 'G-ABCDE12345', // default value if you want
+                'value' => 'G-5J4CR9LCH4', // default value if you want
                 'help' => 'Paste the only the Measurement Id of Google Analytics stream.', // Help text for the input field.
             ],
         ],
