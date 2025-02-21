@@ -73,6 +73,7 @@ RUN pip install --no-cache-dir \
     newspaper3k \
     uvicorn \
     duckdb \
+    lxml_html_clean \
     sqlalchemy \
     spacy \
     spacy \

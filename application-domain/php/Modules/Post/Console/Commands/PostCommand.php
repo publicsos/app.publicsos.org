@@ -31,6 +31,7 @@ class PostCommand extends Command
      */
     public function handle()
     {
+
         // List of institutions and their categories
         $institutions = [
             [

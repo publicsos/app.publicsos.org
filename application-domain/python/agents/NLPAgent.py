@@ -9,7 +9,7 @@ import json
 class NLPAgent:
     def __init__(self):
         # Load spaCy model and NLTK resources
-        self.nlp = spacy.load("en_core_web_sm")
+        self.nlp = spacy.load("en_core_web_trf")
         self.stop_words = set(stopwords.words("english"))
         self.vectorizer = CountVectorizer()
         self.classifier = MultinomialNB()

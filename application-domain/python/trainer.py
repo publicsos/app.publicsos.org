@@ -1,7 +1,7 @@
 # streamlit_app.py
 import spacy_streamlit
 
-models = ["en_core_web_sm"]
+models = ["en_core_web_trf"]
 
 
 

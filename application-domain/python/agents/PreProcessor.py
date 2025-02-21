@@ -9,7 +9,7 @@ EXCLUDED_ENTITY_TYPES = {"TIME", "DATE", "LANGUAGE", "PERCENT", "MONEY", "QUANTI
 # Base NLP Processor Class
 class PreProcessor:
     def __init__(self):
-        self.nlp = spacy.load("en_core_web_md")
+        self.nlp = spacy.load("en_core_web_trf")
         self.sentiment_analyzer = SentimentIntensityAnalyzer()
 
     def analyze_sentiment(self, text: str):

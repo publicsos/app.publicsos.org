@@ -27,7 +27,4 @@ class Postcode extends BaseModel
 
     protected $table = 'postal_codes';
 
-
-
-
 }

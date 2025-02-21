@@ -12,7 +12,7 @@ from concurrent.futures import ProcessPoolExecutor
 nltk.download('wordnet')
 
 # Initializing few variables
-nlp = spacy.load('en_core_web_md')
+nlp = spacy.load('en_core_web_trf')
 lemmatizer = WordNetLemmatizer()
 
 

@@ -1,6 +1,10 @@
 from fastapi import APIRouter, HTTPException
+from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel
 import spacy
+import os
+import pymupdf4llm
+
 from newspaper import Article, Config
 from markdownify import markdownify as md
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -14,7 +18,17 @@ from spacy import displacy
 router = APIRouter()
 
 # Load SpaCy Model
-nlp = spacy.load("en_core_web_md")
+nlp = spacy.load("en_core_web_trf")
+
+
+
+
+# Directory to save the uploaded PDFs
+UPLOAD_DIRECTORY = "pdfs"
+
+# Ensure the upload directory exists
+os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
+
 
 # Initialize Sentiment Analyzer
 sentiment_analyzer = SentimentIntensityAnalyzer()
@@ -29,6 +43,13 @@ class ArticleAction(BaseModel):
 
 class SummarizeAction(BaseModel):
     text: str
+
+
+def filter_entities(doc):
+    """Filter and deduplicate entities."""
+    entities = [(ent.label_, ent.text) for ent in doc.ents if ent.label_ not in EXCLUDED_ENTITY_TYPES]
+    return list(dict.fromkeys(entities))  # Deduplicate by text
+
 
 
 # Helper Functions
@@ -153,3 +174,35 @@ async def extract_tags(article: SummarizeAction):
         return {"data": keywords}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Keyword extraction failed: {str(e)}")
+
+
+
+
+
+@router.post("/nlp/pdf-reader/")
+async def upload(file: UploadFile = File(...)):
+    # Check if the file is a PDF by verifying the MIME type and file extension
+    if file.content_type != "application/pdf" or not file.filename.endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are allowed.")
+
+    try:
+        # Generate the full file path for the uploaded file
+        file_path = os.path.join(UPLOAD_DIRECTORY, file.filename)
+
+        # Read and save the uploaded PDF file
+        contents = file.file.read()
+        with open(file_path, 'wb') as f:
+            f.write(contents)
+
+        # Convert the PDF to markdown using pymupdf4llm
+        markdown_text = pymupdf4llm.to_markdown(file_path)
+        doc = nlp(markdown_text)
+        filtered_entities = filter_entities(doc)
+
+    except Exception as e:
+        return {"message": f"There was an error processing the file: {e}"}
+    finally:
+        file.file.close()  # Ensure the file is closed after reading
+
+    # Return the markdown text as a response
+    return {"message": f"Successfully uploaded {file.filename}", "markdown": markdown_text, "entities" : filtered_entities}
