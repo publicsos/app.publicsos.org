@@ -41,9 +41,6 @@ class DomainServiceProvider extends ServiceProvider
         // Event Service Provider
         $this->app->register(EventServiceProvider::class);
 
-
-        $this->app->bind(PolitiaRomanaContract::class, PolitiaRomanaService::class);
-        $this->app->bind(MonitorulOficialContract::class, MonitorulOficialService::class);
     }
 
 

@@ -9,84 +9,91 @@
 @endsection
 
 @section("content")
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+<!-- Cesium JS -->
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
+
+<!-- Set the initial camera view to look at a specific position (Manhattan coordinates) -->
+<script>
+    const initialPosition = Cesium.Cartesian3.fromDegrees(
+        27.66887633714821,  // Longitude
+        46.22688182800248,  // Latitude
+        127 // Altitude
+    );
+</script>
+
 <?php
-
-$buildings = \Modules\Domain\Models\Buildings\Building::all();
-
+    $buildings = \Modules\Domain\Models\Buildings\Building::all();
 ?>
+
 <div class="container-fluid">
-    <div id="cesiumContainer"></div>
+    <div id="cesiumContainer" style="height: 100vh;"></div>
     <div class="toolbar">
         <button onclick="flyToMarkers()">Fly to Markers</button>
     </div>
-    <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-
-    <!-- Cesium JS -->
-    <script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
 
     <script>
+        // Set your Cesium Ion access token
         Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmMWYwZjFiMS01OGQ3LTRiNDctOTk1Mi03NDgwOWVhZTBjYjciLCJpZCI6MTM0NTU5LCJpYXQiOjE2ODE5NDEwMzN9.0kUdp5KVqgFEL8kZmqMIvcUyKGzzNDiIrliUNHJ2w5s';
 
-        const viewer = new Cesium.Viewer('cesiumContainer', {
-            terrainProvider: new Cesium.EllipsoidTerrainProvider(),
-            infoBox: true,
-            selectionIndicator: false,
-            shadows: true,
-            shouldAnimate: true
+        // Initialize the Cesium viewer
+        const viewer = new Cesium.Viewer("cesiumContainer", {
+            terrain: Cesium.Terrain.fromWorldTerrain(),
         });
 
-        viewer.scene.globe.enableLighting = false;
+        // Define an async function to load the tileset and items
+        async function loadCesiumData() {
+            // Load OSM buildings asynchronously
+            const osmBuildingsTileset = await Cesium.createOsmBuildingsAsync();
+            viewer.scene.primitives.add(osmBuildingsTileset);
 
-        // Convert PHP buildings data to JavaScript
-        const locationData = @json($buildings);
-
-        async function initializeMap() {
-            try {
-                const osmBuildings = await Cesium.createOsmBuildingsAsync();
-                viewer.scene.primitives.add(osmBuildings);
-
-                // Add labels for buildings from database
-                locationData.forEach(location => {
-                    viewer.entities.add({
-                        position: Cesium.Cartesian3.fromDegrees(location.longitude, location.latitude),
-                        label: {
-                            text: location.title,
-                            font: '14pt monospace',
-                            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-                            outlineWidth: 2,
-                            verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-                            pixelOffset: new Cesium.Cartesian2(0, 0),
-                            fillColor: Cesium.Color.WHITE,
-                            outlineColor: Cesium.Color.BLACK,
-                            showBackground: true,
-                            backgroundColor: new Cesium.Color(0.165, 0.165, 0.165, 0.7),
-                        }
-                    });
-                });
-
-                flyToMarkers();
-            } catch (error) {
-                console.error('Error loading OSM Buildings:', error);
-            }
-        }
-
-        function flyToMarkers() {
-            const centerLon = locationData.reduce((sum, loc) => sum + parseFloat(loc.longitude), 0) / locationData.length;
-            const centerLat = locationData.reduce((sum, loc) => sum + parseFloat(loc.latitude), 0) / locationData.length;
-
-            viewer.camera.flyTo({
-                destination: Cesium.Cartesian3.fromDegrees(centerLon, centerLat, 500.0),
+            // Fly to the initial position
+            viewer.scene.camera.flyTo({
+                destination: initialPosition,
                 orientation: {
-                    heading: Cesium.Math.toRadians(45.0),
-                    pitch: Cesium.Math.toRadians(-35.0),
-                    roll: 0.0
+                    heading: Cesium.Math.toRadians(20),
+                    pitch: Cesium.Math.toRadians(-20),
                 },
-                duration: 3
+                duration: 0,
+            });
+
+            // Pass the PHP array of buildings to JavaScript
+            const buildings = @json($buildings);
+
+            // Create markers for each building
+            buildings.forEach(building => {
+                const { latitude, longitude, altitude } = building;
+
+                // Example: Add a point for each building to the Cesium map
+                viewer.entities.add({
+                    position: Cesium.Cartesian3.fromDegrees(longitude, latitude, altitude),
+                    point: {
+                        color: Cesium.Color.RED,
+                        pixelSize: 10,
+                    },
+                });
             });
         }
 
-        viewer.scene.globe.depthTestAgainstTerrain = true;
-        initializeMap();
+        // Call the async function
+        loadCesiumData();
+
+        // Fly to the markers (can be triggered by a button click)
+        function flyToMarkers() {
+            const positions = @json($buildings).map(building => Cesium.Cartesian3.fromDegrees(building.longitude, building.latitude, building.altitude));
+            if (positions.length > 0) {
+                viewer.scene.camera.flyTo({
+                    destination: positions[0],
+                    orientation: {
+                        heading: Cesium.Math.toRadians(20),
+                        pitch: Cesium.Math.toRadians(-20),
+                    },
+                    duration: 1.5,
+                });
+            }
+        }
     </script>
 </div>
+
 @endsection

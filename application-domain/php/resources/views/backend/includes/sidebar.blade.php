@@ -16,7 +16,7 @@ $notifications_latest = optional($notifications)->take(5);
                 />
                 <img
                     class="sidebar-brand-narrow"
-                    src="{{ asset("img/logo-square.jpg") }}"
+                    src="{{ asset("logo2.svg") }}"
                     src="{{ asset("logo2.svg") }}"
                     height="46"
                 />

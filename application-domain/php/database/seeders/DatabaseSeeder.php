@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Artisan;
 use Modules\Category\Models\Category;
+use Modules\Domain\database\seeders\BuildingSeeder;
 class DatabaseSeeder extends Seeder
 {
 
@@ -88,6 +89,10 @@ class DatabaseSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         Artisan::call('cache:clear');
+
+
+        // seed the building
+        $this->call(BuildingSeeder::class);
     }
 
     /**
