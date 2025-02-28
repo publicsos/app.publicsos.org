@@ -46,17 +46,6 @@ class MonitorulOficialService implements MonitorulOficialContract
 
     public function getDocumentSource(): mixed
     {
-
-        $request = new ViewDocumentRequest(
-            '0520250702',
-            'jsonp',
-            '5/2025/',
-            10,
-            'jQuery17204921201570208007_1739733634955'
-        );
-
-        $response = $this->connector->send($request);
-
-        return ($response->dtoOrFail());
+        throw new \Exception('Not implemented');
     }
 }

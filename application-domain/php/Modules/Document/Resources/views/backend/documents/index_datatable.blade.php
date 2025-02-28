@@ -43,7 +43,7 @@
             </x-slot>
         </x-backend.section-header>
 
-        <div class="row mt-4">
+        <div class="mt-4 row">
             <div class="col">
                 <table id="datatable" class="table table-bordered table-hover table-responsive-sm">
                     <thead>
@@ -52,13 +52,19 @@
                                 #
                             </th>
                             <th>
-                                @lang("document::text.name")
+                                @lang("domain::text.name")
                             </th>
                             <th>
-                                @lang("document::text.updated_at")
+                                @lang("domain::text.source")
+                            </th>
+                            <th>
+                                @lang("domain::text.date")
+                            </th>
+                            <th>
+                                @lang("domain::text.updated_at")
                             </th>
                             <th class="text-end">
-                                @lang("document::text.action")
+                                @lang("domain::text.action")
                             </th>
                         </tr>
                     </thead>
@@ -106,6 +112,22 @@
             {
                 data: 'name',
                 name: 'name'
+            },
+            {
+                data: 'source',
+                name: 'source',
+                render: function(data, type, row) {
+                    if (data) {
+                        // Generate the full URL to the file. Adjust this if your file storage path is different.
+                        var url = '/storage/' + data;
+                        return '<a href="' + url + '" target="_blank">' + data + '</a>';
+                    }
+                    return data;
+                }
+            },
+            {
+                data: 'date',
+                name: 'date'
             },
             {
                 data: 'updated_at',

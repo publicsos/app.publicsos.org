@@ -9,10 +9,9 @@ use Modules\Domain\Contracts\Postcodes;
 
 
 class PostcodeService implements Postcodes
-
 {
     public function import(): void
     {
-
+        throw new \Exception('Not implemented');
     }
 }
