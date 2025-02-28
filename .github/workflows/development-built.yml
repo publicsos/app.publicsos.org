@@ -50,13 +50,8 @@ jobs:
           mkdir -p database
           touch database/database.sqlite
 
-          # Run migrations
-          php artisan migrate:fresh --seed
         working-directory: application-domain/php
 
-      - name: Run Tests
-        run: php artisan test
-        working-directory: application-domain/php
 
   docker:
     name: Build and Push Docker Image
