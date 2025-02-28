@@ -19,16 +19,16 @@ use Illuminate\Support\Facades\Route;
 *
 * --------------------------------------------------------------------
 */
-Route::group(['namespace' => '\Modules\Domain\Http\Controllers\Frontend', 'as' => 'frontend.', 'middleware' => 'web', 'prefix' => ''], function () {
+Route::group(['namespace' => '\Modules\Workflow\Http\Controllers\Frontend', 'as' => 'frontend.', 'middleware' => 'web', 'prefix' => ''], function () {
 
     /*
      *
-     *  Frontend Domains Routes
+     *  Frontend Workflows Routes
      *
      * ---------------------------------------------------------------------
      */
-    $module_name = 'domains';
-    $controller_name = 'DomainsController';
+    $module_name = 'workflows';
+    $controller_name = 'WorkflowsController';
     Route::get("$module_name", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
     Route::get("$module_name/{id}/{slug?}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);
 });
@@ -39,7 +39,7 @@ Route::group(['namespace' => '\Modules\Domain\Http\Controllers\Frontend', 'as' =
 *
 * --------------------------------------------------------------------
 */
-Route::group(['namespace' => '\Modules\Domain\Http\Controllers\Backend', 'as' => 'backend.', 'middleware' => ['web', 'auth', 'can:view_backend'], 'prefix' => 'admin'], function () {
+Route::group(['namespace' => '\Modules\Workflow\Http\Controllers\Backend', 'as' => 'backend.', 'middleware' => ['web', 'auth', 'can:view_backend'], 'prefix' => 'admin'], function () {
     /*
     * These routes need view-backend permission
     * (good if you want to allow more than one group in the backend,
@@ -50,37 +50,15 @@ Route::group(['namespace' => '\Modules\Domain\Http\Controllers\Backend', 'as' =>
 
     /*
      *
-     *  Backend Domains Routes
+     *  Backend Workflows Routes
      *
      * ---------------------------------------------------------------------
      */
-    $module_name = 'domains';
-    $controller_name = 'DomainsController';
+    $module_name = 'workflows';
+    $controller_name = 'WorkflowsController';
     Route::get("$module_name/index_list", ['as' => "$module_name.index_list", 'uses' => "$controller_name@index_list"]);
     Route::get("$module_name/index_data", ['as' => "$module_name.index_data", 'uses' => "$controller_name@index_data"]);
     Route::get("$module_name/trashed", ['as' => "$module_name.trashed", 'uses' => "$controller_name@trashed"]);
     Route::patch("$module_name/trashed/{id}", ['as' => "$module_name.restore", 'uses' => "$controller_name@restore"]);
     Route::resource("$module_name", "$controller_name");
-
-
-
-    #Postcodes
-    $module_name = 'postcodes';
-    $controller_name = 'PostcodesController';
-    Route::get("$module_name/index_list", ['as' => "$module_name.index_list", 'uses' => "$controller_name@index_list"]);
-    Route::get("$module_name/index_data", ['as' => "$module_name.index_data", 'uses' => "$controller_name@index_data"]);
-    Route::get("$module_name/trashed", ['as' => "$module_name.trashed", 'uses' => "$controller_name@trashed"]);
-    Route::patch("$module_name/trashed/{id}", ['as' => "$module_name.restore", 'uses' => "$controller_name@restore"]);
-    Route::resource("$module_name", "$controller_name");
-
-
-    $module_name = 'buildings';
-    $controller_name = 'BuildingsController';
-    Route::get("$module_name/index_list", ['as' => "$module_name.index_list", 'uses' => "$controller_name@index_list"]);
-    Route::get("$module_name/index_data", ['as' => "$module_name.index_data", 'uses' => "$controller_name@index_data"]);
-    Route::get("$module_name/trashed", ['as' => "$module_name.trashed", 'uses' => "$controller_name@trashed"]);
-    Route::patch("$module_name/trashed/{id}", ['as' => "$module_name.restore", 'uses' => "$controller_name@restore"]);
-    Route::resource("$module_name", "$controller_name");
-
-
 });

@@ -6,20 +6,35 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('source')->nullable();
-            $table->string('file')->nullable();
-            $table->string('date')->nullable();
-            $table->timestamps();
-        });
 
+            $table->string('name')->nullable();
+            $table->string('date')->nullable();
+            $table->string('source')->nullable();
+            $table->string('status')->default(0);
+
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->integer('deleted_by')->unsigned()->nullable();
+
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('documents');
