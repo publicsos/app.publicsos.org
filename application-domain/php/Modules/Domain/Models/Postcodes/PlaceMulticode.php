@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Domain\Models;
+namespace Modules\Domain\Models\Postcodes;
 
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,15 +16,6 @@ class PlaceMulticode extends BaseModel
     ];
 
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return \Modules\Domain\database\factories\DomainFactory::new();
-    }
 
 
 }

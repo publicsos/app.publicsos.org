@@ -1,6 +1,6 @@
 {
     "Post": true,
     "Category": true,
-    "Tag": true,
-    "Domain":true
+    "Domain":true,
+    "Mail": true
 }

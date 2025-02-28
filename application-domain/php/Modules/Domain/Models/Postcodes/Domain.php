@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Domain\Models;
+namespace Modules\Domain\Models\Postcodes;
 
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

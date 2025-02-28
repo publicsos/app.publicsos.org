@@ -69,6 +69,7 @@ RUN pip install --no-cache-dir \
     fastapi_versioning \
     yake \
     vaderSentiment \
+    python-multipart \
     markdownify \
     newspaper3k \
     uvicorn \

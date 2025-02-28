@@ -1,0 +1,48 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Mail\Repositories\Campaigns;
+
+use Modules\Mail\Models\Campaign;
+
+class SqliteCampaignTenantRepository extends BaseCampaignTenantRepository
+{
+    /**
+     * @inheritDoc
+     */
+    public function getAverageTimeToOpen(Campaign $campaign): string
+    {
+
+        $average = $campaign->opens()
+        ->selectRaw("
+            ROUND(
+                AVG(
+                    (julianday(opened_at) - julianday(delivered_at)) * 86400
+                )
+            ) as average_time_to_open
+        ")
+        ->value('average_time_to_open');
+
+        return $average ? $this->secondsToHms($average) : 'N/A';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAverageTimeToClick(Campaign $campaign): string
+    {
+
+        $average = $campaign->clicks()
+        ->selectRaw("
+            ROUND(
+                AVG(
+                    (julianday(clicked_at) - julianday(delivered_at)) * 86400
+                )
+            ) as average_time_to_click
+        ")
+        ->value('average_time_to_click');
+
+        return $average ? $this->secondsToHms($average) : 'N/A';
+    }
+}

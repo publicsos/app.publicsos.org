@@ -17,7 +17,7 @@ return [
     | To easily integrate the Workflow frontend to your Style you can set your layout and the section.
     |
     */
-    'layout' => 'laravel-mail::layouts.workflow_app',
+    'layout' => 'mail::backend.layouts.workflow_app',
     'section' => 'content',
 
     'unlayer' => env('UNLAYER_API_KEY'),

@@ -37,6 +37,8 @@
         "spiral/roadrunner-http": "^3.3.0",
         "sqids/sqids": "^0.4.1",
         "unisharp/laravel-filemanager": "^2.9",
+        "webklex/laravel-imap": "^6.1",
+        "webklex/php-imap": "^6.1",
         "yajra/laravel-datatables-oracle": "^11.0"
     },
     "require-dev": {
@@ -55,8 +57,7 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Modules\\": "Modules/",
-            "LaravelCompany\\Mail\\": "Modules/Mail/src/"
+            "Modules\\": "Modules/"
 
         },
         "files": [

@@ -51,6 +51,73 @@ $notifications_latest = optional($notifications)->take(5);
             </a>
         </li>
 
+
+        @php
+            $module_name = 'campaigns';
+            $text = __('Campaigns');
+            $icon = 'fa-regular fa-newspaper';
+            $permission = 'mail';
+            $url = route('backend.' . $module_name . '.index');
+        @endphp
+
+        <x-backend.sidebar-nav-item  :url="$url" :icon="$icon" :text="$text" />
+
+
+        @php
+            $module_name = 'email-services';
+            $text = __('Services');
+            $icon = 'fa-solid fa-globe';
+            $permission = 'view_' . $module_name;
+            $url = route('backend.' . $module_name . '.index');
+        @endphp
+
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+
+        @php
+            $module_name = 'templates';
+            $text = __('Templates');
+            $icon = 'fa-solid fa-pen-ruler';
+            $permission = 'view_' . $module_name;
+            $url = route('backend.' . $module_name . '.index');
+        @endphp
+
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+
+
+        @php
+            $module_name = 'subscribers';
+            $text = __('Subscribers');
+            $icon = 'fa-solid fa-users-viewfinder';
+            $permission = 'view_' . $module_name;
+            $url = route('backend.' . $module_name . '.index');
+        @endphp
+
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+
+        @php
+            $module_name = 'messages';
+            $text = __('Messages');
+            $icon = 'fa-regular fa-envelope';
+            $permission = 'view_' . $module_name;
+            $url = route('backend.' . $module_name . '.index');
+        @endphp
+
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+        @php
+            $module_name = 'workflows';
+            $text = __('Workflows');
+            $icon = 'fa-solid fa-robot';
+            $permission = 'view_' . $module_name;
+            $url = route('backend.' . $module_name . '.index');
+        @endphp
+
+        <x-backend.sidebar-nav-item :permission="$permission" :url="$url" :icon="$icon" :text="$text" />
+
+
         @php
             $module_name = "posts";
             $text = __("Posts");
