@@ -67,7 +67,7 @@
 
                 // Example: Add a point for each building to the Cesium map
                 viewer.entities.add({
-                    position: Cesium.Cartesian3.fromDegrees(longitude, latitude, altitude),
+                    position: Cesium.Cartesian3.fromDegrees(longitude, latitude, 25),
                     point: {
                         color: Cesium.Color.RED,
                         pixelSize: 10,
