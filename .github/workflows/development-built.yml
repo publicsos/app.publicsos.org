@@ -3,7 +3,7 @@ name: Build and Test Docker Image
 on:
   push:
     branches:
-      - "development"
+      - "dev"
 
 jobs:
   test:
@@ -29,7 +29,7 @@ jobs:
         run: |
           # Create .env file with secrets or default values
           cat <<EOF > .env
-          APP_NAME=${{ secrets.APP_NAME || 'LaravelApp' }}
+          APP_NAME=${{ secrets.APP_NAME || 'PublicSos' }}
           APP_ENV=${{ secrets.APP_ENV || 'local' }}
           APP_KEY=${{ secrets.APP_KEY || '' }}
           APP_DEBUG=${{ secrets.APP_DEBUG || 'true' }}
