@@ -1,25 +1,60 @@
 <?php
-
+declare(strict_types=1);
 namespace Modules\Workflow\Models;
 
-use App\Models\BaseModel;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Workflow extends BaseModel
+class Workflow extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    private array $data = []; // Explicit property type
 
     protected $table = 'workflows';
 
+    protected  $fillable = [
+        'name',
+
+    ];
+
+
     /**
-     * Create a new factory instance for the model.
+     * Get the tasks associated with the workflow.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return HasMany
      */
-    protected static function newFactory()
+    public function tasks(): HasMany
     {
-        return \Modules\Workflow\database\factories\WorkflowFactory::new();
+        return $this->hasMany(\Modules\Workflow\Tasks\Task::class);
+    }
+
+    /**
+     * Get the triggers associated with the workflow.
+     *
+     * @return HasMany
+     */
+    public function triggers(): HasMany
+    {
+        return $this->hasMany(\Modules\Workflow\Triggers\Trigger::class);
+    }
+
+    /**
+     * Get the logs associated with the workflow.
+     *
+     * @return HasMany
+     */
+    public function logs(): HasMany
+    {
+        return $this->hasMany(\Modules\Workflow\Loggers\WorkflowLog::class);
+    }
+
+    /**
+     * Get a trigger by its class type.
+     *
+     * @param string $class
+     * @return Model|null
+     */
+    public function getTriggerByClass(string $class): ?Model
+    {
+        return $this->triggers()->where('type', $class)->first();
     }
 }

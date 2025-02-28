@@ -101,7 +101,7 @@ class EmailServicesController extends Controller
         $emailService->settings = $settings;
         $emailService->save();
 
-        return redirect()->route('backend.email_services.index');
+        return redirect()->route('backend.email-services.index');
     }
 
     /**

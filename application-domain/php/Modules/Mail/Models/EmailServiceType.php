@@ -20,6 +20,10 @@ class EmailServiceType extends BaseModel
     public const FACEBOOK = 10;
     public const LINKEDIN = 11;
     public const TRACK = 12;
+    public const WHATSUP = 13;
+    public const SMS = 14;
+    public const LORA = 15;
+    public const NOTIFICATION = 16;
 
     ///if this increase please check seeder and update the static array
     protected static array $types = [
@@ -33,6 +37,10 @@ class EmailServiceType extends BaseModel
         self::ZEPTO => 'ZeptoMail',
         self::PRINT => 'PrintMail',
         self::TRACK => 'SmtpTrack',
+        self::WHATSUP => 'WHATSUP',
+        self::SMS => 'SMS',
+        self::LORA => 'LORA',
+        self::NOTIFICATION => 'Notification',
     ];
 
     /**

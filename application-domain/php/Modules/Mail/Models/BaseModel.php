@@ -3,7 +3,7 @@ declare(strict_types=1);
 namespace Modules\Mail\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\Mail\Triggers\WorkflowObservable;
+use Modules\Workflow\Triggers\WorkflowObservable;
 
 class BaseModel extends Model
 {
