@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Category\Console\Commands;
+namespace Modules\Domain\Console\Commands;
 
 use Illuminate\Console\Command;
 use Modules\Category\Models\Category;
