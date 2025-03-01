@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Domain\Services;
+namespace Modules\Document\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Jurosh\PDFMerge\PDFMerger;
-use Modules\Domain\Repositories\DocumentRepository;
-use Modules\Domain\Saloon\Connectors\MonitorulOficialConnector;
-use Modules\Domain\Saloon\Requests\Monitorul\GetPage;
+use Modules\Document\Repositories\DocumentRepository;
+use Modules\Document\Saloon\Connectors\MonitorulOficialConnector;
+use Modules\Document\Saloon\Requests\Monitorul\GetPage;
 
 
 class DocumentService

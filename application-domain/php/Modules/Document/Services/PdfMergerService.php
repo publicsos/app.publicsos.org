@@ -2,7 +2,7 @@
 
 
 
-namespace Modules\Domain\Services;
+namespace Modules\Document\Services;
 
 use Jurosh\PDFMerge\PDFMerger;
 use Exception;

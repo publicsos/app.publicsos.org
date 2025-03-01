@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Domain\Saloon\Connectors;
+namespace Modules\Document\Saloon\Connectors;
 
 
 use Saloon\Http\Connector;

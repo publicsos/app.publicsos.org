@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Domain\Saloon\Requests\Monitorul;
+namespace Modules\Document\Saloon\Requests\Monitorul;
 
 
 use Saloon\Enums\Method;

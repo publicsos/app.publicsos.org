@@ -19,7 +19,7 @@
     const initialPosition = Cesium.Cartesian3.fromDegrees(
         27.66887633714821,  // Longitude
         46.22688182800248,  // Latitude
-        127 // Altitude
+        260 // Altitude
     );
 </script>
 
@@ -51,6 +51,7 @@
             // Fly to the initial position
             viewer.scene.camera.flyTo({
                 destination: initialPosition,
+                material: Cesium.Color.RED.withAlpha(0.5),
                 orientation: {
                     heading: Cesium.Math.toRadians(20),
                     pitch: Cesium.Math.toRadians(-20),
@@ -63,14 +64,17 @@
 
             // Create markers for each building
             buildings.forEach(building => {
+
                 const { latitude, longitude, altitude } = building;
 
                 // Example: Add a point for each building to the Cesium map
                 viewer.entities.add({
-                    position: Cesium.Cartesian3.fromDegrees(longitude, latitude, 25),
-                    point: {
-                        color: Cesium.Color.RED,
-                        pixelSize: 10,
+                    position: Cesium.Cartesian3.fromDegrees(longitude, latitude, 110.00),
+                    box: {
+                        dimensions: new Cesium.Cartesian3(20.0, 20.0, 10.0),
+                        material: Cesium.Color.RED.withAlpha(0.5),
+                        outline: true,
+                        outlineColor: Cesium.Color.BLACK,
                     },
                 });
             });

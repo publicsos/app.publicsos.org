@@ -4,10 +4,10 @@ namespace Modules\Document\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
-use Modules\Domain\Services\DocumentService;
-use Modules\Domain\Services\PdfMergerService;
-use Modules\Domain\Saloon\Connectors\MonitorulOficialConnector;
-use Modules\Domain\Repositories\DocumentRepository;
+use Modules\Document\Services\DocumentService;
+use Modules\Document\Services\PdfMergerService;
+use Modules\Document\Saloon\Connectors\MonitorulOficialConnector;
+use Modules\Document\Repositories\DocumentRepository;
 
 class ImportCommand extends Command
 {

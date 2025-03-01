@@ -1,10 +1,8 @@
 <?php
-
-
-namespace Modules\Domain\Repositories;
+namespace Modules\Document\Repositories;
 
 use Illuminate\Support\Facades\Auth;
-use Modules\Domain\Models\Documents\Document;
+use Modules\Document\Models\Document;
 
 class DocumentRepository
 {

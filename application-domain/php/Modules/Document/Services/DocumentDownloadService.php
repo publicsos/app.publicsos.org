@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Domain\Services;
+namespace Modules\Document\Services;
 
 use Illuminate\Support\Facades\Storage;
-use Modules\Domain\Saloon\Connectors\MonitorulOficialConnector;
-use Modules\Domain\Saloon\Requests\Monitorul\GetPage;
+use Modules\Document\Saloon\Connectors\MonitorulOficialConnector;
+use Modules\Document\Saloon\Requests\Monitorul\GetPage;
 
 class DocumentDownloadService
 {

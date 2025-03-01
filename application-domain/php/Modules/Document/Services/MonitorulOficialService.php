@@ -2,17 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Modules\Domain\Services;
+namespace Modules\Document\Services;
 
-use Carbon\Carbon;
-use Modules\Domain\Contracts\MonitorulOficialContract;
 
-use Modules\Domain\Saloon\Connectors\MonitorulOficialConnector;
+use Modules\Document\Saloon\Connectors\MonitorulOficialConnector;
 
-use Modules\Domain\Saloon\Requests\ViewDocumentRequest;
 use Symfony\Component\DomCrawler\Crawler;
 
-class MonitorulOficialService implements MonitorulOficialContract
+class MonitorulOficialService
 {
     protected MonitorulOficialConnector $connector;
 
