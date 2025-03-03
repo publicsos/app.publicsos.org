@@ -102,7 +102,7 @@ WORKDIR /var/www/php/
 
 # Copy application
 COPY ./application-domain/php/ .
-COPY ./application-domain/php/.env.production .env
+COPY ./application-domain/php/env.production .env
 # Install Laravel Octane
 RUN composer require laravel/octane
 
