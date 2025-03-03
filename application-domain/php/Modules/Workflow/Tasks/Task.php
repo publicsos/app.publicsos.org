@@ -5,16 +5,16 @@ namespace Modules\Workflow\Tasks;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
-use Modules\Mail\DataBuses\DataBus;
-use Modules\Mail\DataBuses\DataBussable;
-use Modules\Mail\Fields\Fieldable;
-use Modules\Mail\Loggers\TaskLog;
-use Modules\Mail\Loggers\WorkflowLog;
-use Modules\Mail\Models\BaseModel;
-use Modules\Mail\Models\Workflow;
+use Modules\Workflow\DataBuses\DataBus;
+use Modules\Workflow\DataBuses\DataBussable;
+use Modules\Workflow\Fields\Fieldable;
+use Modules\Workflow\Loggers\TaskLog;
+use Modules\Workflow\Loggers\WorkflowLog;
+use Modules\Workflow\Models\BaseModel;
+use Modules\Workflow\Models\Workflow;
 
 
-class Task extends BaseModel implements TaskInterface
+class Task extends Model implements TaskInterface
 {
     use DataBussable, Fieldable;
 

@@ -1,16 +1,32 @@
-@extends('backend.layouts.app')
+@extends("backend.layouts.app")
+@section('title', __('Workflows'))
 
-@section('title') {{ __($module_action) }} {{ __($module_title) }} @endsection
+@section('heading')
+    {{ __('Edit Workflow') }} {{ $workflow->name }}
+@endsection
 
-@section('breadcrumbs')
-<x-backend.breadcrumbs>
-    <x-backend.breadcrumb-item route='{{route("backend.$module_name.index")}}' icon='{{ $module_icon }}'>
-        {{ __($module_title) }}
-    </x-backend.breadcrumb-item>
-    <x-backend.breadcrumb-item type="active">{{ __($module_action) }}</x-backend.breadcrumb-item>
-</x-backend.breadcrumbs>
+@section('left')
+    <a href="{{ route('backend.workflows.index') }}" class="btn btn-warning">{{ __('Cancel')}}</a>
 @endsection
 
 @section('content')
-<x-backend.layouts.edit :data="$$module_name_singular" :module_name="$module_name" :module_path="$module_path" :module_title="$module_title" :module_icon="$module_icon" :module_action="$module_action" />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+               <form action="{{ route('backend.workflows.update', ['workflow' => $workflow]) }}" method="POST">
+                   @csrf4
+                   <div class="col-md-12">
+                       <div class="form-group">
+                           <input type="text" class="form-control" id="name" name="name" value="{{ $workflow->name }}"
+                                  aria-describedby="Name"
+                                  placeholder="{{ $workflow->name }}">
+                       </div>
+                   </div>
+                   <div class="text-right col-md-12">
+                        <button type="submit" class="btn btn-success">{{ __('Save')}}</button>
+                   </div>
+               </form>
+            </div>
+        </div>
+    </div>
 @endsection

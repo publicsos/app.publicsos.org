@@ -11,22 +11,16 @@ return new class extends Migration {
         Schema::create('buildings', function (Blueprint $table) {
             $table->id();
             $table->string('type')->nullable();
-            $table->decimal('longitude', 10, 7)->nullable();
-            $table->decimal('latitude', 10, 7)->nullable();
+            $table->string('longitude', 32)->nullable();
+            $table->string('latitude', 32)->nullable();
             $table->string('title')->nullable();
-            $table->string('blocuri_id')->nullable();
-            $table->text('description')->nullable();
-            $table->string('properties_face')->nullable();
-            $table->string('properties_icon_url')->nullable();
-            $table->unsignedInteger('properties_icon_scaledSize_width')->nullable();
-            $table->unsignedInteger('properties_icon_scaledSize_height')->nullable();
-            $table->unsignedInteger('properties_icon_origin_x')->nullable();
-            $table->unsignedInteger('properties_icon_origin_y')->nullable();
-            $table->unsignedInteger('properties_icon_anchor_x')->nullable();
-            $table->unsignedInteger('properties_icon_anchor_y')->nullable();
-            $table->decimal('distance_miles', 8, 2)->nullable();
-
-
+            $table->string('remote_id')->nullable();
+            $table->string('address')->nullable();
+            $table->string('risk')->nullable();
+            $table->string('apartments')->nullable();
+            $table->string('age_group')->nullable();
+            $table->string('height')->nullable();
+            $table->string('postcode')->nullable();
             $table->timestamps();
         });
     }

@@ -30,15 +30,19 @@ class ProcessDocumentsCommand extends Command
     private function processDocument(Document $document)
     {
 
-        $file = Storage::disk('public')->get($document->source);
-
         $connector = new NLPConnector();
 
         $request = new ProcessDocument($document->source);
 
         $response = $connector->send($request);
 
-        dd($response->dtoOrFail(), );
+
+        $ent = $response->dtoOrFail()->entities;
+
+
+        foreach ($ent as $entity) {
+            dd($entity);
+        }
 
     }
 }

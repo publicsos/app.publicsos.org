@@ -14,13 +14,10 @@ class Document extends BaseModel
 
     protected $table = 'documents';
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
+
+
+    public function entities()
     {
-        return \Modules\Document\database\factories\DocumentFactory::new();
+        return $this->hasMany(DocumentEntity::class);
     }
 }

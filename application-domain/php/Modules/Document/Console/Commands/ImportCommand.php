@@ -31,8 +31,7 @@ class ImportCommand extends Command
         $documentPath = $this->option('document_path') ?: env('MONITORUL_OFICIAL_DOCUMENT_PATH', '5/2025/');
         $totalPages = (int)($this->option('total_pages') ?: env('MONITORUL_OFICIAL_TOTAL_PAGES', 32));
         $uploadEndpoint = $this->option('upload_endpoint') ?: env('PDF_UPLOAD_ENDPOINT', 'http://localhost:1602/v1_0/nlp/pdf-reader/');
-        $skipUpload = $this->option('skip_upload');
-
+        $skipUpload = $this->option('skip_upload', true);
 
 
         // Create directory for today

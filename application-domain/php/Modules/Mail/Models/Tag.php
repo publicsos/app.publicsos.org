@@ -6,33 +6,15 @@ namespace Modules\Mail\Models;
 
 use Carbon\Carbon;
 
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Database\Factories\TagFactory;
-/**
- * @property int $id
- * @property int $workspace_id
- * @property string $name
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- *
- * @property EloquentCollection $campaigns
- * @property EloquentCollection $subscribers
- * @property EloquentCollection $active_subscribers
- *
- * @method static TagFactory factory
- */
+
+
 class Tag extends BaseModel
 {
     use HasFactory;
 
-    // NOTE(david): we require this because of namespace issues when resolving factories from models
-    // not in the default `App\Models` namespace.
-    protected static function newFactory()
-    {
-        return TagFactory::new();
-    }
 
     /** @var string */
     protected $table = 'tags';

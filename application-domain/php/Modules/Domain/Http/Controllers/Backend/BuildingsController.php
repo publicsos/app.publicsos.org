@@ -15,6 +15,23 @@ class BuildingsController extends BackendBaseController
 {
     use Authorizable;
 
+
+    private array $fields = [
+        'id',
+
+        'title',
+        'type',
+        'longitude',
+        'latitude',
+        'remote_id',
+        'address',
+        'risk',
+        'apartments',
+        'age_group',
+        'height',
+        'postcode'
+    ];
+
     public function __construct()
     {
         // Page Title
@@ -49,7 +66,9 @@ class BuildingsController extends BackendBaseController
        $page_heading = label_case($module_title);
        $title = $page_heading.' '.label_case($module_action);
 
-       $$module_name = $module_model::select('id', 'title', 'longitude','latitude','distance_miles', 'updated_at');
+       //title,type,longitude,latitude,remote_id,address,risk,apartments,postcode
+       $$module_name = $module_model::select("*");
+
 
 
        return Datatables::of($$module_name)
@@ -58,18 +77,7 @@ class BuildingsController extends BackendBaseController
 
                return view('backend.includes.action_column', compact('module_name', 'data'));
            })
-           ->editColumn('title', '<strong>Building - {{$title}}</strong>')
-           ->editColumn('updated_at', function ($data) {
-               $module_name = $this->module_name;
 
-               $diff = Carbon::now()->diffInHours($data->updated_at);
-
-               if ($diff < 25) {
-                   return $data->updated_at->diffForHumans();
-               }
-
-               return $data->updated_at->isoFormat('llll');
-           })
            ->rawColumns(['title', 'action'])
            ->orderColumns(['id'], '-:column $1')
            ->make(true);

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Modules\Mail\Triggers\WorkflowObservable;
+use Modules\Workflow\Triggers\WorkflowObservable;
 
 /**
  * @property int $id

@@ -60,9 +60,7 @@
                             <th>
                                 @lang("domain::text.latitude")
                             </th>
-                            <th>
-                                @lang("domain::text.distance_miles")
-                            </th>
+
                             <th class="text-end">
                                 @lang("domain::text.action")
                             </th>
@@ -122,10 +120,7 @@
                 data: 'latitude',
                 name: 'latitude'
             },
-            {
-                data: 'distance_miles',
-                name: 'distance_miles'
-            },
+
             {
                 data: 'action',
                 name: 'action',

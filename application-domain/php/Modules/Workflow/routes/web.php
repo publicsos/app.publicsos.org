@@ -74,23 +74,23 @@ Route::group(['namespace' => '\Modules\Workflow\Http\Controllers\Backend', 'as' 
     Route::get('{workflow}/delete', [WorkflowController::class, 'delete'])->name('delete');
     Route::post('{workflow}/update', [WorkflowController::class, 'update'])->name('update');
     /** Diagram routes */
-    Route::post('diagram/{workflow}/addTask', [WorkflowController::class, 'addTask'])->name('addTask');
-    Route::post('diagram/{workflow}/addTrigger', [WorkflowController::class, 'addTrigger'])->name('addTrigger');
-    Route::post('diagram/{workflow}/addConnection', [WorkflowController::class, 'addConnection'])->name('addConnection');
-    Route::post('diagram/{workflow}/removeConnection', [WorkflowController::class, 'removeConnection'])->name('removeConnection');
-    Route::post('diagram/{workflow}/removeTask', [WorkflowController::class, 'removeTask'])->name('removeTask');
-    Route::post('diagram/{workflow}/updateNodePosition', [WorkflowController::class, 'updateNodePosition'])->name('updateNodePosition');
+    Route::post('diagram/{workflow}/addTask', [WorkflowController::class, 'addTask'])->name('workflows.addTask');
+    Route::post('diagram/{workflow}/addTrigger', [WorkflowController::class, 'addTrigger'])->name('workflows.addTrigger');
+    Route::post('diagram/{workflow}/addConnection', [WorkflowController::class, 'addConnection'])->name('workflows.addConnection');
+    Route::post('diagram/{workflow}/removeConnection', [WorkflowController::class, 'removeConnection'])->name('workflows.removeConnection');
+    Route::post('diagram/{workflow}/removeTask', [WorkflowController::class, 'removeTask'])->name('workflows.removeTask');
+    Route::post('diagram/{workflow}/updateNodePosition', [WorkflowController::class, 'updateNodePosition'])->name('workflows.updateNodePosition');
     /** Settings routes */
-    Route::post('settings/{workflow}/changeConditions', [WorkflowController::class, 'changeConditions'])->name('changeConditions');
-    Route::post('settings/{workflow}/changeValues', [WorkflowController::class, 'changeValues'])->name('changeValues');
-    Route::post('settings/{workflow}/getElementSettings', [WorkflowController::class, 'getElementSettings'])->name('getElementSettings');
-    Route::post('settings/{workflow}/getElementConditions', [WorkflowController::class, 'getElementConditions'])->name('getElementConditions');
-    Route::post('settings/{workflow}/getElementDelays', [WorkflowController::class, 'getElementDelays'])->name('getElementDelays');
-    Route::post('settings/{workflow}/loadResourceIntelligence', [WorkflowController::class, 'loadResourceIntelligence'])->name('loadResourceIntelligence');
+    Route::post('settings/{workflow}/changeConditions', [WorkflowController::class, 'changeConditions'])->name('workflows.changeConditions');
+    Route::post('settings/{workflow}/changeValues', [WorkflowController::class, 'changeValues'])->name('workflows.changeValues');
+    Route::post('settings/{workflow}/getElementSettings', [WorkflowController::class, 'getElementSettings'])->name('workflows.getElementSettings');
+    Route::post('settings/{workflow}/getElementConditions', [WorkflowController::class, 'getElementConditions'])->name('workflows.getElementConditions');
+    Route::post('settings/{workflow}/getElementDelays', [WorkflowController::class, 'getElementDelays'])->name('workflows.getElementDelays');
+    Route::post('settings/{workflow}/loadResourceIntelligence', [WorkflowController::class, 'loadResourceIntelligence'])->name('workflows.loadResourceIntelligence');
     /** Log routes */
-    Route::post('logs/reRun/{workflow_log_id}', [WorkflowController::class, 'reRun'])->name('reRun');
-    Route::post('logs/reRun/', [WorkflowController::class, 'reRun'])->name('reRunJSHelper');
-    Route::post('logs/{workflow}/getLogs', [WorkflowController::class, 'getLogs'])->name('getLogs');
+    Route::post('logs/reRun/{workflow_log_id}', [WorkflowController::class, 'reRun'])->name('workflows.reRun');
+    Route::post('logs/reRun/', [WorkflowController::class, 'reRun'])->name('workflows.reRunJSHelper');
+    Route::post('logs/{workflow}/getLogs', [WorkflowController::class, 'getLogs'])->name('workflows.getLogs');
     /** Triggers */
     Route::post('button_trigger/execute/{id}', [WorkflowController::class, 'triggerButton'])->name('triggers.button');
 

@@ -50,6 +50,7 @@
 
             <div class="body flex-grow-1">
                 <div class="container-fluid">
+
                     @include("flash::message")
 
                     <!-- Errors block -->

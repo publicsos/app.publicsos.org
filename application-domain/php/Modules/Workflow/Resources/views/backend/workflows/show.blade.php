@@ -1,5 +1,7 @@
 @extends('backend.layouts.app')
 
+@extends('backend.layouts.app')
+
 @section('title') {{ __($module_action) }} {{ __($module_title) }} @endsection
 
 @section('breadcrumbs')
@@ -13,4 +15,10 @@
 
 @section('content')
 <x-backend.layouts.show :data="$$module_name_singular" :module_name="$module_name" :module_path="$module_path" :module_title="$module_title" :module_icon="$module_icon" :module_action="$module_action" />
+<div id="app">
+    <workflow-show></workflow-show>
+</div>
+@endsection
+@section('after-scripts')
+<script src="{{ asset('js/app.js') }}"></script>
 @endsection

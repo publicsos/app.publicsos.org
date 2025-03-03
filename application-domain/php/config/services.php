@@ -47,4 +47,8 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
+    'cesium' => [
+        'token' => env('CESIUM_TOKEN'),
+        'cesium_secret' => env('CESIUM_SECRET'),
+    ],
 ];

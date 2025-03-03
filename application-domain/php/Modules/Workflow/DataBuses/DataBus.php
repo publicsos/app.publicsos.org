@@ -32,7 +32,6 @@ class DataBus
 
         foreach ($fields as $name => $field) {
 
-
             //TODO: Quick fix to remove description but handle/filter this better in the future :(
 
             if ($name === 'description') {
@@ -45,7 +44,12 @@ class DataBus
                 continue;
             }
 
+            Log::debug('Task: '. $name);
+            Log::debug('Type: '. $field['type'] );
+            Log::debug('Value: '. $field['value'] );
+
             $className = $field['type'] ?? ValueResource::class;
+
             $resource = new $className();
 
             $this->data[$name] = $resource->getData($name, $field_value, $model, $this);
@@ -53,7 +57,7 @@ class DataBus
 
     }
 
-    public function toString()
+    public function toString():string
     {
         $output = '';
 
@@ -64,7 +68,7 @@ class DataBus
         return $output;
     }
 
-    public function get(string $key, string $default = null)
+    public function get(string $key, string $default)
     {
         return $this->data[$key] ?? $default;
     }

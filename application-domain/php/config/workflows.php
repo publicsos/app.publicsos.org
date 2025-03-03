@@ -1,3 +1,56 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
 
 use App\Models\User;
@@ -9,6 +62,7 @@ use Modules\Mail\Tasks\RssReader;
 return [
 
     /*
+
     |--------------------------------------------------------------------------
     | Styling TODO - MOVE THIS to laravel-mail.config
     |--------------------------------------------------------------------------
@@ -31,21 +85,16 @@ return [
     |
     */
     'tasks' => [
-        'SendMail' => Modules\Mail\Tasks\SendMail::class,
-        'Execute' => Modules\Mail\Tasks\Execute::class,
-        'Scan' => Modules\Mail\Tasks\Scan::class,
-        'PregReplace' => Modules\Mail\Tasks\PregReplace::class,
-        'HtmlInput' => Modules\Mail\Tasks\HtmlInput::class,
-        'DomPDF' => Modules\Mail\Tasks\DomPDF::class,
-        'HttpStatus' => Modules\Mail\Tasks\HttpStatus::class,
-        'LoadModel' => Modules\Mail\Tasks\LoadModel::class,
-        'ChangeModel' => Modules\Mail\Tasks\ChangeModel::class,
-        'SaveModel' => Modules\Mail\Tasks\SaveModel::class,
-        'SendSlackMessage' => Modules\Mail\Tasks\SendSlackMessage::class,
-        'TextInput' => Modules\Mail\Tasks\TextInput::class,
-        'RssReader' => Modules\Mail\Tasks\RssReader::class,
-        'MagentoProducts' => Modules\Mail\Tasks\MagentoProducts::class,
-        'Campaign' => Modules\Mail\Tasks\Campaign::class,
+        'SendMail' => Modules\Workflow\Tasks\SendMail::class,
+        'Execute' => Modules\Workflow\Tasks\Execute::class,
+        'PregReplace' => Modules\Workflow\Tasks\PregReplace::class,
+        'HtmlInput' => Modules\Workflow\Tasks\HtmlInput::class,
+        'DomPDF' => Modules\Workflow\Tasks\DomPDF::class,
+        'HttpStatus' => Modules\Workflow\Tasks\HttpStatus::class,
+        'LoadModel' => Modules\Workflow\Tasks\LoadModel::class,
+        'ChangeModel' => Modules\Workflow\Tasks\ChangeModel::class,
+        'SaveModel' => Modules\Workflow\Tasks\SaveModel::class,
+        'TextInput' => Modules\Workflow\Tasks\TextInput::class,
     ],
 
     'task_settings' => [
@@ -66,10 +115,10 @@ return [
     |
     */
     'data_resources' => [
-        'ValueResource' => Modules\Mail\DataBuses\ValueResource::class,
-        'ModelResource' => Modules\Mail\DataBuses\ModelResource::class,
-        'DataResource' => Modules\Mail\DataBuses\DataBusResource::class,
-        'ConfigResource' => Modules\Mail\DataBuses\ConfigResource::class,
+        'ValueResource' => Modules\Workflow\DataBuses\ValueResource::class,
+        'ModelResource' => Modules\Workflow\DataBuses\ModelResource::class,
+        'DataResource' => Modules\Workflow\DataBuses\DataBusResource::class,
+        'ConfigResource' => Modules\Workflow\DataBuses\ConfigResource::class,
     ],
 
     /*
@@ -92,8 +141,8 @@ return [
     'triggers' => [
 
         'types' => [
-            'ObserverTrigger' => Modules\Mail\Triggers\ObserverTrigger::class,
-            'ButtonTrigger' => Modules\Mail\Triggers\ButtonTrigger::class,
+            'ObserverTrigger' => Modules\Workflow\Triggers\ObserverTrigger::class,
+
         ],
 
         'Observers' => [
@@ -113,7 +162,6 @@ return [
             ],
             'classes' => [
                 User::class => 'User',
-                WorkflowLog::class => 'WorkflowLog',
                 Subscriber::class => 'Subscriber',
                 Message::class => 'Message',
             ],
@@ -121,7 +169,6 @@ return [
         'Button' => [
             'classes' => [
                 User::class => 'User',
-                WorkflowLog::class => 'WorkflowLog',
                 Subscriber::class => 'Subscriber',
                 Message::class => 'Message',
             ],

@@ -4,7 +4,7 @@ namespace Modules\Workflow\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use Illuminate\Support\Facades\DB;
 class Workflow extends Model
 {
     private array $data = []; // Explicit property type
@@ -57,4 +57,17 @@ class Workflow extends Model
     {
         return $this->triggers()->where('type', $class)->first();
     }
+
+
+ /**
+     * Get the list of all the Columns of the table.
+     *
+     * @return array Column names array
+     */
+    public function getTableColumns()
+    {
+
+        return [];
+    }
+
 }

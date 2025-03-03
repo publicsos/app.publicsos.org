@@ -16,7 +16,7 @@ use Saloon\Http\Response;
 use Saloon\Traits\Plugins\HasTimeout;
 
 use Modules\Document\DTOs\EntityDto;
-use Modules\Document\DTOs\ProcessedDocumentDto;
+use Modules\Document\DTOs\ProcessedDocumentData;
 
 
 class ProcessDocument extends Request implements HasBody
@@ -56,22 +56,15 @@ class ProcessDocument extends Request implements HasBody
 
     public function createDtoFromResponse(Response $response): mixed
     {
-        $data =  $response->json();
-
-        $data = $response->json();
-
-        $entities = array_map(function ($entity) {
-            return new EntityDto(
-                type: $entity[0],
-                name: $entity[1]
+        try {
+            return ProcessedDocumentData::from($response->json());
+        } catch (\Spatie\LaravelData\Exceptions\CannotCreateData $e) {
+            // Handle validation errors
+            throw new \RuntimeException(
+                "Invalid API response format: " . $e->getMessage(),
+                previous: $e
             );
-        }, $data['entities'] ?? []);
-
-        return new ProcessedDocumentDto(
-            message: $data['message'] ?? '',
-            markdown: $data['markdown'] ?? '',
-            entities: $entities
-        );
+        }
     }
 
 }

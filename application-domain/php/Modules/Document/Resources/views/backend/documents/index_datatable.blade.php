@@ -20,6 +20,7 @@
             </x-slot>
             <x-slot name="toolbar">
                 @can('add_'.$module_name)
+                <x-buttons.create route='{{ route("backend.documents.import") }}' title="{{__('Import')}}" icon='fa-solid fa-file-import' />
                 <x-buttons.create route='{{ route("backend.$module_name.create") }}' title="{{__('Create')}} {{ ucwords(Str::singular($module_name)) }}" />
                 @endcan
 
@@ -53,6 +54,9 @@
                             </th>
                             <th>
                                 @lang("domain::text.name")
+                            </th>
+                            <th>
+                                @lang("domain::text.status")
                             </th>
                             <th>
                                 @lang("domain::text.source")
@@ -112,6 +116,16 @@
             {
                 data: 'name',
                 name: 'name'
+            },
+            {
+                data: 'status',
+                name: 'status',
+                render: function(data, type, row) {
+                    if (!data) {
+                        return '<span class="badge badge-success">Processed</span>';
+                    }
+                    return '<span class="badge badge-danger">Unprocessed</span>';
+                }
             },
             {
                 data: 'source',

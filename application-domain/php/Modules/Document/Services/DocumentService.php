@@ -72,10 +72,10 @@ class DocumentService
         }
     }
 
-    public function saveDocumentMetadata(string $name, string $path): void
+    public function saveDocumentMetadata(string $name, string $path,): void
     {
 
-        $this->repository->saveOrUpdate([
+        $this->repository->save([
             'name' => $name,
             'source' => $path,
             'status' => 0,

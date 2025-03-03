@@ -36,12 +36,8 @@ class Subscriber extends BaseModel
 {
     use HasFactory;
 
-    use WorkflowObservable;
 
-    protected static function newFactory()
-    {
-        return SubscriberFactory::new();
-    }
+
 
     /** @var string */
     protected $table = 'subscribers';

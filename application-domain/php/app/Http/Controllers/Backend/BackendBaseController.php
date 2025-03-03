@@ -124,7 +124,7 @@ class BackendBaseController extends Controller
         $page_heading = label_case($module_title);
         $title = $page_heading.' '.label_case($module_action);
 
-        $$module_name = $module_model::select('id', 'name', 'updated_at');
+        $$module_name = $module_model::select('id', 'name', 'date','source','status','created_at','updated_at');
 
         $data = $$module_name;
 
@@ -146,7 +146,7 @@ class BackendBaseController extends Controller
 
                 return $data->updated_at->isoFormat('llll');
             })
-            ->rawColumns(['name', 'action'])
+            ->rawColumns(['name', 'source','action'])
             ->orderColumns(['id'], '-:column $1')
             ->make(true);
     }

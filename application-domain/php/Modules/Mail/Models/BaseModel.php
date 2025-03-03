@@ -8,9 +8,6 @@ use Modules\Workflow\Triggers\WorkflowObservable;
 class BaseModel extends Model
 {
 
-    use WorkflowObservable;
-
-
     /**
      * Store which fields are boolean in the model
      *

@@ -113,11 +113,15 @@ WORKDIR /var/www/php/
 RUN php artisan octane:install
 
 # Install and build Node.js assets
+RUN npm install vue
 RUN npm install --legacy-peer-deps && npm run build
 
 
 # Configure Supervisor
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+
+RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 
 # Expose ports
