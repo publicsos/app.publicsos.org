@@ -81,7 +81,7 @@ jobs:
       - name: Build and Push Image
         uses: docker/build-push-action@v3
         with:
-          context: application-domain/php
+          context: .
           platforms: linux/amd64
           push: true
           tags: |
