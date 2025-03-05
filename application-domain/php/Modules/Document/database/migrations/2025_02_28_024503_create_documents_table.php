@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Document\Enums\DocumentStatus;
 
 return new class extends Migration
 {
@@ -16,11 +17,11 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name')->nullable();
+            $table->string('title')->nullable();
             $table->string('date')->nullable();
             $table->string('source')->nullable();
-            $table->string('status')->default(0);
-
+            $table->longText('content')->nullable();
+            $table->string('status')->default(DocumentStatus::Unprocessed->value);
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();

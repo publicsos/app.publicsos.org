@@ -19,8 +19,9 @@
                 @lang(":module_name Management Dashboard", ['module_name'=>Str::title($module_name)])
             </x-slot>
             <x-slot name="toolbar">
+                <a href="{{ route("backend.documents.import") }}" class="btn btn-md btn-danger" disabled>Import Government Documents</a>
+
                 @can('add_'.$module_name)
-                <x-buttons.create route='{{ route("backend.documents.import") }}' title="{{__('Import')}}" icon='fa-solid fa-file-import' />
                 <x-buttons.create route='{{ route("backend.$module_name.create") }}' title="{{__('Create')}} {{ ucwords(Str::singular($module_name)) }}" />
                 @endcan
 
@@ -53,20 +54,19 @@
                                 #
                             </th>
                             <th>
-                                @lang("domain::text.name")
+                                @lang("domain::text.title")
                             </th>
                             <th>
                                 @lang("domain::text.status")
                             </th>
-                            <th>
-                                @lang("domain::text.source")
-                            </th>
+
                             <th>
                                 @lang("domain::text.date")
                             </th>
                             <th>
                                 @lang("domain::text.updated_at")
                             </th>
+
                             <th class="text-end">
                                 @lang("domain::text.action")
                             </th>
@@ -105,6 +105,7 @@
 
 <script type="module">
     $('#datatable').DataTable({
+        pageLength:100,
         processing: true,
         serverSide: true,
         responsive: true,
@@ -114,38 +115,37 @@
                 name: 'id'
             },
             {
-                data: 'name',
-                name: 'name'
+                data: 'title',
+                name: 'title'
             },
             {
                 data: 'status',
                 name: 'status',
                 render: function(data, type, row) {
-                    if (!data) {
-                        return '<span class="badge badge-success">Processed</span>';
+                    if ( data  === "Downloaded") {
+                        return '<span class="badge text-bg-warning">Downloaded</span>';
                     }
+
+                    if ( data  === "Processed") {
+                        return '<span class="badge text-bg-success">Processed</span>';
+                    }
+
+                    if ( data  === "Failed") {
+                        return '<span class="badge text-bg-danger">Failed</span>';
+                    }
+
+
                     return '<span class="badge badge-danger">Unprocessed</span>';
                 }
             },
-            {
-                data: 'source',
-                name: 'source',
-                render: function(data, type, row) {
-                    if (data) {
-                        // Generate the full URL to the file. Adjust this if your file storage path is different.
-                        var url = '/storage/' + data;
-                        return '<a href="' + url + '" target="_blank">' + data + '</a>';
-                    }
-                    return data;
-                }
-            },
+
             {
                 data: 'date',
                 name: 'date'
             },
             {
                 data: 'updated_at',
-                name: 'updated_at'
+                name: 'updated'
             },
             {
                 data: 'action',

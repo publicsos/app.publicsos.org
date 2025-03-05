@@ -16,7 +16,7 @@ use Modules\Mail\Models\EmailService;
 use Modules\Mail\Models\EmailServiceType;
 use Modules\Mail\Models\Subscriber;
 use Modules\Mail\Models\Template;
-use Modules\Mail\Models\Workflow;
+use Modules\Workflow\Models\Workflow;
 use Modules\Mail\Tasks\RssReader;
 use Modules\Mail\Tasks\Task;
 use Modules\Mail\Triggers\ObserverTrigger;

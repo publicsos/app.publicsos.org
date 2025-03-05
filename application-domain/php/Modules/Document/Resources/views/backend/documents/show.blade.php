@@ -20,9 +20,4 @@
 <x-backend.layouts.show :data="$$module_name_singular" :module_name="$module_name" :module_path="$module_path" :module_title="$module_title" :module_icon="$module_icon" :module_action="$module_action" />
 
 
-<h1>
-    Show the entaties or the process form {{ $$module_name_singular->source}}
-</h1>
-
-
 @endsection

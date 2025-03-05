@@ -5,6 +5,7 @@ namespace Modules\Document\Providers;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\Finder\Finder;
+use Illuminate\Console\Scheduling\Schedule;
 
 class DocumentServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,13 @@ class DocumentServiceProvider extends ServiceProvider
 
         // register commands
         $this->registerCommands('\Modules\Document\Console\Commands');
+
+
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+            $schedule->command('documents:download')->everyMinute();
+            $schedule->command('documents:process')->everyMinute();
+        });
     }
 
     /**

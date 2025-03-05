@@ -27,7 +27,7 @@ os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
 sentiment_analyzer = SentimentIntensityAnalyzer()
 
 # Constants
-EXCLUDED_ENTITY_TYPES = {"TIME", "DATE", "LANGUAGE", "PERCENT", "MONEY", "QUANTITY", "ORDINAL", "CARDINAL"}
+EXCLUDED_ENTITY_TYPES = {}
 
 # Request Models
 class ArticleAction(BaseModel):

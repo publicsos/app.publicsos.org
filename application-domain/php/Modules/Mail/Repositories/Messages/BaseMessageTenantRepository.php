@@ -7,13 +7,10 @@ namespace Modules\Mail\Repositories\Messages;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Modules\Mail\Facades\Helper;
 use Modules\Mail\Models\Campaign;
 use Modules\Mail\Models\Message;
-use Modules\Mail\Models\Workflow;
 use Modules\Mail\Repositories\BaseTenantRepository;
 
 abstract class BaseMessageTenantRepository extends BaseTenantRepository implements MessageTenantRepositoryInterface
@@ -29,9 +26,7 @@ abstract class BaseMessageTenantRepository extends BaseTenantRepository implemen
     {
         $this->parseOrder($orderBy);
 
-        //todo this can be improved by using workflow
         $instance = $this->getQueryBuilder($workspaceId)->with($relations)
-            ->orWhere('source_type', '=', Workflow::class)
             ->where('source_type', '=', Campaign::class);
 
         $this->applyFilters($instance, $parameters);

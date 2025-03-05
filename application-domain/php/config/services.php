@@ -51,4 +51,9 @@ return [
         'token' => env('CESIUM_TOKEN'),
         'cesium_secret' => env('CESIUM_SECRET'),
     ],
+
+    'mo' => [
+        'session_id' => env('MO_SESSION_ID') ?? '',
+        'subfolder' => env('MO_SUBFOLDER') ?? "5/2025/",
+    ],
 ];

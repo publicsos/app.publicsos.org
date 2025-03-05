@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace Modules\Workflow\DataBuses;
 
-use Modules\Mail\Models\Workflow;
+use Modules\Workflow\Models\Workflow;
 use Illuminate\Database\Eloquent\Model;
 
 trait DataBussable

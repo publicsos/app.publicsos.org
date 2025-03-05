@@ -63,11 +63,7 @@ class ViewDocument extends Request
 
     public function createDtoFromResponse(Response $response): mixed
     {
-        $status =  $response->status();
-
-        $content = $response->body();
-
-        dd($status, $content);
+        return $response->body();
     }
 
 }

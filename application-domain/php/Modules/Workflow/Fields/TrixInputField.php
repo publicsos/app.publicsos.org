@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-namespace Modules\Mail\Fields;
+namespace Modules\Workflow\Fields;
 
-use Modules\Mail\DataBuses\DataBusResource;
-use Modules\Mail\DataBuses\ModelResource;
+use Modules\Workflow\DataBuses\DataBusResource;
+use Modules\Workflow\DataBuses\ModelResource;
 
 class TrixInputField implements FieldInterface
 {

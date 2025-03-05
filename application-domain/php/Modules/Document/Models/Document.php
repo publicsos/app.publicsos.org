@@ -14,7 +14,9 @@ class Document extends BaseModel
 
     protected $table = 'documents';
 
+    protected  $fillable = [
 
+    ];
 
     public function entities()
     {

@@ -55,10 +55,10 @@ class DocumentRepository implements DocumentRepositoryInterface
         $document->update($documentDetails);
 
         // Process entities efficiently (check by path)
-        $existingPaths = $document->entities()->pluck('path')->toArray();
+        $existingPaths = $document->entities()->pluck('value')->toArray();
 
         foreach ($entities as $entityData) {
-            if (!in_array($entityData['path'], $existingPaths)) {
+            if (!in_array($entityData['value'], $existingPaths)) {
                 $document->entities()->create($entityData);
             }
         }
@@ -81,7 +81,7 @@ class DocumentRepository implements DocumentRepositoryInterface
      */
     public function saveOrUpdate(array $documentDetails): Document
     {
-        $document = Document::where('name', $documentDetails['name'])->first();
+        $document = Document::where('title', $documentDetails['title'])->first();
 
         if ($document) {
             return $this->update($document, $documentDetails);

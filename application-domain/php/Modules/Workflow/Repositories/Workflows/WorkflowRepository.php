@@ -3,7 +3,7 @@ declare(strict_types=1);
 namespace Modules\Workflow\Repositories\Workflows;
 
 
-use Modules\Mail\Models\Workflow;
+use Modules\Workflow\Models\Workflow;
 use Modules\Mail\Repositories\BaseEloquentRepository;
 
 class WorkflowRepository extends BaseEloquentRepository

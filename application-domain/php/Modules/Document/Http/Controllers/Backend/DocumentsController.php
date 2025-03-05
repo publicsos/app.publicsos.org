@@ -6,37 +6,36 @@ use App\Authorizable;
 use App\Http\Controllers\Backend\BackendBaseController;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
+use Modules\Document\Models\Document;
+use Modules\Document\Services\DocumentProcessor;
+use Modules\Document\Enums\DocumentStatus;
+use Modules\Document\Repositories\DocumentRepository;
+use Yajra\DataTables\DataTables;
+
 class DocumentsController extends BackendBaseController
 {
     use Authorizable;
 
-    public function __construct()
+    public function __construct(
+        private DocumentProcessor $processor,
+        private DocumentRepository $documentRepo
+    ) {
+        $this->initializeModuleProperties();
+    }
+
+    private function initializeModuleProperties(): void
     {
-        // Page Title
         $this->module_title = 'Documents';
-
-        // module name
         $this->module_name = 'documents';
-
-        // directory path of the module
         $this->module_path = 'document::backend';
-
-        // module icon
         $this->module_icon = 'fa-solid fa-sun';
-
-        // module model name, path
         $this->module_model = "Modules\Document\Models\Document";
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function show($id)
+
+    public function index_data()
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -45,60 +44,109 @@ class DocumentsController extends BackendBaseController
         $module_model = $this->module_model;
         $module_name_singular = Str::singular($module_name);
 
-        $module_action = 'Show';
+        $module_action = 'List';
 
-        $$module_name_singular = $module_model::with("entities")->findOrFail($id);
+        $page_heading = label_case($module_title);
 
-        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
+        $title = $page_heading.' '.label_case($module_action);
 
-        return view(
-            "{$module_path}.{$module_name}.show",
-            compact('module_title', 'module_name', 'module_path', 'module_icon', 'module_name_singular', 'module_action', "{$module_name_singular}")
-        );
+        $$module_name = $module_model::select('id','title', 'date', 'status', 'updated_at');
+
+        $data = $$module_name;
+
+        return Datatables::of($$module_name)
+            ->addColumn('action', function ($data) {
+                $module_name = $this->module_name;
+                return view('backend.includes.action_column', compact('module_name', 'data'));
+            })
+
+            ->rawColumns(['action'])
+            ->orderColumns(['id'], '-:column $1')
+            ->make(true);
     }
 
+
+    public function show($id)
+    {
+        $moduleData = $this->getModuleData('Show');
+        $document = $this->module_model::with("entities")->findOrFail($id);
+
+
+        return view("{$this->module_path}.{$this->module_name}.view-document", compact('document'));
+    }
 
     public function import()
     {
-
-        $module_name = $this->module_name;
-        $module_path = $this->module_path;
-        $module_action = 'Import';
+        $moduleData = $this->getModuleData('Import');
+        $documents = Document::all();
 
         return view(
-            "{$module_path}.{$module_name}.import",
-            compact('module_name',  'module_path')
+            "{$this->module_path}.{$this->module_name}.import",
+            array_merge($moduleData, compact('documents'))
         );
     }
 
-
-
     public function importDocument(Request $request)
     {
-        $options = [
-            '--session_id' => $request->input('session_id'),
-            '--document_id' => $request->input('document_id'),
-            '--document_type' => $request->input('document_type', 'pdf'),
-            '--document_path' => $request->input('document_path'),
-            '--total_pages' => $request->input('total_pages'),
-            '--upload_endpoint' => $request->input('upload_endpoint'),
-            '--skip_upload' => $request->has('skip_upload'),
-        ];
+        $request->validate([
+            'session_id' => 'required',
+            'date' => 'required|date',
+        ]);
 
-        // Filter out null values to avoid passing empty options to Artisan
-        $filteredOptions = array_filter($options, function ($value) {
-            return $value !== null;
-        });
+        $this->cacheImportData($request);
 
-        // Execute the Artisan command
-        Artisan::call('document:import', $filteredOptions);
+        $documents = $this->processDocuments($request);
 
-        // Get the output of the Artisan command
-        $output = Artisan::output();
+        flash('The following documents have been scrapped successfully', 'success');
 
-        // Redirect back or show a success message
-        return redirect()->back()->with('success', $output);
+        return view('document::backend.documents.import', compact('documents'));
     }
 
+    private function cacheImportData(Request $request): void
+    {
+        Cache::put('date', $request->date);
+        Cache::put('session_id', $request->session_id);
+    }
 
+    private function processDocuments(Request $request)
+    {
+        $documents = collect($this->processor->getDocuments($request->session_id, $request->date));
+
+        return $documents->map(function ($document) use ($request) {
+            return $this->prepareDocumentData($document, $request);
+        });
+    }
+
+    private function prepareDocumentData(array $document, Request $request): Document
+    {
+        $documentData = [
+            'title' => $document['text'],
+            'date' => $request->date,
+            'source' => $document['href'],
+            'content' => null,
+            'status' => DocumentStatus::Unprocessed->value,
+            'created_by' => $request->user()->id,
+            'updated_by' => $request->user()->id,
+            'deleted_by' => null,
+        ];
+
+        return $this->documentRepo->save($documentData);
+    }
+
+    private function getModuleData(string $action): array
+    {
+        return [
+            'module_title' => $this->module_title,
+            'module_name' => $this->module_name,
+            'module_path' => $this->module_path,
+            'module_icon' => $this->module_icon,
+            'module_name_singular' => Str::singular($this->module_name),
+            'module_action' => $action,
+        ];
+    }
+
+    public function processSelected(Request $request)
+    {
+       throw new \Exception('Not implemented');
+    }
 }

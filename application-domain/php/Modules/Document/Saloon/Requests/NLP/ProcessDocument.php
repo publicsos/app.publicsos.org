@@ -37,7 +37,8 @@ class ProcessDocument extends Request implements HasBody
 
     protected function defaultBody(): array
     {
-        $fileContent = Storage::disk('public')->get($this->filePath);
+
+        $fileContent = file_get_contents($this->filePath);
 
         $fileName = basename($this->filePath);
 

@@ -51,12 +51,15 @@
             const excludedBuildingIds = [
                 '228676745',
                 '208701537',
-                '1093429208'
+                '1093429208',
+                '208697037'
             ];
 
 
             osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
-                show: "${feature['building']} === 'residential' || ${feature['building']} === 'apartments'",
+                show: `${Cesium.FEATURES_LENGTH} > 0 && (${
+            excludedBuildingIds.map(id => `${Cesium.FEATURE_ID_PROPERTY} !== '${id}'`).join(' && ')
+        })`,
             });
 
             // Apply custom styling

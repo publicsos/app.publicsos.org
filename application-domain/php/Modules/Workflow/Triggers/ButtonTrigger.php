@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Workflow\Tasks;
+namespace Modules\Workflow\Triggers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\View;
