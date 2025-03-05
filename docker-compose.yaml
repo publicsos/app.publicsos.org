@@ -4,15 +4,14 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        WWWUSER: '${WWWUSER:-1000}'
-        WWWGROUP: '${WWWGROUP:-1000}'
-    image: izdrail/publicsos.org:dev
+        WWWUSER: '${WWWUSER}'
+        WWWGROUP: '${WWWGROUP}'
+    image: izdrail/publicsos.org:production
     container_name: publicsos.org
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
       - '1120:1120'
-      - '1121:1121'
       - '1122:1122'
     environment:
       WWWUSER: '${WWWUSER}'

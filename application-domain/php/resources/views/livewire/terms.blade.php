@@ -1,18 +1,9 @@
 <div>
     <x-frontend.header-block :title="$title" />
 
-    <section class="mx-auto max-w-screen-xl bg-white p-6 text-gray-600 sm:p-20">
+    <section class="p-6 mx-auto max-w-screen-xl text-gray-600 bg-white sm:p-20">
         <div class="grid grid-cols-1">
-            <p>Welcome to {{ app_name() }}!</p>
-            <p>
-                Nasir Khan Saikat and
-                <a href="https://github.com/nasirkhan/laravel-starter/graphs/contributors" target="_blank">
-                    contributors
-                </a>
-                built the {{ config("app.name") }} as an Open Source app. This SERVICE is provided by
-                <a href="https://nasirkhn.com" target="_blank">Nasir Khan Saikat</a>
-                at no cost and is intended for use as is.
-            </p>
+
             <p>
                 These terms and conditions outline the rules and regulations for the use of {{ $company_name }}'s
                 Website, located at
@@ -34,7 +25,7 @@
                 prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural,
                 capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.
             </p>
-            <h3 class="mb-2 mt-4 text-2xl">Cookies</h3>
+            <h3 class="mt-4 mb-2 text-2xl">Cookies</h3>
             <p>
                 We employ the use of cookies. By accessing {{ app_name() }}, you agreed to use cookies in agreement
                 with the {{ $company_name }}'s Privacy Policy.
@@ -44,21 +35,21 @@
                 used by our website to enable the functionality of certain areas to make it easier for people visiting
                 our website. Some of our affiliate/advertising partners may also use cookies.
             </p>
-            <h3 class="mb-2 mt-4 text-2xl">License</h3>
+            <h3 class="mt-4 mb-2 text-2xl">License</h3>
             <p>
                 Unless otherwise stated, {{ $company_name }} and/or its licensors own the intellectual property rights
                 for all material on {{ app_name() }}. All intellectual property rights are reserved. You may access
                 this from {{ app_name() }} for your own personal use subjected to restrictions set in these terms and
                 conditions.
             </p>
-            <h3 class="mb-2 mt-4 text-2xl">You must not:</h3>
-            <ul class="list-inside list-disc">
+            <h3 class="mt-4 mb-2 text-2xl">You must not:</h3>
+            <ul class="list-disc list-inside">
                 <li>Republish material from {{ app_name() }}</li>
                 <li>Sell, rent or sub-license material from {{ app_name() }}</li>
                 <li>Reproduce, duplicate or copy material from {{ app_name() }}</li>
                 <li>Redistribute content from {{ app_name() }}</li>
             </ul>
-            <h3 class="mb-2 mt-4 text-2xl">This Agreement shall begin on the date hereof.</h3>
+            <h3 class="mt-4 mb-2 text-2xl">This Agreement shall begin on the date hereof.</h3>
             <p>
                 Parts of this website offer an opportunity for users to post and exchange opinions and information in
                 certain areas of the website. {{ $company_name }} does not filter, edit, publish or review Comments
@@ -72,7 +63,7 @@
                 {{ $company_name }} reserves the right to monitor all Comments and to remove any Comments which can be
                 considered inappropriate, offensive or causes breach of these Terms and Conditions.
             </p>
-            <ul class="list-inside list-disc">
+            <ul class="list-disc list-inside">
                 <li>
                     You are entitled to post the Comments on our website and have all necessary licenses and consents to
                     do so;
@@ -95,9 +86,9 @@
                 others to use, reproduce and edit any of your Comments in any and all forms, formats or media.
             </p>
 
-            <h3 class="mb-2 mt-4 text-2xl">Hyperlinking to our Content</h3>
+            <h3 class="mt-4 mb-2 text-2xl">Hyperlinking to our Content</h3>
             <p>The following organizations may link to our Website without prior written approval:</p>
-            <ul class="list-inside list-disc">
+            <ul class="list-disc list-inside">
                 <li>Government agencies;</li>
                 <li>Search engines;</li>
                 <li>News organizations;</li>
@@ -117,7 +108,7 @@
                 linking party's site.
             </p>
             <p>We may consider and approve other link requests from the following types of organizations:</p>
-            <ul class="list-inside list-disc">
+            <ul class="list-disc list-inside">
                 <li>commonly-known consumer and/or business information sources;</li>
                 <li>dot.com community sites;</li>
                 <li>associations or other groups representing charities;</li>
@@ -145,8 +136,8 @@
                 you intend to link to our Website, and a list of the URLs on our site to which you would like to link.
                 Wait 2-3 weeks for a response.
             </p>
-            <h3 class="mb-2 mt-4 text-2xl">Approved organizations may hyperlink to our Website as follows:</h3>
-            <ul class="list-inside list-disc">
+            <h3 class="mt-4 mb-2 text-2xl">Approved organizations may hyperlink to our Website as follows:</h3>
+            <ul class="list-disc list-inside">
                 <li>By use of our corporate name; or</li>
                 <li>By use of the uniform resource locator being linked to; or</li>
                 <li>
@@ -160,13 +151,13 @@
                 license agreement.
             </p>
 
-            <h3 class="mb-2 mt-4 text-2xl">iFrames</h3>
+            <h3 class="mt-4 mb-2 text-2xl">iFrames</h3>
             <p>
                 Without prior approval and written permission, you may not create frames around our Webpages that alter
                 in any way the visual presentation or appearance of our Website.
             </p>
 
-            <h3 class="mb-2 mt-4 text-2xl">Content Liability</h3>
+            <h3 class="mt-4 mb-2 text-2xl">Content Liability</h3>
             <p>
                 We shall not be hold responsible for any content that appears on your Website. You agree to protect and
                 defend us against all claims that is rising on your Website. No link(s) should appear on any Website
@@ -174,7 +165,7 @@
                 advocates the infringement or other violation of, any third party rights.
             </p>
 
-            <h3 class="mb-2 mt-4 text-2xl">Reservation of Rights</h3>
+            <h3 class="mt-4 mb-2 text-2xl">Reservation of Rights</h3>
             <p>
                 We reserve the right to request that you remove all links or any particular link to our Website. You
                 approve to immediately remove all links to our Website upon request. We also reserve the right to amen
@@ -182,7 +173,7 @@
                 you agree to be bound to and follow these linking terms and conditions.
             </p>
 
-            <h3 class="mb-2 mt-4 text-2xl">Removal of links from our website</h3>
+            <h3 class="mt-4 mb-2 text-2xl">Removal of links from our website</h3>
             <p>
                 If you find any link on our Website that is offensive for any reason, you are free to contact and inform
                 us any moment. We will consider requests to remove links but we are not obligated to or so or to respond
@@ -194,12 +185,12 @@
                 website is kept up to date.
             </p>
 
-            <h3 class="mb-2 mt-4 text-2xl">Disclaimer</h3>
+            <h3 class="mt-4 mb-2 text-2xl">Disclaimer</h3>
             <p>
                 To the maximum extent permitted by applicable law, we exclude all representations, warranties and
                 conditions relating to our website and the use of this website. Nothing in this disclaimer will:
             </p>
-            <ul class="list-inside list-disc">
+            <ul class="list-disc list-inside">
                 <li>limit or exclude our or your liability for death or personal injury;</li>
                 <li>limit or exclude our or your liability for fraud or fraudulent misrepresentation;</li>
                 <li>limit any of our or your liabilities in any way that is not permitted under applicable law; or</li>

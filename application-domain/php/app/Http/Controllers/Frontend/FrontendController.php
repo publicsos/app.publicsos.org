@@ -35,4 +35,15 @@ class FrontendController extends Controller
     {
         return view('frontend.terms');
     }
+
+
+        /**
+     * Terms & Conditions Page.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function about()
+    {
+        return view('frontend.about');
+    }
 }

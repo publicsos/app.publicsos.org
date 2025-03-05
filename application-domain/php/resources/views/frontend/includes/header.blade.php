@@ -331,7 +331,7 @@
                 <x-frontend.nav-item :active="request()->routeIs('home')">
                     {{ __("Home") }}
                 </x-frontend.nav-item>
-                <x-frontend.nav-item :active="request()->routeIs('about')">
+                <x-frontend.nav-item :active="request()->routeIs('about')"   :href="route('about')">
                     {{ __("About") }}
                 </x-frontend.nav-item>
                 <x-frontend.nav-item

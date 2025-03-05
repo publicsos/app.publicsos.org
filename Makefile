@@ -1,23 +1,11 @@
 #!/bin/sh -l
 
 # Define variables
-IMAGE_DEV=izdrail/publicsos.org:dev
-IMAGE_PROD=izdrail/publicsos.org:latest
+IMAGE_PROD=izdrail/publicsos.org:production
 DOCKERFILE=Dockerfile
 DOCKER_COMPOSE_FILE=docker-compose.yaml
-DOCKER_COMPOSE_FILE_PROD=docker-compose.yaml
 
-# Targets
-build-dev:
-
-	docker buildx build \
-		--platform linux/amd64 \
-		-t $(IMAGE_DEV) \
-		--progress=plain \
-		-f $(DOCKERFILE) \
-		.  # <-- Build Context Docker file is located at root
-
-build-prod:
+build:
 	docker image rm -f $(IMAGE_PROD) || true
 	docker buildx build \
 		--platform linux/amd64 \
@@ -32,7 +20,7 @@ dev:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) up --remove-orphans
 
 prod:
-	docker-compose -f $(DOCKER_COMPOSE_FILE_PROD) up --remove-orphans
+	docker-compose -f $(DOCKER_COMPOSE_FILE) up --remove-orphans
 
 down:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) down
