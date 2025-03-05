@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Domain\Models\Buildings\Building;
 use Yajra\DataTables\DataTables;
 
 
@@ -82,6 +83,39 @@ class BuildingsController extends BackendBaseController
            ->orderColumns(['id'], '-:column $1')
            ->make(true);
    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show($id)
+    {
+        $module_title = $this->module_title;
+        $module_name = $this->module_name;
+        $module_path = $this->module_path;
+        $module_icon = $this->module_icon;
+        $module_model = $this->module_model;
+        $module_name_singular = Str::singular($module_name);
+
+        $module_action = 'Show';
+
+        $$module_name_singular = $module_model::findOrFail($id);
+
+
+        $buildings = Building::where('id', $id)->get();
+
+
+
+        logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
+
+        return view(
+            "{$module_path}.{$module_name}.building",
+            compact('buildings', 'module_title', 'module_name', 'module_path', 'module_icon', 'module_name_singular', 'module_action', "{$module_name_singular}")
+        );
+    }
 
 
 }
