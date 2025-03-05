@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        <title>{{ config("app.name", "Laravel") }}</title>
+        <title>{{ config("app.name", "Public sos - Emergency Management Online Platform") }}</title>
 
         <!-- Scripts -->
         @vite(["resources/css/app-frontend.css"])
@@ -23,8 +23,7 @@
                 </a>
             </div>
 
-            <div
-                class="overflow-hidden px-6 py-4 mt-6 w-full bg-white shadow-md dark:bg-gray-800 sm:max-w-md sm:rounded-lg"
+            <div class="overflow-hidden px-6 py-4 mt-6 w-full bg-white shadow-md dark:bg-gray-800 sm:max-w-md sm:rounded-lg"
             >
                 {{ $slot }}
             </div>

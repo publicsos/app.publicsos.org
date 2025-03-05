@@ -1,7 +1,7 @@
 <nav class="bg-white border-b-2 border-gray-200 shadow-md dark:border-gray-700 dark:bg-gray-900">
     <div class="flex flex-wrap justify-between items-center p-4 mx-auto max-w-screen-xl">
         <a class="flex items-center space-x-3 rtl:space-x-reverse" href="/">
-            <img class="h-9" src="{{ asset("logo2.svg") }}" style="height:50px;" alt="{{ app_name() }} Logo" />
+            <img class="h-9" src="{{ asset("logo2.svg") }}" style="height:50px;" alt="{{ app_name() }} public sos" />
         </a>
         <div class="flex justify-end items-center space-x-1 md:order-2 md:space-x-0 rtl:space-x-reverse">
             <button
@@ -331,20 +331,15 @@
                 <x-frontend.nav-item :active="request()->routeIs('home')">
                     {{ __("Home") }}
                 </x-frontend.nav-item>
-                <x-frontend.nav-item
-                    :href="route('frontend.posts.index')"
-                    :active="request()->routeIs('frontend.posts.*')"
-                >
-                    {{ __("Posts") }}
+                <x-frontend.nav-item :active="request()->routeIs('about')">
+                    {{ __("About") }}
                 </x-frontend.nav-item>
                 <x-frontend.nav-item
-                    :href="route('frontend.categories.index')"
-                    :active="request()->routeIs('frontend.categories.*')"
+                    :href="route('frontend.buildings.index')"
+                    :active="request()->routeIs('frontend.buildings.*')"
                 >
-                    {{ __("Categories") }}
+                    {{ __("City") }}
                 </x-frontend.nav-item>
-
-
             </ul>
         </div>
     </div>

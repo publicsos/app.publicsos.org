@@ -6,6 +6,7 @@ use App\Livewire\Privacy;
 use App\Livewire\Terms;
 use App\Livewire\Business;
 use Illuminate\Support\Facades\Route;
+use Modules\Domain\Http\Controllers\Frontend\BuildingsController;
 
 /*
 *
@@ -25,6 +26,9 @@ require __DIR__.'/auth.php';
 
 // home route
 Route::get('home', [FrontendController::class, 'index'])->name('home');
+Route::get('about', [FrontendController::class, 'about'])->name('about');
+Route::get('buildings', [BuildingsController::class, 'index'])->name('frontend.buildings.index');
+Route::get('buildings/{$id}', [BuildingsController::class, 'show'])->name('frontend.buildings.show');
 
 // Language Switch
 Route::get('language/{language}', [LanguageController::class, 'switch'])->name('language.switch');

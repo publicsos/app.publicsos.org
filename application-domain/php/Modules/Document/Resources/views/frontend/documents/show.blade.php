@@ -4,19 +4,19 @@
 
 @section('content')
 
-<section class="bg-gray-100 text-gray-600 py-10 sm:py-20">
-    <div class="container mx-auto flex px-5 items-center justify-center flex-col">
-        <div class="text-center lg:w-2/3 w-full">
+<section class="py-10 text-gray-600 bg-gray-100 sm:py-20">
+    <div class="container flex flex-col justify-center items-center px-5 mx-auto">
+        <div class="w-full text-center lg:w-2/3">
             <p class="mb-8 leading-relaxed">
-                <a href="{{route('frontend.'.$module_name.'.index')}}" class="outline outline-1 outline-gray-800 bg-gray-200 hover:bg-gray-100 text-gray-800 text-sm font-semibold mr-2 px-3 py-1 rounded dark:bg-gray-700 dark:text-gray-300">
+                <a href="{{route('frontend.'.$module_name.'.index')}}" class="px-3 py-1 mr-2 text-sm font-semibold text-gray-800 bg-gray-200 rounded outline outline-1 outline-gray-800 hover:bg-gray-100 dark:bg-gray-700 dark:text-gray-300">
                     {{ __($module_title) }}
                 </a>
             </p>
-            <h1 class="text-3xl sm:text-4xl mb-4 font-medium text-gray-800">
-                {{$$module_name_singular->name}}
+            <h1 class="mb-4 text-3xl font-medium text-gray-800 sm:text-4xl">
+                {{$$module_name_singular->title}}
             </h1>
             <p class="mb-8 leading-relaxed">
-                {{$$module_name_singular->description}}
+                {{$$module_name_singular->date }}
             </p>
 
             @include('frontend.includes.messages')
@@ -24,10 +24,10 @@
     </div>
 </section>
 
-<section class="bg-white text-gray-600 p-6 sm:p-20">
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<section class="p-6 text-gray-600 bg-white sm:p-20">
+    <div class="container mx-auto">
         <div>
-            Content area.
+            {{$$module_name_singular->content }}
         </div>
     </div>
 </section>
