@@ -56,7 +56,6 @@ return new class extends  UpgradeMigration
         // Rename and modify existing tables as needed
         $this->renameAndModifyTables();
 
-        $this->createWorkflowsTable();
     }
 
     protected function seedEmailServiceTypes()
@@ -71,7 +70,10 @@ return new class extends  UpgradeMigration
             ['id' => EmailServiceType::POSTAL, 'name' => 'Postal'],
             ['id' => EmailServiceType::ZEPTO, 'name' => 'ZeptoMail'],
             ['id' => EmailServiceType::TRACK, 'name' => 'SmtpTrack'],
-            ['id' => EmailServiceType::PRINT, 'name' => 'PrintMail']
+            ['id' => EmailServiceType::PRINT, 'name' => 'PrintMail'],
+            ['id' => EmailServiceType::WHATSUP, 'name' => 'Whatsup'],
+            ['id' => EmailServiceType::SMS, 'name' => 'SMS'],
+            ['id' => EmailServiceType::LORA, 'name' => 'LORA'],
         ];
 
         foreach ($serviceTypes as $type) {
@@ -250,6 +252,17 @@ return new class extends  UpgradeMigration
 
             $table->foreign('message_id')->references('id')->on($messages);
         });
+
+
+        Schema::create('message_urls', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('source_type')->index();
+            $table->unsignedInteger('source_id')->index();
+            $table->string('hash')->index();
+            $table->string('url')->index();
+            $table->unsignedInteger('click_count')->default(0);
+            $table->timestamps();
+        });
     }
 
     public function createSubscribersSegmentsTable()
@@ -306,98 +319,5 @@ return new class extends  UpgradeMigration
     }
 
 
-    protected function createWorkflowsTable()
-    {
-        Schema::create('workflows', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('workspace_id')->default(1);
-            $table->string('name');
-
-            $table->timestamps();
-        });
-
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('workflow_id')->nullable();
-            $table->bigInteger('parentable_id')->nullable()->index();
-            $table->string('parentable_type')->nullable()->index();
-            $table->string('type');
-            $table->string('name');
-            $table->json('data_fields')->nullable();
-            $table->json('conditions')->nullable();
-            $table->integer('node_id')->nullable();
-            $table->integer('pos_x')->default(0);
-            $table->integer('pos_y')->default(0);
-            $table->timestamps();
-        });
-        Schema::create('task_logs', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('workflow_log_id');
-            $table->bigInteger('task_id');
-            $table->string('name');
-            $table->string('status');
-            $table->text('message')->nullable();
-            $table->dateTime('start');
-            $table->dateTime('end')->nullable();
-            $table->timestamps();
-        });
-        Schema::create('triggers', function (Blueprint $table) {
-            $table->id();
-            $table->string('type');
-            $table->string('name');
-            $table->boolean('queueable')->default(true);
-            $table->json('data_fields')->nullable();
-            $table->json('conditions')->nullable();
-            $table->bigInteger('workflow_id')->nullable()->index();
-            $table->integer('pos_x');
-            $table->integer('pos_y');
-            $table->timestamps();
-        });
-        Schema::create('workflow_logs', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('workflow_id')->nullable()->index();
-            $table->bigInteger('elementable_id')->nullable()->index();
-            $table->string('elementable_type')->nullable()->index();
-            $table->bigInteger('triggerable_id')->nullable()->index();
-            $table->string('triggerable_type')->nullable()->index();
-            $table->string('name');
-            $table->string('status');
-            $table->text('message')->nullable();
-            $table->text('databus')->nullable();
-            $table->dateTime('start');
-            $table->dateTime('end')->nullable();
-            $table->timestamps();
-        });
-        Schema::create('message_urls', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('source_type')->index();
-            $table->unsignedInteger('source_id')->index();
-            $table->string('hash')->index();
-            $table->string('url')->index();
-            $table->unsignedInteger('click_count')->default(0);
-            $table->timestamps();
-        });
-
-//        Schema::table('task_logs', function (Blueprint $table) {
-//            $table->bigInteger('task_id')->unsigned()->change();
-//            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
-//        });
-//
-//        Schema::table('tasks', function (Blueprint $table) {
-//         //   $table->dropIndex(['workflow_id']);
-//            $table->bigInteger('workflow_id')->unsigned()->change();
-//            $table->foreign('workflow_id')->references('id')->on('workflows')->onDelete('cascade');
-//        });
-//
-//        Schema::table('triggers', function (Blueprint $table) {
-////            $table->bigInteger('workflow_id')->unsigned()->change();
-//            $table->foreign('workflow_id')->references('id')->on('workflows')->onDelete('cascade');
-//        });
-//
-//        Schema::table('workflow_logs', function (Blueprint $table) {
-//           /// $table->bigInteger('workflow_id')->unsigned()->change();
-//            $table->foreign('workflow_id')->references('id')->on('workflows')->onDelete('cascade');
-//        });
-    }
 
 };

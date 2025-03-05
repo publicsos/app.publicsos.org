@@ -15,7 +15,7 @@
     @endcomponent
 @stop
 
-@push('scripts')
+@push('after-scripts')
     <script>
         $(document).ready(function () {
             console.log('Document ready, initializing email service form...');

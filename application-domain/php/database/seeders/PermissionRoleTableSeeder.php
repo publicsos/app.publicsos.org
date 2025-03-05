@@ -63,6 +63,7 @@ class PermissionRoleTableSeeder extends Seeder
         Role::firstOrCreate(['id' => 3, 'name' => 'manager'])->givePermissionTo('view_backend');
         Role::firstOrCreate(['id' => 4, 'name' => 'executive'])->givePermissionTo('view_backend');
         Role::firstOrCreate(['id' => 5, 'name' => 'user']);
+        Role::firstOrCreate(['id' => 6, 'name' => 'incident commander'])->givePermissionTo('view_backend');
     }
 
     protected function createEmergencyRoles()

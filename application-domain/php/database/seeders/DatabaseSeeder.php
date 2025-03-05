@@ -12,359 +12,291 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Artisan;
 use Modules\Category\Models\Category;
 use Modules\Domain\database\seeders\BuildingSeeder;
+use Modules\Domain\database\seeders\PostcodesSeeder;
+use Modules\Domain\database\seeders\PostcodesGeoSeeder;
+
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * Emergency response roles configuration
+     */
+    private const ROLES = [
+        ['id' => 1, 'name' => 'super admin', 'permissions' => ['*'], 'system' => true],
+        ['id' => 2, 'name' => 'administrator', 'permissions' => ['view_backend', 'edit_settings'], 'system' => true],
+        ['id' => 3, 'name' => 'incident commander', 'permissions' => ['view_backend', 'edit_settings', 'manage_users', 'manage_roles']],
+        ['id' => 4, 'name' => 'operations chief', 'permissions' => ['view_backend', 'manage_operations', 'manage_resources']],
+        ['id' => 5, 'name' => 'medical chief', 'permissions' => ['view_backend', 'manage_operations', 'manage_resources']],
+        ['id' => 6, 'name' => 'fire & hazmat chief', 'permissions' => ['view_backend', 'manage_operations', 'manage_resources']],
+        ['id' => 7, 'name' => 'engineering chief', 'permissions' => ['view_backend', 'manage_operations', 'manage_resources']],
+        ['id' => 8, 'name' => 'law enforcement chief', 'permissions' => ['view_backend', 'manage_operations', 'manage_resources']],
+        ['id' => 9, 'name' => 'logistics coordinator', 'permissions' => ['view_backend', 'manage_resources']],
+        ['id' => 10, 'name' => 'communication officer', 'permissions' => ['view_backend', 'manage_posts', 'manage_comments']],
+        ['id' => 11, 'name' => 'shelter coordinator', 'permissions' => ['view_backend', 'manage_resources']],
+        ['id' => 12, 'name' => 'field responder', 'permissions' => ['view_backend', 'create_reports']],
+        ['id' => 13, 'name' => 'priest', 'permissions' => ['view_backend']],
+    ];
 
-
-    private array $roles = [
+    /**
+     * Users configuration with corresponding role assignments
+     */
+    private const USERS = [
+        [
+            'id' => 1,
+            'username' => '100001',
+            'name' => 'Super Admin',
+            'email' => 'super@admin.com',
+            'role' => 'super admin',
+        ],
+        [
+            'id' => 2,
+            'username' => '100002',
+            'name' => 'Admin Istrator',
+            'email' => 'admin@admin.com',
+            'role' => 'administrator',
+        ],
         [
             'id' => 3,
-            'name' => 'Incident Commander',
+            'username' => 'IC001',
+            'name' => 'John Commander',
+            'email' => 'commander@publicsos.org',
+            'role' => 'incident commander',
         ],
         [
             'id' => 4,
-            'name' => 'Operations Chief',
+            'username' => 'OC001',
+            'name' => 'Sarah Operations',
+            'email' => 'operations@publicsos.org',
+            'role' => 'operations chief',
         ],
         [
             'id' => 5,
-            'name' => 'Medical Chief',
+            'username' => 'MC001',
+            'name' => 'Dr. Michael Medical',
+            'email' => 'medical@publicsos.org',
+            'role' => 'medical chief',
         ],
         [
             'id' => 6,
-            'name' => 'Fire & HAZMAT Chief',
+            'username' => 'FC001',
+            'name' => 'Robert Fire',
+            'email' => 'fire@publicsos.org',
+            'role' => 'fire & hazmat chief',
         ],
         [
             'id' => 7,
-            'name' => 'Engineering Chief',
+            'username' => 'EC001',
+            'name' => 'Emma Engineering',
+            'email' => 'engineering@publicsos.org',
+            'role' => 'engineering chief',
         ],
         [
             'id' => 8,
-            'name' => 'Law Enforcement Chief',
+            'username' => 'LC001',
+            'name' => 'David Law',
+            'email' => 'law@publicsos.org',
+            'role' => 'law enforcement chief',
         ],
         [
             'id' => 9,
-            'name' => 'Logistics Coordinator',
+            'username' => 'LG001',
+            'name' => 'Patricia Logistics',
+            'email' => 'logistics@publicsos.org',
+            'role' => 'logistics coordinator',
         ],
         [
             'id' => 10,
-            'name' => 'Communication Officer',
+            'username' => 'CO001',
+            'name' => 'James Communications',
+            'email' => 'communications@publicsos.org',
+            'role' => 'communication officer',
         ],
         [
             'id' => 11,
-            'name' => 'Shelter Coordinator',
+            'username' => 'SC001',
+            'name' => 'Maria Shelter',
+            'email' => 'shelter@publicsos.org',
+            'role' => 'shelter coordinator',
         ],
         [
             'id' => 12,
-            'name' => 'Field Responder',
+            'username' => 'FR001',
+            'name' => 'Alex Responder',
+            'email' => 'responder@publicsos.org',
+            'role' => 'field responder',
         ],
         [
             'id' => 13,
+            'username' => 'FR002',
+            'name' => 'Jonathan Responder',
+            'email' => 'responder2@publicsos.org',
+            'role' => 'field responder',
+        ],
+        [
+            'id' => 14,
+            'username' => 'FR003',
             'name' => 'Priest',
-        ]
+            'email' => 'priest@publicsos.org',
+            'role' => 'priest',
+        ],
     ];
+
+    /**
+     * Module permissions to be created
+     */
+    private const MODULES = [
+        'posts', 'categories', 'tags', 'comments',
+        'incidents', 'operations', 'resources', 'users'
+    ];
+
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
+        // Disable foreign key constraints during seeding
         Schema::disableForeignKeyConstraints();
 
-
-        // Create categories
+        // Create all data in the appropriate order
         $this->createCategories();
-        // Create default permissions
-        $this->createDefaultPermissions();
+        $this->createPermissions();
+        $this->createRolesWithPermissions();
+        $this->createUsersWithRoles();
 
-        // Create roles
-        $this->createRoles();
-
-        // Create users
-        $this->createUsers();
-
-        // Assign roles to users
-        $this->assignUserRoles();
-
-
-
+        // Re-enable foreign key constraints
         Schema::enableForeignKeyConstraints();
 
+        // Clear cache to ensure all seeded data is fresh
         Artisan::call('cache:clear');
 
+        // Seed additional data
+        $this->seedAdditionalData();
 
-        // seed the building
-        $this->call(BuildingSeeder::class);
+        $this->command->info('Database seeded successfully!');
     }
 
     /**
-     * Create default permissions and additional module permissions
+     * Create categories for each role
      */
-    private function createDefaultPermissions()
+    private function createCategories(): void
     {
-        // Create default permissions
-        $permissions = Permission::defaultPermissions();
-        foreach ($permissions as $permission) {
-            $permission = Permission::make(['name' => $permission]);
-            $permission->saveOrFail();
-        }
+        $this->command->info('Creating categories...');
 
-        // Create module specific permissions
-        $modules = ['posts', 'categories', 'tags', 'comments', 'incidents', 'operations', 'resources', 'users'];
-        foreach ($modules as $module) {
-            Artisan::call('auth:permissions', [
-                'name' => $module,
-            ]);
-            echo "\n *" . ucfirst($module) . "* Permissions Created.";
-        }
-        echo "\n\n";
-    }
+        Category::truncate();
 
-    /**
-     * Create roles and assign permissions
-     */
-    private function createRoles()
-    {
-        // Create system roles first
-        $super = Role::create(['id' => 1, 'name' => 'super admin']);
-
-        $admin = Role::create(['id' => 2, 'name' => 'administrator']);
-        $admin->givePermissionTo(['view_backend', 'edit_settings']);
-
-        //transform roles names to lowercase
-        $lowercaseRoles = [];
-        foreach ($this->roles as $role) {
-            $lowercaseRoles[] = [
-                'id' => $role['id'],
-                'name' => strtolower($role['name']),
-            ];
-        }
-
-
-        foreach ($lowercaseRoles as $role_data) {
-            $role = Role::create($role_data);
-
-            $name = $role->name;
-            // Assign permissions based on role
-            switch ($role->name) {
-                case 'incident commander':
-                    $role->givePermissionTo(['view_backend', 'edit_settings', 'manage_users', 'manage_roles']);
-                    break;
-                case 'operations chief':
-                case 'medical chief':
-                case 'fire & hazmat chief':
-                case 'engineering chief':
-                case 'law enforcement chief':
-                    $role->givePermissionTo(['view_backend', 'manage_operations', 'manage_resources']);
-                    break;
-                case 'logistics coordinator':
-                    $role->givePermissionTo(['view_backend', 'manage_resources']);
-                    break;
-                case 'communication officer':
-                    $role->givePermissionTo(['view_backend', 'manage_posts', 'manage_comments']);
-                    break;
-                case 'shelter coordinator':
-                    $role->givePermissionTo(['view_backend', 'manage_resources']);
-                    break;
-                case 'field responder':
-                    $role->givePermissionTo(['view_backend', 'create_reports']);
-                case 'priest':
-                        $role->givePermissionTo(['view_backend']);
-                break;
-            }
-        }
-    }
-
-    /**
-     * Create default users
-     */
-    private function createUsers()
-    {
-        $users = [
-            [
-                'id' => 1,
-                'username' => '100001',
-                'name' => 'Super Admin',
-                'email' => 'super@admin.com',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 2,
-                'username' => '100002',
-                'name' => 'Admin Istrator',
-                'email' => 'admin@admin.com',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 3,
-                'username' => 'IC001',
-                'name' => 'John Commander',
-                'email' => 'commander@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 4,
-                'username' => 'OC001',
-                'name' => 'Sarah Operations',
-                'email' => 'operations@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 5,
-                'username' => 'MC001',
-                'name' => 'Dr. Michael Medical',
-                'email' => 'medical@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 6,
-                'username' => 'FC001',
-                'name' => 'Robert Fire',
-                'email' => 'fire@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 7,
-                'username' => 'EC001',
-                'name' => 'Emma Engineering',
-                'email' => 'engineering@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 8,
-                'username' => 'LC001',
-                'name' => 'David Law',
-                'email' => 'law@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 9,
-                'username' => 'LG001',
-                'name' => 'Patricia Logistics',
-                'email' => 'logistics@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 10,
-                'username' => 'CO001',
-                'name' => 'James Communications',
-                'email' => 'communications@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 11,
-                'username' => 'SC001',
-                'name' => 'Maria Shelter',
-                'email' => 'shelter@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 12,
-                'username' => 'FR001',
-                'name' => 'Alex Responder',
-                'email' => 'responder@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 13,
-                'username' => 'FR002',
-                'name' => 'Jonathan Responder',
-                'email' => 'responder2@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'id' => 14,
-                'username' => 'FR003',
-                'name' => 'Priest',
-                'email' => 'priest@publicsos.org',
-                'password' => Hash::make('secret'),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-        ];
-
-        foreach ($users as $user_data) {
-            $user = User::create($user_data);
-            //event(new UserCreated($user));
-        }
-    }
-
-    /**
-     * Assign roles to users
-     */
-    private function assignUserRoles()
-    {
-        // Assign system roles
-        User::findOrFail(1)->assignRole('super admin');
-        User::findOrFail(2)->assignRole('administrator');
-
-        // Assign emergency response roles
-        User::findOrFail(3)->assignRole('Incident Commander'); // council
-        User::findOrFail(4)->assignRole('Operations Chief'); // OP
-        User::findOrFail(5)->assignRole('Medical Chief'); // hospitals area points coordonation
-        User::findOrFail(6)->assignRole('Fire & HAZMAT Chief'); //fire statins
-        User::findOrFail(7)->assignRole('Engineering Chief');
-        User::findOrFail(8)->assignRole('Law Enforcement Chief');
-        User::findOrFail(9)->assignRole('Logistics Coordinator');
-        User::findOrFail(10)->assignRole('Communication Officer');
-        User::findOrFail(11)->assignRole('Shelter Coordinator');
-        User::findOrFail(12)->assignRole('Field Responder');
-        User::findOrFail(13)->assignRole('Field Responder');
-        User::findOrFail(14)->assignRole('Priest');
-    }
-
-
-
-    public function createCategories()
-    {
-        foreach ($this->roles as $role) {
+        foreach (self::ROLES as $role) {
+            $name = ucfirst($role['name']);
 
             Category::create([
-                'name' => ucfirst($role['name']),
-                'slug' => \Str::slug($role['name']),
-                'description' => "Category for " . ucfirst($role['name']),
+                'name' => $name,
+                'slug' => \Str::slug($name),
+                'description' => "Category for {$name}",
                 'status' => 'active',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
         }
+
+        $this->command->info('Categories created successfully.');
+    }
+
+    /**
+     * Create default and module-specific permissions
+     */
+    private function createPermissions(): void
+    {
+        $this->command->info('Creating permissions...');
+
+        Permission::truncate();
+
+        // Create default permissions
+        $permissions = Permission::defaultPermissions();
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
+
+        // Create module specific permissions
+        foreach (self::MODULES as $module) {
+            Artisan::call('auth:permissions', ['name' => $module]);
+            $this->command->info("✓ {$module} permissions created");
+        }
+
+        $this->command->info('All permissions created successfully.');
+    }
+
+    /**
+     * Create roles and assign permissions in a single method
+     */
+    private function createRolesWithPermissions(): void
+    {
+        $this->command->info('Creating roles with permissions...');
+
+        Role::truncate();
+
+        foreach (self::ROLES as $roleData) {
+            $role = Role::create([
+                'id' => $roleData['id'],
+                'name' => $roleData['name'],
+            ]);
+
+            // Handle special case for super admin
+            if (isset($roleData['permissions'])) {
+                if ($roleData['permissions'][0] === '*') {
+                    // Super admin gets all permissions
+                    $role->givePermissionTo(Permission::all());
+                } else {
+                    // Other roles get specific permissions
+                    $role->givePermissionTo($roleData['permissions']);
+                }
+            }
+
+            $this->command->info("✓ Role '{$roleData['name']}' created with permissions");
+        }
+
+        $this->command->info('Roles and permissions assignment completed.');
+    }
+
+    /**
+     * Create users and assign roles in a single method
+     */
+    private function createUsersWithRoles(): void
+    {
+        $this->command->info('Creating users with roles...');
+
+        User::truncate();
+
+        foreach (self::USERS as $userData) {
+            $user = User::create([
+                'id' => $userData['id'],
+                'username' => $userData['username'],
+                'name' => $userData['name'],
+                'email' => $userData['email'],
+                'password' => Hash::make('secret'),
+                'email_verified_at' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+
+            $user->assignRole($userData['role']);
+            $this->command->info("✓ User '{$userData['name']}' created with role '{$userData['role']}'");
+        }
+
+        $this->command->info('Users creation and role assignment completed.');
+    }
+
+    /**
+     * Seed additional data from other seeders
+     */
+    private function seedAdditionalData(): void
+    {
+        $this->command->info('Seeding additional data...');
+
+        // Buildings data
+        $this->call(BuildingSeeder::class);
+
+        // Postcodes data
+        $this->call(PostcodesSeeder::class);
+        $this->call(PostcodesGeoSeeder::class);
+
+        $this->command->info('Additional data seeded successfully.');
     }
 }

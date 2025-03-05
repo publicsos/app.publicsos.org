@@ -51,6 +51,28 @@ $notifications_latest = optional($notifications)->take(5);
             </a>
         </li>
 
+        @php
+            $module_name = 'buildings';
+            $text = __('Buildings');
+            $icon = 'fa-regular fa-building';
+            $permission = 'mail';
+            $url = route('backend.' . $module_name . '.index');
+        @endphp
+
+        <x-backend.sidebar-nav-item  :url="$url" :icon="$icon" :text="$text" />
+
+
+
+        @php
+            $module_name = 'documents';
+            $text = __('Documents');
+            $icon = 'fa-regular fa-file';
+            $permission = 'mail';
+            $url = route('backend.' . $module_name . '.index');
+        @endphp
+
+        <x-backend.sidebar-nav-item  :url="$url" :icon="$icon" :text="$text" />
+
 
         @php
             $module_name = 'campaigns';

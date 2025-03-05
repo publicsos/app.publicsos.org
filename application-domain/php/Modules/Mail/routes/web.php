@@ -92,34 +92,4 @@ Route::group(['namespace' => '\Modules\Mail\Http\Controllers', 'as' => 'backend.
     Route::get('subscribers/enrich/{subscriberId}', [SubscribersImportController::class, 'enrich'])->name('subscribers.enrich');
 
 
-    // Workflows
-    Route::name('workflows.')->prefix('workflows')->namespace('\Modules\Mail\Http\Controllers')->group(function (Router $workflowRouter) {
-        $workflowRouter->get('/', [WorkflowController::class, 'index'])->name('index');
-        $workflowRouter->get('create', [WorkflowController::class, 'create'])->name('create');
-        $workflowRouter->post('store', [WorkflowController::class, 'store'])->name('store');
-        $workflowRouter->get('{workflow}', [WorkflowController::class, 'show'])->name('show');
-        $workflowRouter->get('{workflow}/edit', [WorkflowController::class, 'edit'])->name('edit');
-        $workflowRouter->get('{workflow}/delete', [WorkflowController::class, 'delete'])->name('delete');
-        $workflowRouter->post('{workflow}/update', [WorkflowController::class, 'update'])->name('update');
-        /** Diagram routes */
-        $workflowRouter->post('diagram/{workflow}/addTask', [WorkflowController::class, 'addTask'])->name('addTask');
-        $workflowRouter->post('diagram/{workflow}/addTrigger', [WorkflowController::class, 'addTrigger'])->name('addTrigger');
-        $workflowRouter->post('diagram/{workflow}/addConnection', [WorkflowController::class, 'addConnection'])->name('addConnection');
-        $workflowRouter->post('diagram/{workflow}/removeConnection', [WorkflowController::class, 'removeConnection'])->name('removeConnection');
-        $workflowRouter->post('diagram/{workflow}/removeTask', [WorkflowController::class, 'removeTask'])->name('removeTask');
-        $workflowRouter->post('diagram/{workflow}/updateNodePosition', [WorkflowController::class, 'updateNodePosition'])->name('updateNodePosition');
-        /** Settings routes */
-        $workflowRouter->post('settings/{workflow}/changeConditions', [WorkflowController::class, 'changeConditions'])->name('changeConditions');
-        $workflowRouter->post('settings/{workflow}/changeValues', [WorkflowController::class, 'changeValues'])->name('changeValues');
-        $workflowRouter->post('settings/{workflow}/getElementSettings', [WorkflowController::class, 'getElementSettings'])->name('getElementSettings');
-        $workflowRouter->post('settings/{workflow}/getElementConditions', [WorkflowController::class, 'getElementConditions'])->name('getElementConditions');
-        $workflowRouter->post('settings/{workflow}/getElementDelays', [WorkflowController::class, 'getElementDelays'])->name('getElementDelays');
-        $workflowRouter->post('settings/{workflow}/loadResourceIntelligence', [WorkflowController::class, 'loadResourceIntelligence'])->name('loadResourceIntelligence');
-        /** Log routes */
-        $workflowRouter->post('logs/reRun/{workflow_log_id}', [WorkflowController::class, 'reRun'])->name('reRun');
-        $workflowRouter->post('logs/reRun/', [WorkflowController::class, 'reRun'])->name('reRunJSHelper');
-        $workflowRouter->post('logs/{workflow}/getLogs', [WorkflowController::class, 'getLogs'])->name('getLogs');
-        /** Triggers */
-        $workflowRouter->post('button_trigger/execute/{id}', [WorkflowController::class, 'triggerButton'])->name('triggers.button');
-    });
 });

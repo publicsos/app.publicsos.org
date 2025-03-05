@@ -1,13 +1,11 @@
-@props([
-    "data" => "",
-    "module_name",
-])
-<p>
-    @lang("All values of :module_name (Id: :id)", ["module_name" => ucwords(Str::singular($module_name)), "id" => $data->id])
-</p>
-<table class="table-responsive-sm table-hover table-bordered table">
+
+
+
+Testing
+<table class="table table-responsive-sm table-hover table-bordered">
     <?php
     $all_columns = $data->getTableColumns();
+
     ?>
 
     <thead>
@@ -29,11 +27,11 @@
             <tr>
                 <td>
                     <strong>
-                        {{ __(label_case($column->name)) }}
+
                     </strong>
                 </td>
                 <td>
-                    {!! show_column_value($data, $column) !!}
+                    {!! ($column) !!}
                 </td>
             </tr>
         @endforeach

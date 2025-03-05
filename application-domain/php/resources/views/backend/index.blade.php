@@ -19,7 +19,7 @@
     const initialPosition = Cesium.Cartesian3.fromDegrees(
         27.66887633714821,  // Longitude
         46.22688182800248,  // Latitude
-        127 // Altitude
+        260 // Altitude
     );
 </script>
 
@@ -35,7 +35,7 @@
 
     <script>
         // Set your Cesium Ion access token
-        Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmMWYwZjFiMS01OGQ3LTRiNDctOTk1Mi03NDgwOWVhZTBjYjciLCJpZCI6MTM0NTU5LCJpYXQiOjE2ODE5NDEwMzN9.0kUdp5KVqgFEL8kZmqMIvcUyKGzzNDiIrliUNHJ2w5s';
+        Cesium.Ion.defaultAccessToken = '{{ config('services.cesium.token') }}';
 
         // Initialize the Cesium viewer
         const viewer = new Cesium.Viewer("cesiumContainer", {
@@ -46,14 +46,48 @@
         async function loadCesiumData() {
             // Load OSM buildings asynchronously
             const osmBuildingsTileset = await Cesium.createOsmBuildingsAsync();
+
+
+            const excludedBuildingIds = [
+                '228676745',
+                '208701537',
+                '1093429208',
+                '208697037'
+            ];
+
+
+            osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
+                show: `${Cesium.FEATURES_LENGTH} > 0 && (${
+            excludedBuildingIds.map(id => `${Cesium.FEATURE_ID_PROPERTY} !== '${id}'`).join(' && ')
+        })`,
+            });
+
+            // Apply custom styling
+            osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
+                color: {
+                    conditions: [
+                        ["${feature['building']} === 'hospital'", "rgba(0, 165, 0, 1)"], // Green
+                        ["${feature['building']} === 'school'", "rgba(255, 165, 0, 1)"], // Orange
+                        ["${feature['building']} === 'church'", "rgba(0, 165, 0, 1)"], // Orange
+                        ["${feature['building']} === 'police'", "rgba(0, 0, 255, 1)"], // Blue
+                        ["${feature['building']} === 'fire'", "rgba(255, 0, 0, 1)"], // Red
+                        [true, "rgba(128, 128, 128, 0.5)"] // Gray for others
+                    ]
+                },
+
+            });
+
             viewer.scene.primitives.add(osmBuildingsTileset);
+
+
 
             // Fly to the initial position
             viewer.scene.camera.flyTo({
                 destination: initialPosition,
+                material: Cesium.Color.RED.withAlpha(0.5),
                 orientation: {
-                    heading: Cesium.Math.toRadians(20),
-                    pitch: Cesium.Math.toRadians(-20),
+                    heading: Cesium.Math.toRadians(45),
+                    pitch: Cesium.Math.toRadians(-45),
                 },
                 duration: 0,
             });
@@ -63,15 +97,49 @@
 
             // Create markers for each building
             buildings.forEach(building => {
-                const { latitude, longitude, altitude } = building;
+                const { id, latitude, longitude, title } = building;
 
-                // Example: Add a point for each building to the Cesium map
+                // Format building information HTML for the popup
+                const description = `
+                    <div class="building-info">
+
+                        <table style="background:#ddd;color:#fff" class="cesium-infoBox-defaultTable">
+                            <tr>
+                                <th>ID:</th>
+                                <td>${id}</td>
+                            </tr>
+                             <tr>
+                                <th>TItle:</th>
+                                <td>${title}</td>
+                            </tr>
+                            <tr>
+                                <th>Location:</th>
+                                <td>${latitude}, ${longitude}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Actions:</th>
+                                <td>
+                                    <a href="/admin/buildings/${id}" class="btn btn-sm btn-info" target="_blank">View Details</a>
+                                    <a href="/admin/buildings/${id}/edit" class="btn btn-sm btn-warning" target="_blank">Edit</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                `;
+
+                // Add a box entity for each building to the Cesium map with popup information
                 viewer.entities.add({
-                    position: Cesium.Cartesian3.fromDegrees(longitude, latitude, 25),
-                    point: {
-                        color: Cesium.Color.RED,
-                        pixelSize: 10,
+                    id: `building-${id}`,
+                    name: name || `Building #${id}`,
+                    position: Cesium.Cartesian3.fromDegrees(longitude, latitude, 100),
+                    box: {
+                        dimensions: new Cesium.Cartesian3(15, 15, 15.0),
+                        material: Cesium.Color.BLUE.withAlpha(0.5),
+                        outline: true,
+                        outlineColor: Cesium.Color.BLACK,
                     },
+                    description: description, // This adds HTML content to the popup
                 });
             });
         }
@@ -86,8 +154,8 @@
                 viewer.scene.camera.flyTo({
                     destination: positions[0],
                     orientation: {
-                        heading: Cesium.Math.toRadians(20),
-                        pitch: Cesium.Math.toRadians(-20),
+                        heading: Cesium.Math.toRadians(45),
+                        pitch: Cesium.Math.toRadians(-45),
                     },
                     duration: 1.5,
                 });

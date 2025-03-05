@@ -7,7 +7,7 @@
         <div class="mb-4 row">
             <div class="col-md-6">
                 <a class="btn btn-primary" href="{{ route('backend.email-services.create') }}">
-                    <i class="mr-2 fa fa-plus"></i> {{ __('Adaugă serviciu') }}
+                    <i class="mr-2 fa fa-plus"></i> {{ __('Add new service') }}
                 </a>
             </div>
             <div class="text-right col-md-6">
@@ -17,16 +17,16 @@
 
         <div class="shadow-sm card">
             <div class="card-header bg-dark">
-                <h5 class="mb-0 card-title">{{ __('Servicii de email configurate') }}</h5>
+                <h5 class="mb-0 card-title">{{ __('Communication Services') }}</h5>
             </div>
             <div class="p-0 card-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="thead-dark">
                             <tr>
-                                <th>{{ __('Nume') }}</th>
-                                <th>{{ __('Serviciu') }}</th>
-                                <th style="text-align: right" class="text-right">{{ __('Acțiuni') }}</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Service') }}</th>
+                                <th style="text-align: right" class="text-right">{{ __('Actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,8 +49,8 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                        onclick="return confirm('{{ __('Ești sigur că vrei să ștergi acest serviciu?') }}')">
-                                                    <i class="mr-1 fa fa-trash"></i> {{ __('Șterge') }}
+                                                        onclick="return confirm('{{ __('Are you sure you want to trash this email service') }}')">
+                                                    <i class="mr-1 fa fa-trash"></i> {{ __('Trash') }}
                                                 </button>
                                             </form>
                                         </div>
@@ -61,9 +61,9 @@
                                     <td colspan="3" class="py-4 text-center">
                                         <div class="empty-state">
                                             <i class="mb-3 fa fa-envelope-open-text fa-3x text-muted"></i>
-                                            <p class="text-muted">{{ __('Nu ai configurat încă niciun serviciu de trimitere email.') }}</p>
+                                            <p class="text-muted">{{ __("No connections found") }}</p>
                                             <a href="{{ route('backend.email-services.create') }}" class="btn btn-outline-primary">
-                                                <i class="mr-1 fa fa-plus"></i> {{ __('Adaugă primul serviciu') }}
+                                                <i class="mr-1 fa fa-plus"></i> {{ __('Add a new connection') }}
                                             </a>
                                         </div>
                                     </td>
