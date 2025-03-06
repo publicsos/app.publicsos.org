@@ -1,9 +1,8 @@
 # Public SOS
 
-A strategy and operational online framework for a incident management team, adhering to the Public Safety and rescue service guidelines.
+![Public SOS](https://publicsos.org/logo2.svg "Public SOS")
 
-## Company Mission
-To provide a safe and secure environment for the public, and to ensure the public safety of the environment.
+A strategy and operational online framework for a incident management team, adhering to the Public Safety and rescue service guidelines.
 
 
 
@@ -17,23 +16,20 @@ To provide a safe and secure environment for the public, and to ensure the publi
 ## Executive Roles and Responsibilities
 
 ### CEO - Alex M.
-Sets the company's vision and overall strategy, ensuring the organization moves in the right direction. The CEO serves as the public face of the company and holds ultimate responsibility for its success.
+Sets the company's vision and overall strategy, ensuring the organization moves in the right direction. 
+The CEO serves as the public face of the company and holds ultimate responsibility for its success.
 
-**Contact Details:**
-- Address: TBA
 
 ### CTO - Stefan I.
 
 #### Responsibilities
-Sets the company technical standards and processes, ensuring the company's success. The CTO serves as the technical face of the company and holds ultimate responsibility for technical aspects of the business.
+Sets the company technical standards and processes, ensuring the company's success.
+The CTO serves as the technical face of the company and holds ultimate responsibility for technical aspects of the business.
 
-#### Contact Details
-- Address: TBA
 
 ### Board Members
 - Bogdan M
 
-Cross-functional collaboration among the leadership team is essential for ensuring that different departments work cohesively toward shared goals. By working together, executives can make well-rounded decisions that benefit the entire organization.
 
 ## Social Standards
 

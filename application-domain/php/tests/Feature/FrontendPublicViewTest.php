@@ -78,4 +78,17 @@ class FrontendPublicViewTest extends TestCase
 
         $response->assertSeeText($value, $escxaped = true);
     }
+
+
+
+    public function test_about_page_public_view(): void
+    {
+        $response = $this->get('/about');
+
+        $response->assertStatus(200);
+
+        $value = 'About ';
+
+        $response->assertSeeText($value, $escxaped = true);
+    }
 }

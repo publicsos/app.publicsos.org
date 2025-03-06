@@ -26,6 +26,7 @@ require __DIR__.'/auth.php';
 
 // home route
 Route::get('home', [FrontendController::class, 'index'])->name('home');
+Route::get('contact', [FrontendController::class, 'contact'])->name('contact');
 Route::get('about', [FrontendController::class, 'about'])->name('about');
 Route::get('buildings', [BuildingsController::class, 'index'])->name('frontend.buildings.index');
 Route::get('buildings/{$id}', [BuildingsController::class, 'show'])->name('frontend.buildings.show');

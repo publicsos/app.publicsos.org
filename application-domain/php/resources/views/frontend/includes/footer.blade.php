@@ -1,4 +1,4 @@
-<footer class="p-4 bg-gray-100 dark:bg-gray-800 sm:p-20">
+<footer class="p-4 bg-gray-100 dark:bg-gray-900 sm:p-20">
     <div class="mx-auto max-w-screen-xl text-center">
 
         <a class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white" href="/">
@@ -24,7 +24,7 @@
                 <a class="mx-2 hover:underline md:mx-3" href="#">@lang("FAQs")</a>
             </li>
             <li>
-                <a class="mx-2 hover:underline md:mx-3" href="#">@lang("Contact")</a>
+                <a class="mx-2 hover:underline md:mx-3" href="{{ route("contact") }}">@lang("Contact")</a>
             </li>
         </ul>
 
