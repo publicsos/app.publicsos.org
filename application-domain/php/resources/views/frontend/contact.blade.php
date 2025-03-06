@@ -16,6 +16,54 @@ Contact our team - {{ app_name() }} - Emergency Response Service Management Syst
 </section>
 
 <section class="bg-white dark:bg-gray-900" style="padding-bottom: 10vh">
+
+    <div class="pt-20 pb-20 mb-20 space-x-8 space-y-8 text-center md:grid md:grid-cols-1">
+        <form id="my-form" action="https://formspree.io/f/mrbpzpzn" method="POST" class="space-y-4">
+            <div>
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                <input type="email" name="email" id="email" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
+            </div>
+            <div>
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
+                <textarea id="message" name="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+            </div>
+            <button id="my-form-button" type="submit" class="px-5 py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg sm:w-fit hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send message</button>
+            <p id="my-form-status" class="text-sm text-gray-600 dark:text-gray-400"></p>
+        </form>
+
+        <script>
+            var form = document.getElementById("my-form");
+
+            async function handleSubmit(event) {
+                event.preventDefault();
+                var status = document.getElementById("my-form-status");
+                var data = new FormData(event.target);
+                fetch(event.target.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        status.innerHTML = "Thanks for your submission!";
+                        form.reset()
+                    } else {
+                        response.json().then(data => {
+                            if (Object.hasOwn(data, 'errors')) {
+                                status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+                            } else {
+                                status.innerHTML = "Oops! There was a problem submitting your form"
+                            }
+                        })
+                    }
+                }).catch(error => {
+                    status.innerHTML = "Oops! There was a problem submitting your form"
+                });
+            }
+            form.addEventListener("submit", handleSubmit)
+        </script>
+    </div>
     <div class="pt-20 pb-20 mb-20 space-x-8 space-y-8 text-center md:grid md:grid-cols-3 md:gap-12 md:space-y-0 lg:grid-cols-3">
         <div>
            <div class="flex justify-center items-center mx-auto mb-4 w-10 h-10 bg-gray-100 rounded-lg dark:bg-gray-800 lg:h-16 lg:w-16">
