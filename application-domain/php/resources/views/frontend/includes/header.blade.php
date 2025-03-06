@@ -305,15 +305,24 @@
                 <x-frontend.nav-item :active="request()->routeIs('home')">
                     {{ __("Home") }}
                 </x-frontend.nav-item>
+
+                <x-frontend.nav-item :active="request()->routeIs('features')"   :href="route('features')">
+                    <i class="fas fa-star"></i>
+                    {{ __("Features") }}
+                </x-frontend.nav-item>
+
+                <x-frontend.nav-item
+                :href="route('frontend.buildings.index')"
+                :active="request()->routeIs('frontend.buildings.*')"
+            >
+            <i class="fas fa-play"></i>
+                {{ __("Demo") }}
+            </x-frontend.nav-item>
                 <x-frontend.nav-item :active="request()->routeIs('contact')"   :href="route('contact')">
+                    <i class="fas fa-phone"></i>
                     {{ __("Contact") }}
                 </x-frontend.nav-item>
-                <x-frontend.nav-item
-                    :href="route('frontend.buildings.index')"
-                    :active="request()->routeIs('frontend.buildings.*')"
-                >
-                    {{ __("Demo City") }}
-                </x-frontend.nav-item>
+
             </ul>
         </div>
     </div>

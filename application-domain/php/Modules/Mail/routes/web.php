@@ -87,8 +87,8 @@ Route::group(['namespace' => '\Modules\Mail\Http\Controllers', 'as' => 'backend.
     Route::resource('subscribers', SubscribersController::class);
     Route::get('subscribers/export', [SubscribersController::class, 'export'])->name('subscribers.export');
     Route::get('subscribers/unsubscribe/{subscriberId}', [SubscribersController::class, 'unsubscribe'])->name('subscribers.unsubscribe');
-    Route::get('subscribers/import', [SubscribersImportController::class, 'show'])->name('subscribers.import');
-    Route::post('subscribers/import', [SubscribersImportController::class, 'store'])->name('subscribers.import.store');
+    Route::get('subscribers-import', [SubscribersImportController::class, 'showNew'])->name('subscribers.import');
+    Route::post('subscribers-import', [SubscribersImportController::class, 'store'])->name('subscribers.import.store');
     Route::get('subscribers/enrich/{subscriberId}', [SubscribersImportController::class, 'enrich'])->name('subscribers.enrich');
 
 

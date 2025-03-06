@@ -37,8 +37,6 @@ class ValidateSubscribers extends Command
     {
         $this->info('Checking for existing subscriber...');
 
-        //todo check because the is a json and we need to add validated to
-
         $subscribers = (new \Modules\Mail\Models\Subscriber)->where('meta', NULL)->get();
 
         if($subscribers->isEmpty()){

@@ -74,9 +74,7 @@ class SubscribersController extends Controller
         return view('mail::backend.subscribers.create', compact('tags', 'selectedTags'));
     }
 
-    /**
-     * @throws Exception
-     */
+
     public function store(SubscriberRequest $request): RedirectResponse
     {
         $data = $request->all();
@@ -90,10 +88,8 @@ class SubscribersController extends Controller
         return redirect()->route('backend.subscribers.index');
     }
 
-    /**
-     * @throws Exception
-     */
-    public function show(int $id): View
+
+    public function show($id): View
     {
         $subscriber = $this->subscriberRepo->find(
             $this->workspaceId,
@@ -104,9 +100,6 @@ class SubscribersController extends Controller
         return view('mail::backend.subscribers.show', compact('subscriber'));
     }
 
-    /**
-     * @throws Exception
-     */
     public function edit(int $id): View
     {
         $subscriber = $this->subscriberRepo->find($this->workspaceId, $id);
@@ -116,9 +109,7 @@ class SubscribersController extends Controller
         return view('mail::backend.subscribers.edit', compact('subscriber', 'tags', 'selectedTags'));
     }
 
-    /**
-     * @throws Exception
-     */
+
     public function update(SubscriberRequest $request, int $id): RedirectResponse
     {
 

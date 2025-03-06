@@ -1,6 +1,6 @@
 @extends("frontend.layouts.app")
 @section("title")
-{{ app_name() }} - Emergency Response Service Management System.
+Contact our team - {{ app_name() }} - Emergency Response Service Management System.
 @endsection
 @section("content")
 <section class="bg-white dark:bg-gray-800">
@@ -14,8 +14,8 @@
       @include("frontend.includes.messages")
    </div>
 </section>
-<section class="bg-white dark:bg-gray-900" style="padding-bottom: 10vh">
 
+<section class="bg-white dark:bg-gray-900" style="padding-bottom: 10vh">
     <div class="pt-20 pb-20 mb-20 space-x-8 space-y-8 text-center md:grid md:grid-cols-3 md:gap-12 md:space-y-0 lg:grid-cols-3">
         <div>
            <div class="flex justify-center items-center mx-auto mb-4 w-10 h-10 bg-gray-100 rounded-lg dark:bg-gray-800 lg:h-16 lg:w-16">
@@ -49,6 +49,9 @@
         </div>
      </div>
 </section>
+
+@endsection
+@push('after-scripts')
 <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-@endsection
+@endpush

@@ -59,4 +59,20 @@ class FrontendController extends Controller
     {
         return view('frontend.contact');
     }
+
+
+
+        /**
+     * Terms & Conditions Page.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function features()
+    {
+
+        /// core features as an array for now
+
+
+        return view('frontend.features');
+    }
 }
