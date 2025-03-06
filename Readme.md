@@ -1,6 +1,11 @@
 # Public SOS
 
-Public SOS is an international team that provides free, open, and high quality sustainable alerts and information to the public.
+A strategy and operational online framework for a incident management team, adhering to the Public Safety and rescue service guidelines.
+
+## Company Mission
+To provide a safe and secure environment for the public, and to ensure the public safety of the environment.
+
+
 
 ## Company Size
 3 employees
@@ -26,7 +31,7 @@ Sets the company technical standards and processes, ensuring the company's succe
 - Address: TBA
 
 ### Board Members
-- Bogdan
+- Bogdan M
 
 Cross-functional collaboration among the leadership team is essential for ensuring that different departments work cohesively toward shared goals. By working together, executives can make well-rounded decisions that benefit the entire organization.
 
@@ -63,8 +68,6 @@ Reference: [See Readme](business-domain/administration/readme.md)
 ## Contact
 Business enquiries: stefan@izdrail.com
 
-## Citation
-TBA
 
 ## License
 CC BY 4.0

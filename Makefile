@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
 # Define variables
-IMAGE_PROD=izdrail/publicsos.org:production
+IMAGE_PROD=izdrail/publicsos.org:main
 DOCKERFILE=Dockerfile
 DOCKER_COMPOSE_FILE=docker-compose.yaml
 
