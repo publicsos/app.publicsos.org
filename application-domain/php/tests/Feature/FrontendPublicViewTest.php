@@ -17,7 +17,7 @@ class FrontendPublicViewTest extends TestCase
 
         $value = app_name();
 
-        $response->assertSeeText($value, $escxaped = true);
+        $response->assertSeeText($value, $escaped = true);
     }
 
     public function test_login_page_public_view(): void
@@ -28,7 +28,7 @@ class FrontendPublicViewTest extends TestCase
 
         $value = __('Log in');
 
-        $response->assertSeeText($value, $escxaped = true);
+        $response->assertSeeText($value, $escaped = true);
     }
 
     public function test_registration_page_public_view(): void
@@ -40,7 +40,7 @@ class FrontendPublicViewTest extends TestCase
 
             $value = 'Register';
 
-            $response->assertSeeText($value, $escxaped = true);
+            $response->assertSeeText($value, $escaped = true);
         } else {
             $response->assertStatus(404);
         }
@@ -54,7 +54,7 @@ class FrontendPublicViewTest extends TestCase
 
         $value = 'Email Password Reset Link';
 
-        $response->assertSeeText($value, $escxaped = true);
+        $response->assertSeeText($value, $escaped = true);
     }
 
     public function test_privacy_policy_page_public_view(): void
@@ -65,7 +65,7 @@ class FrontendPublicViewTest extends TestCase
 
         $value = 'Privacy Policy';
 
-        $response->assertSeeText($value, $escxaped = true);
+        $response->assertSeeText($value, $escaped = true);
     }
 
     public function test_terms_page_public_view(): void
@@ -76,19 +76,43 @@ class FrontendPublicViewTest extends TestCase
 
         $value = 'Terms and Conditions ';
 
-        $response->assertSeeText($value, $escxaped = true);
+        $response->assertSeeText($value, $escaped = true);
     }
 
 
 
-    public function test_about_page_public_view(): void
+    public function test_contact_page_public_view(): void
     {
-        $response = $this->get('/about');
+        $response = $this->get('/contact');
 
         $response->assertStatus(200);
 
-        $value = 'About ';
+        $value = 'Contact ';
 
-        $response->assertSeeText($value, $escxaped = true);
+        $response->assertSeeText($value, $escaped = true);
+    }
+
+
+    public function test_features_page_public_view(): void
+    {
+        $response = $this->get('/features');
+
+        $response->assertStatus(200);
+
+        $value = 'Features';
+
+        $response->assertSeeText($value, $escaped = true);
+    }
+
+
+    public function test_buuildings_page_public_view(): void
+    {
+        $response = $this->get('/buildings');
+
+        $response->assertStatus(200);
+
+        $value = 'Buildings';
+
+        $response->assertSeeText($value, $escaped = true);
     }
 }
