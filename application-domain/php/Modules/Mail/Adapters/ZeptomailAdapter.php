@@ -92,7 +92,7 @@ class ZeptomailAdapter extends BaseMailAdapter
             config('mail.mailers.smtp.host') ?? "localhost",
             config('mail.mailers.smtp.username') ?? "admin",
             config('mail.mailers.smtp.password') ?? "admin",
-            config('mail.mailers.smtp.port') ?? 25,
+            config('mail.mailers.smtp.port') ?? 587,
             []
         );
 

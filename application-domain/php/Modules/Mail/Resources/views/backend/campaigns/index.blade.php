@@ -14,7 +14,7 @@
         @endslot
         @slot('right')
             <a class="btn btn-success btn-md btn-flat" href="{{ route('backend.campaigns.create') }}">
-                <i class="mr-1 fa fa-plus"></i> {{ __('Creaza campanie') }}
+                <i class="mr-1 fa fa-plus"></i> {{ __('Create campaign') }}
             </a>
         @endslot
     @endcomponent

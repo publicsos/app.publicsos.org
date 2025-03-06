@@ -1,6 +1,6 @@
 
 @extends("backend.layouts.app")
-@section('title', __('Creaza campanie'))
+@section('title', __('Create Campaign'))
 
 
 @section('content')

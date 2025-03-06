@@ -2,12 +2,12 @@
 
 @section('content')
     @component('mail::backend.layouts.partials.card')
-        @slot('cardHeader', __('Creaza un nou serviciu'))
+        @slot('cardHeader', __('Create email service'))
         @slot('cardBody')
             <form action="{{ route('backend.email-services.store') }}" method="POST" class="form-horizontal">
                 @csrf
-                <x-text-field name="name" :label="__('Numele Serviciului')" />
-                <x-select-field name="type_id" :label="__('Tipul Serviciului')" :options="$emailServiceTypes" />
+                <x-text-field name="name" :label="__('Service name')" />
+                <x-select-field name="type_id" :label="__('Service Type')" :options="$emailServiceTypes" />
                 <div id="services-fields"></div>
                 <x-submit-button :label="__('Save')" />
             </form>

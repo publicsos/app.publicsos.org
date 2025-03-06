@@ -25,7 +25,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     librsvg2-bin \
     fswatch \
     nano \
-    cargo \
     ffmpeg \
     poppler-utils \
     libzip-dev \
@@ -43,8 +42,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 
 
-# Install Python tools
-RUN pip install pipx --break-system-packages
+
 
 # Install PHP extensions
 RUN docker-php-ext-install bcmath gd exif zip pdo_mysql pcntl sockets && \

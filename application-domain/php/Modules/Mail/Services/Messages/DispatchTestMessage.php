@@ -75,7 +75,7 @@ class DispatchTestMessage
             'workspace_id' => $workspaceId,
             'recipient_email' => $options->getTo(),
             'subject' => $options->getSubject(),
-            'from_name' => $options->getFromName() ?? 'mail.laravelmail.com',
+            'from_name' => $options->getFromName() ?? 'Info',
             'from_email' => $options->getFromEmail(),
             'hash' => md5($options->getTo()),
         ]);

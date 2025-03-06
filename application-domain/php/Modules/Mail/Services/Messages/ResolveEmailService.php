@@ -7,6 +7,7 @@ use Modules\Mail\Models\EmailService;
 use Modules\Mail\Models\Message;
 use Modules\Mail\Repositories\Campaigns\CampaignTenantRepositoryInterface;
 use Modules\Mail\Repositories\AutomationScheduleRepository;
+use Modules\Workflow\Repositories\Workflows\WorkflowRepository;
 
 class ResolveEmailService
 {
@@ -44,8 +45,8 @@ class ResolveEmailService
      */
     protected function resolveWorkflowEmailService(Message $message): EmailService
     {
-        //TODO: Implement this
-        if (! $automationSchedule = app(AutomationScheduleRepository::class)->find(
+
+        if (! $automationSchedule = app(WorkflowRepository::class)->find(
             $message->source_id,
             ['automation_step.automation.email_service.type']
         )) {

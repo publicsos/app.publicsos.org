@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use Modules\Workflow\Models\Workflow;
 
 /**
  * @property int $id
@@ -28,13 +28,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class EmailService extends BaseModel
 {
-    //todo rename to smtps
     use HasFactory;
-    // not in the default `App\Models` namespace.
-    protected static function newFactory()
-    {
-        return EmailServiceFactory::new();
-    }
+
 
     /** @var string */
     protected $table = 'email_services';
@@ -56,26 +51,17 @@ class EmailService extends BaseModel
         ];
     }
 
-    /**
-     * The type of this provider.
-     */
+
     public function type(): BelongsTo
     {
         return $this->belongsTo(EmailServiceType::class, 'type_id');
     }
 
-    /**
-     * Campaigns using this provider.
-     */
     public function campaigns(): HasMany
     {
         return $this->hasMany(Campaign::class, 'email_service_id');
     }
 
-    /**
-     * @todo Remove this relationship once automations are migrated to the new system that uses the42coder/laravel-workflow package.
-     * Automations using this email service.
-     */
      public function automations(): HasMany
      {
          return $this->hasMany(Workflow::class, 'email_service_id');
@@ -93,9 +79,6 @@ class EmailService extends BaseModel
 
     public function getInUseAttribute(): bool
     {
-        // if (Helper::isPro()) {
-        //     return (bool)$this->campaigns()->count() + $this->automations()->count();
-        // }
 
         return (bool)$this->campaigns()->count();
     }

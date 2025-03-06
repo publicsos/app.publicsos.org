@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Modules\Mail\Triggers\WorkflowObservable;
+use Modules\Workflow\Triggers\WorkflowObservable;
 use Ramsey\Uuid\Uuid;
 
 

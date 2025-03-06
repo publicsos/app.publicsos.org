@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <h1>{{ __('Creaza automatizare') }}</h1>
+                <h1>{{ __('Create automation') }}</h1>
             </div>
         </div>
 
@@ -14,8 +14,8 @@
                    @csrf
                    <div class="col-md-12">
                    <div class="form-group">
-                       <label for="name">{{  __('Nume automatizare') }}</label>
-                       <input type="text" class="form-control" id="name" name="name" aria-describedby="Name" placeholder="Nume automatizare">
+                       <label for="name">{{  __('Automation name') }}</label>
+                       <input type="text" class="form-control" id="name" name="name" aria-describedby="Name" placeholder="">
                    </div>
                    </div>
                    <div class="mt-2 text-right col-md-12">
