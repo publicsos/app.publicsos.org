@@ -13,9 +13,9 @@ class BuildingsService
     public function getBuildingDetails(string $building_id): mixed
     {
 
-        $forge = new BuildingsConnector;
+        $connector = new BuildingsConnector;
 
-        $response = $forge->send(new GetBuildingDetails($building_id));
+        $response = $connector->send(new GetBuildingDetails($building_id));
 
         return $response->json();
     }

@@ -12,6 +12,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\Permission\Traits\HasRoles;
+use Namu\WireChat\Traits\Chatable;
+
 
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
@@ -21,6 +23,8 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     use Notifiable;
     use SoftDeletes;
     use UserPresenter;
+    use Chatable;
+
 
     protected $guarded = [
         'id',
@@ -103,5 +107,12 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     public function getRolesListAttribute()
     {
         return array_map('intval', $this->roles->pluck('id')->toArray());
+    }
+
+
+
+    public function canCreateChats(): bool
+    {
+        return $this->hasVerifiedEmail();
     }
 }

@@ -4,11 +4,6 @@ server:
 
 http:
   address: 0.0.0.0:1120
-  workers:
-    python:
-      address: "localhost:1121"
-      prefix: "/python/"
-
 # do not use development mode in production
 logs:
   mode: development

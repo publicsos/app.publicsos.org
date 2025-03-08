@@ -37,8 +37,10 @@
         "@vue-flow/core": "^1.29.2",
         "@vueuse/core": "^10.7.2",
         "class-variance-authority": "^0.7.1",
+        "laravel-echo": "^2.0.2",
         "lucide-vue-next": "^0.477.0",
         "monaco-editor": "^0.52.2",
+        "pusher-js": "^8.4.0",
         "radix-vue": "^1.9.17",
         "tailwind-merge": "^3.0.2",
         "typescript": "^5.8.2"
