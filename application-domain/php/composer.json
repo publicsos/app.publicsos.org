@@ -20,6 +20,7 @@
     "require": {
         "php": "^8.2|^8.3",
         "arcanedev/log-viewer": "^11.0",
+        "denis660/laravel-centrifugo": "^5.0",
         "intervention/image-laravel": "^1.2",
         "jurosh/pdf-merge": "^2.1",
         "laracasts/flash": "^3.2",

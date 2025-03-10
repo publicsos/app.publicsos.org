@@ -6,12 +6,13 @@ services:
       args:
         WWWUSER: '${WWWUSER}'
         WWWGROUP: '${WWWGROUP}'
-    image: izdrail/publicsos.org:production
+    image: izdrail/publicsos.org:main
     container_name: publicsos.org
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
       - '1120:1120'
+      - '1121:1121'
       - '1122:1122'
     environment:
       WWWUSER: '${WWWUSER}'

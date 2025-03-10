@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10b30cfb87195897f9137db4c22b00ad",
+    "content-hash": "3c95e97a029318b151bd005411c4a3c1",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1335,6 +1335,74 @@
                 "source": "https://github.com/DaveRandom/LibDNS/tree/v2.1.0"
             },
             "time": "2024-04-12T12:12:48+00:00"
+        },
+        {
+            "name": "denis660/laravel-centrifugo",
+            "version": "5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/denis660/laravel-centrifugo.git",
+                "reference": "212bc450612d19b3d50959076b0f42ecf8d99988"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/denis660/laravel-centrifugo/zipball/212bc450612d19b3d50959076b0f42ecf8d99988",
+                "reference": "212bc450612d19b3d50959076b0f42ecf8d99988",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "~6.0|^7.0",
+                "laravel/framework": "^9.0|^10.0|^11.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.35|^8.14|^9.0",
+                "phpunit/phpunit": "^9.3|^10.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "denis660\\Centrifugo\\CentrifugoServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "denis660\\Centrifugo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Denis Zakharenko",
+                    "email": "amx-serv@ya.ru",
+                    "role": "Creator"
+                }
+            ],
+            "description": "Centrifugo broadcaster for laravel",
+            "homepage": "https://github.com/denis660/laravel-centrifugo",
+            "keywords": [
+                "Socket",
+                "broadcaster",
+                "centrifugo",
+                "laravel",
+                "laravel-broadcaster",
+                "real time",
+                "web socket",
+                "web-socket",
+                "websocket"
+            ],
+            "support": {
+                "email": "amx-serv@ya.ru",
+                "issues": "https://github.com/denis660/laravel-centrifugo/issues",
+                "source": "https://github.com/denis660/laravel-centrifugo"
+            },
+            "time": "2024-10-08T17:10:09+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

@@ -65,6 +65,7 @@ COPY ./application-domain/php/ .
 COPY ./application-domain/php/env.production .env
 # Install Laravel Octane
 RUN composer require laravel/octane
+RUN composer require laravel/horizon
 
 # Install PHP dependencies
 
@@ -84,8 +85,19 @@ COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 
+# Customize shell with Zsh
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.5/zsh-in-docker.sh)" -- \
+    -t https://github.com/denysdovhan/spaceship-prompt \
+    -a 'SPACESHIP_PROMPT_ADD_NEWLINE="false"' \
+    -a 'SPACESHIP_PROMPT_SEPARATE_LINE="false"' \
+    -p git \
+    -p ssh-agent \
+    -p https://github.com/zsh-users/zsh-autosuggestions \
+    -p https://github.com/zsh-users/zsh-completions
+
+
 # Expose ports
-EXPOSE 1120
+EXPOSE 1120 1121 1122
 
 # Set working directory back to application root
 WORKDIR /var/www/

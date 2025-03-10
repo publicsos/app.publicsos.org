@@ -59,6 +59,62 @@
       </div>
    </div>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=46.52&longitude=27.64&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m";
+
+fetch(apiUrl)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        const times = data.hourly.time.map(timeStr => new Date(timeStr));
+        const temperatures = data.hourly.temperature_2m;
+        const windSpeeds = data.hourly.wind_speed_10m;
+        const humidity = data.hourly.relative_humidity_2m;
+
+        const ctx = document.getElementById('weatherChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: times,
+                datasets: [{
+                    label: 'Temperature (°C)',
+                    data: temperatures,
+                    borderColor: 'red',
+                    fill: false
+                }, {
+                    label: 'Wind Speed (m/s)',
+                    data: windSpeeds,
+                    borderColor: 'blue',
+                    fill: false
+                },
+                {
+                    label: 'Relative Humidity (%)',
+                    data: humidity,
+                    borderColor: 'green',
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'hour'
+                        }
+                    }
+                }
+            }
+        });
+    })
+    .catch(error => {
+        console.error("Error fetching or processing data:", error);
+    });
+</script>
 <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 @endsection
