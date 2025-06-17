@@ -1,22 +1,22 @@
 <?php
 
-namespace Modules\Category\Providers;
+namespace Modules\Blog\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\Finder\Finder;
 
-class CategoryServiceProvider extends ServiceProvider
+class BlogServiceProvider extends ServiceProvider
 {
     /**
      * @var string
      */
-    protected $moduleName = 'Category';
+    protected $moduleName = 'Blog';
 
     /**
      * @var string
      */
-    protected $moduleNameLower = 'category';
+    protected $moduleNameLower = 'blog';
 
     /**
      * Boot the application events.
@@ -28,10 +28,10 @@ class CategoryServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->loadMigrationsFrom(base_path('Modules/Category/database/migrations'));
+        $this->loadMigrationsFrom(base_path('Modules/Blog/database/migrations'));
 
         // register commands
-        $this->registerCommands('\Modules\Category\Console\Commands');
+        $this->registerCommands('\Modules\Blog\Console\Commands');
     }
 
     /**
@@ -55,10 +55,10 @@ class CategoryServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            base_path('Modules/Category/Config/config.php') => config_path($this->moduleNameLower.'.php'),
+            base_path('Modules/Blog/Config/config.php') => config_path($this->moduleNameLower.'.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            base_path('Modules/Category/Config/config.php'), $this->moduleNameLower
+            base_path('Modules/Blog/Config/config.php'), $this->moduleNameLower
         );
     }
 
@@ -71,7 +71,7 @@ class CategoryServiceProvider extends ServiceProvider
     {
         $viewPath = resource_path('views/modules/'.$this->moduleNameLower);
 
-        $sourcePath = base_path('Modules/Category/Resources/views');
+        $sourcePath = base_path('Modules/Blog/Resources/views');
 
         $this->publishes([
             $sourcePath => $viewPath,
@@ -80,13 +80,22 @@ class CategoryServiceProvider extends ServiceProvider
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
+    /**
+     * Register translations.
+     *
+     * @return void
+     */
     public function registerTranslations()
     {
-        $this->loadTranslationsFrom(__DIR__.'/../lang', 'category');
+        $this->loadTranslationsFrom(__DIR__.'/../lang', 'post');
     }
 
-
-    public function provides(): array
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
     {
         return [];
     }

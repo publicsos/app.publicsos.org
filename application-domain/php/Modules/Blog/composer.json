@@ -1,0 +1,23 @@
+{
+    "name": "publicsos/blog",
+    "description": "",
+    "type": "laravel-module",
+    "authors": [
+        {
+            "name": "stefan bogdan"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+              "Modules\\Blog\\": ""
+        }
+    }
+}
