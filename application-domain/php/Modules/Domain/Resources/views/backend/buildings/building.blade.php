@@ -130,7 +130,6 @@
     <!-- Cesium JS -->
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
 
-
     <script>
         (function() {  // Wrap in IIFE to create a private scope
             Cesium.Ion.defaultAccessToken = "{{ config('services.cesium.token') }}";
@@ -160,6 +159,7 @@
                 }
             }
 
+            //todo improve this to use vue
             async function loadCesiumData(viewerInstance) {
                 try {
                     const osmBuildingsTileset = await Cesium.createOsmBuildingsAsync();
@@ -280,16 +280,30 @@
             window.resetView = resetView;
 
             // Initialize when map tab is first shown
-            document.getElementById('map-tab').addEventListener('shown.bs.tab', function (e) {
-                if (!cesiumInitialized) {
-                    initializeCesium();
+            document.addEventListener('DOMContentLoaded', function() {
+                const mapTab = document.getElementById('map-tab');
+                const dataTab = document.getElementById('data-tab');
+                
+                // Add event listeners for tab switching
+                mapTab.addEventListener('shown.bs.tab', function (e) {
+                    if (!cesiumInitialized) {
+                        // Small delay to ensure the container is visible
+                        setTimeout(() => {
+                            initializeCesium();
+                        }, 100);
+                    } else if (viewer) {
+                        // Resize the viewer if it's already initialized
+                        viewer.resize();
+                    }
+                });
+
+                // Initialize immediately if map tab is active on page load
+                if (mapTab.classList.contains('active')) {
+                    setTimeout(() => {
+                        initializeCesium();
+                    }, 100);
                 }
             });
-
-            // Initialize immediately if map tab is active on page load
-            if (document.getElementById('map-tab').classList.contains('active')) {
-                initializeCesium();
-            }
         })();
     </script>
 

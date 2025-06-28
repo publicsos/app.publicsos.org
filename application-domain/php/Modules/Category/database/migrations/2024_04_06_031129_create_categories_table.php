@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Modules\Category\Enums\CategoryStatus;
+use Modules\Blog\Enums\CategoryStatus;
 
 return new class extends Migration
 {

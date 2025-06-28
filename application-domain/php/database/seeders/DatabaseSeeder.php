@@ -10,7 +10,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Artisan;
-use Modules\Category\Models\Category;
+use Modules\Blog\Models\Category;
 use Modules\Domain\database\seeders\BuildingSeeder;
 use Modules\Domain\database\seeders\PostcodesSeeder;
 use Modules\Domain\database\seeders\PostcodesGeoSeeder;

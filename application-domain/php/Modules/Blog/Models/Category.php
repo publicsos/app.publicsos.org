@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Category\Models;
+namespace Modules\Blog\Models;
 
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,16 +18,8 @@ class Category extends BaseModel
      */
     public function posts()
     {
-        return $this->hasMany('Modules\Post\Models\Post');
+        return $this->hasMany('Modules\Blog\Models\Post');
     }
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return \Modules\Category\database\factories\CategoryFactory::new();
-    }
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Post\Models;
+namespace Modules\Blog\Models;
 
 use App\Models\BaseModel;
 use Carbon\Carbon;

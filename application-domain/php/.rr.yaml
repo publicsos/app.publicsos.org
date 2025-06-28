@@ -1,0 +1,33 @@
+version: "3"
+server:
+  command: "php public/index.php"
+
+http:
+  address: 0.0.0.0:13002
+
+
+logs:
+  mode: development
+  level: debug
+  encoding: console
+  output: stderr
+  err_output: stderr
+  channels:
+    http:
+      mode: development
+      level: panic
+      encoding: console
+      output: stdout
+      err_output: stderr
+    server:
+      mode: development
+      level: info
+      encoding: json
+      output: stdout
+      err_output: stdout
+    rpc:
+      mode: development
+      level: debug
+      encoding: console
+      output: stderr
+      err_output: stdout

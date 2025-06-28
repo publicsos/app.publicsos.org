@@ -97,7 +97,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
 
 
 # Expose ports
-EXPOSE 1120 1121 1122
+EXPOSE 1120 1121 1122 5173
 
 # Set working directory back to application root
 WORKDIR /var/www/

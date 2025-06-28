@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Category\Enums;
+namespace Modules\Blog\Enums;
 
 enum CategoryStatus: string
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Post\Events;
+namespace Modules\Blog\Events;
 
 use Illuminate\Queue\SerializesModels;
-use Modules\Post\Models\Post;
+use Modules\Blog\Models\Post;
 
 class PostCreated
 {

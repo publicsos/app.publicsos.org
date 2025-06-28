@@ -98,7 +98,6 @@
                 // Format building information HTML for the popup
                 const description = `
                     <div class="building-info">
-
                         <table style="background:#ddd;color:#fff" class="cesium-infoBox-defaultTable">
                             <tr>
                                 <th>ID:</th>
