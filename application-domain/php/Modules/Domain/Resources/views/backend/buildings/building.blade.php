@@ -218,6 +218,9 @@
                                     <a href="/admin/buildings/${building.id}/edit" class="btn btn-sm btn-warning" target="_blank">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
+                                     <a href="/admin/buildings/${building.id}/edit" class="btn btn-sm btn-warning" target="_blank">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
                                 </td>
                             </tr>
                         </table>
