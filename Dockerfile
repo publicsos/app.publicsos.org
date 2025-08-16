@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpng-dev \
     python3 \
     python3-pip \
-    python3.11-venv \
+    python3-venv \
     dnsutils \
     librsvg2-bin \
     fswatch \
